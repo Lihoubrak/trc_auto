@@ -400,11 +400,15 @@ def fill_file_upload(driver: webdriver.Chrome, form_header: str, file_url: str) 
                 logger.debug(f"Cleaned up temp file: {temp_file}")
             except Exception as e:
                 logger.warning(f"Failed to delete temp file {temp_file}: {e}")
-def fill_google_form(driver, row, headers, header_mapping):
+def fill_google_form(driver, row, headers, header_mapping, is_first_submission: bool = False):
     try:
         driver.get(GOOGLE_FORM_URL)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//form")))
-        clear_inputs(driver)
+        
+        # Clear inputs only for the first submission
+        if is_first_submission:
+            logger.info("Clearing inputs for the first submission")
+            clear_inputs(driver)
 
         for excel_header, value in zip(headers, row):
             if excel_header not in header_mapping or value is None:
@@ -414,25 +418,39 @@ def fill_google_form(driver, row, headers, header_mapping):
             value_str = str(value).strip()
             logging.info(f"Processing field '{form_header}' with value '{value_str}'")
 
+            # Wait for the field header to be present
+            try:
+                # Use partial match to handle long headers and special characters
+                header_xpath = (
+                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]"
+                )
+                WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.XPATH, header_xpath))
+                )
+                logger.debug(f"Found header: {form_header[:50]}...")
+            except TimeoutException:
+                logging.warning(f"Field header '{form_header}' not found in form")
+                continue
+
             # Check if the field is a date field
             date_input_xpath = (
-                f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']//"
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//"
                 f"input[@type='date' or @aria-label='Month' or @aria-label='Day of the month' or @aria-label='Year']"
             )
             date_inputs = driver.find_elements(By.XPATH, date_input_xpath)
             if date_inputs:
                 if fill_date_field(driver, form_header, value):
                     continue
-
-            # Check if the field is a file upload
-            file_input_xpath = (
-                f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']//input[@type='file']"
+            # Check if the field is a file upload by looking for the "Add File" button
+            file_button_xpath = (
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//"
+                f"div[@role='button' and contains(@aria-label, 'Add File')]"
             )
-            file_inputs = driver.find_elements(By.XPATH, file_input_xpath)
-            if file_inputs and value_str.startswith("http"):
+            file_buttons = driver.find_elements(By.XPATH, file_button_xpath)
+            if file_buttons and value_str.startswith("http"):
                 try:
-                    scroll_into_view(driver, file_inputs[0])
-                    if fill_file_upload(driver, file_inputs[0], value_str):
+                    scroll_into_view(driver, file_buttons[0])
+                    if fill_file_upload(driver, form_header, value_str):
                         logging.info(f"✅ Uploaded file for '{form_header}'")
                         continue
                 except Exception as e:
@@ -440,21 +458,41 @@ def fill_google_form(driver, row, headers, header_mapping):
                     continue
 
             try:
-                # Try text input field
+                # Try text input
                 input_xpath = (
-                    f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']//input[@type='text']"
+                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//"
+                    f"input[@type='text' or @type='number']"
                 )
                 inputs = driver.find_elements(By.XPATH, input_xpath)
                 if inputs:
+                    # Wait for the input to be interactable
+                    WebDriverWait(driver, 5).until(
+                        EC.element_to_be_clickable((By.XPATH, input_xpath))
+                    )
                     scroll_into_view(driver, inputs[0])
                     inputs[0].clear()
                     inputs[0].send_keys(value_str)
                     logging.info(f"Filled text field '{form_header}' with '{value_str}'")
                     continue
 
+                # Try textarea
+                textarea_xpath = (
+                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//textarea"
+                )
+                textareas = driver.find_elements(By.XPATH, textarea_xpath)
+                if textareas:
+                    WebDriverWait(driver, 5).until(
+                        EC.element_to_be_clickable((By.XPATH, textarea_xpath))
+                    )
+                    scroll_into_view(driver, textareas[0])
+                    textareas[0].clear()
+                    textareas[0].send_keys(value_str)
+                    logging.info(f"Filled textarea field '{form_header}' with '{value_str}'")
+                    continue
+
                 # Try dropdown
                 dropdown_xpath = (
-                    f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']//div[@role='listbox']"
+                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//div[@role='listbox']"
                 )
                 dropdowns = driver.find_elements(By.XPATH, dropdown_xpath)
                 if dropdowns:
@@ -469,7 +507,6 @@ def fill_google_form(driver, row, headers, header_mapping):
                             logging.info(f"Selected dropdown option '{opt.text}' for '{form_header}'")
                             break
                     continue
-
                 # Try checkbox
                 checkbox_xpath = f"//div[@role='listitem']//span[normalize-space(.)='{value_str}']/ancestor::label"
                 checkboxes = driver.find_elements(By.XPATH, checkbox_xpath)
@@ -478,7 +515,6 @@ def fill_google_form(driver, row, headers, header_mapping):
                     checkboxes[0].click()
                     logging.info(f"Checked checkbox '{form_header}' with value '{value_str}'")
                     continue
-
                 logging.warning(f"No matching input found for field '{form_header}' with value '{value_str}'")
 
             except Exception as e:
@@ -516,10 +552,9 @@ def main():
 
         for idx, row in enumerate(rows, start=2):
             logger.info(f"Processing row {idx}")
-            if fill_google_form(driver, row, excel_headers, header_mapping):
-                logger.info(f"Row {idx} processed successfully")
-            else:
-                logger.error(f"Failed to process row {idx}")
+            # Clear inputs only for the first row
+            fill_google_form(driver, row, excel_headers, header_mapping, is_first_submission=(idx == 2))
+            logger.info(f"Row {idx} processed successfully")
 
     except FormAutomationError as e:
         logger.error(f"Automation failed: {e}")
