@@ -1,4 +1,8 @@
+selenium
 openpyxl
-requests
 fuzzywuzzy
-pynput
+python-Levenshtein
+requests
+webdriver_manager
+retrying
+psutil
