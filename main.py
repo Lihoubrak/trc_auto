@@ -1,167 +1,160 @@
-import logging
+import time
 import os
+import logging
+import openpyxl
+import tempfile
 import shutil
 from datetime import datetime
-import tempfile
-import time
-from typing import List, Tuple, Dict, Optional
-
-import openpyxl
-import psutil
-import requests
-from fuzzywuzzy import fuzz
-from retrying import retry
 from selenium import webdriver
-from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, ElementClickInterceptedException
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from fuzzywuzzy import fuzz
+import psutil
+import gdown
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+# Constants
+GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform"
+EXCEL_FILE = "MAINTENANCE CABLE REQUEST TO VTC.xlsx"  # Update to your Excel file path
+SIMILARITY_THRESHOLD = 80
+TEMP_DIR = tempfile.mkdtemp()
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB limit
+CHROMEDRIVER_PATH = r"D:\trc_auto\chromedriver.exe"  # Adjust if needed
+
+# Optional: Check for webdriver_manager
 try:
     from webdriver_manager.chrome import ChromeDriverManager
     USE_WEBDRIVER_MANAGER = True
 except ImportError:
     USE_WEBDRIVER_MANAGER = False
 
-# Configuration
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.StreamHandler()]
-)
-logger = logging.getLogger(__name__)
-
-GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=dialog"
-EXCEL_FILE = "MAINTENANCE CABLE REQUEST TO VTC.xlsx"
-SIMILARITY_THRESHOLD = 80
-TEMP_DIR = tempfile.mkdtemp()
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB limit
-USER_DATA_DIR = r"C:\Users\KHC\AppData\Local\Google\Chrome\User Data"
-PROFILE_DIR = "Profile 1"
-
-class FormAutomationError(Exception):
-    """Custom exception for form automation errors."""
-    pass
-
-def kill_chrome_processes() -> None:
-    """Terminate all Chrome processes to prevent profile conflicts."""
-    try:
-        for proc in psutil.process_iter(['pid', 'name']):
-            if proc.info['name'].lower() == "chrome.exe":
+def kill_chrome():
+    """Terminate all running Chrome processes."""
+    for proc in psutil.process_iter(attrs=['pid', 'name']):
+        if proc.info['name'].lower() == "chrome.exe":
+            try:
                 proc.kill()
-                logger.debug(f"Killed Chrome process: {proc.pid}")
-    except Exception as e:
-        logger.warning(f"Error killing Chrome processes: {e}")
+                logging.info(f"Killed Chrome process: {proc.pid}")
+            except Exception as e:
+                logging.warning(f"Could not kill Chrome process {proc.pid}: {e}")
 
-def setup_driver() -> webdriver.Chrome:
-    """Initialize Chrome WebDriver with user profile to avoid login."""
+def setup_driver():
+    """Initialize and configure Chrome WebDriver."""
+    from selenium.webdriver.chrome.options import Options
     options = Options()
-    options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
-    options.add_argument(f"--profile-directory={PROFILE_DIR}")
+    user_data_dir = r"C:\Users\KHC\AppData\Local\Google\Chrome\User Data"
+    profile_dir = "Profile 1"
+    options.add_argument(f"--user-data-dir={user_data_dir}")
+    options.add_argument(f"--profile-directory={profile_dir}")
     options.add_argument("--start-maximized")
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
     options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.85 Safari/537.36"
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
     )
 
     try:
-        service = ChromeDriverManager().install() if USE_WEBDRIVER_MANAGER else 'chromedriver.exe'
-        driver = webdriver.Chrome(service=webdriver.chrome.service.Service(service), options=options)
-        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-            "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        })
-        logger.info(f"WebDriver initialized with profile {USER_DATA_DIR}/{PROFILE_DIR}")
-        return driver
+        if USE_WEBDRIVER_MANAGER:
+            driver = webdriver.Chrome(service=webdriver.chrome.service.Service(ChromeDriverManager().install()), options=options)
+        else:
+            driver = webdriver.Chrome(service=webdriver.chrome.service.Service(CHROMEDRIVER_PATH), options=options)
     except Exception as e:
-        logger.error(f"Failed to initialize WebDriver: {e}")
-        raise FormAutomationError("WebDriver setup failed")
+        logging.error(f"Failed to initialize WebDriver: {e}")
+        raise
 
-def download_google_drive_file(url: str, output_path: str) -> Optional[str]:
-    """Download a file from Google Drive and ensure it exists."""
+    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+    })
+    return driver
+
+def download_google_drive_file(url, output_path):
+    """Download an image from a Google Drive URL using gdown."""
     try:
-        file_id = None
-        if "id=" in url:
-            file_id = url.split("id=")[1].split("&")[0]
-        elif "/file/d/" in url:
-            file_id = url.split("/file/d/")[1].split("/")[0]
-
-        if not file_id:
-            logger.warning(f"Invalid Google Drive URL: {url}")
+        if not url or "drive.google.com" not in url:
+            logging.warning(f"Invalid or missing Google Drive URL: '{url}'")
             return None
 
-        download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
-        response = requests.get(download_url, stream=True, timeout=30)
-
-        if response.status_code != 200:
-            logger.warning(f"Failed to download file from {url}: Status {response.status_code}")
-            return None
-
-        content_length = response.headers.get("Content-Length")
-        if content_length and int(content_length) > MAX_FILE_SIZE:
-            logger.warning(f"File exceeds size limit: {content_length} bytes")
-            return None
-
-        with open(output_path, "wb") as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    f.write(chunk)
-
-        # Verify file exists and is non-empty
+        gdown.download(url=url, output=output_path, quiet=False, fuzzy=True)
+        
         if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
-            logger.warning(f"File not fully downloaded: {output_path}")
+            logging.warning(f"Failed to download file to {output_path}")
             return None
 
-        logger.info(f"Downloaded file to {output_path}")
+        file_size = os.path.getsize(output_path)
+        if file_size > MAX_FILE_SIZE:
+            logging.warning(f"File at {url} exceeds {MAX_FILE_SIZE/1024/1024}MB limit")
+            os.remove(output_path)
+            return None
+
+        logging.info(f"Downloaded file to {output_path}")
         return output_path
     except Exception as e:
-        logger.warning(f"Error downloading file from {url}: {e}")
+        logging.warning(f"Error downloading file from {url}: {e}")
         return None
 
-def read_excel_data(filepath: str) -> Tuple[List[str], List[List[str]]]:
-    """Read headers and data from Excel file."""
+def read_excel_data(filepath):
+    """Read headers and data from an Excel file."""
     try:
-        wb = openpyxl.load_workbook(filepath, read_only=True)
+        wb = openpyxl.load_workbook(filepath)
         sheet = wb.active
-        headers = [
-            cell.value.strftime("%Y-%m-%d") if isinstance(cell.value, datetime)
-            else str(cell.value).strip()
-            for cell in sheet[1] if cell.value is not None
-        ]
-        data = [
-            ["" if val is None else val for val in row]
-            for row in sheet.iter_rows(min_row=2, values_only=True) if any(row)
-        ]
-        logger.info(f"Read {len(data)} rows from {filepath}")
+        headers = []
+        for cell in sheet[1]:
+            if cell.value is None:
+                continue
+            if isinstance(cell.value, datetime):
+                headers.append(cell.value.strftime("%Y-%m-%d"))
+            else:
+                headers.append(str(cell.value).strip())
+
+        data = []
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            if any(row):
+                cleaned_row = [val if val is not None else "" for val in row]
+                data.append(cleaned_row)
+        logging.info(f"Read {len(data)} rows from Excel file")
         return headers, data
     except Exception as e:
-        logger.error(f"Error reading Excel file {filepath}: {e}")
-        raise FormAutomationError("Excel file reading failed")
+        logging.error(f"Error reading Excel file: {e}")
+        raise
 
-def get_form_headers(driver: webdriver.Chrome) -> List[str]:
-    """Retrieve headers from the Google Form."""
+def get_form_headers_and_file_fields(driver):
+    """Retrieve headers and identify file upload fields from the Google Form."""
     try:
         driver.get(GOOGLE_FORM_URL)
-        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//span[@class='M7eMe']")))
-        headers = [
-            elem.text.strip()
-            for elem in driver.find_elements(By.XPATH, "//span[@class='M7eMe']")
-            if elem.text.strip()
-        ]
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//span[@class='M7eMe']")))
+        
+        # Get all form headers
+        header_elements = driver.find_elements(By.XPATH, "//span[@class='M7eMe']")
+        headers = [elem.text.strip() for elem in header_elements if elem.text.strip()]
         if not headers:
             raise ValueError("No form headers found")
-        logger.info(f"Retrieved {len(headers)} form headers")
-        return headers
+        
+        # Identify file upload fields by checking for "Add File" buttons
+        file_upload_headers = []
+        for header in headers:
+            button_xpath = (
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{header[:50]}')]/ancestor::div[@role='listitem']"
+                f"//div[@role='button' and contains(@aria-label, 'Add File')]"
+            )
+            if driver.find_elements(By.XPATH, button_xpath):
+                file_upload_headers.append(header)
+        
+        logging.info(f"Form headers: {headers}")
+        logging.info(f"Detected file upload fields: {file_upload_headers}")
+        return headers, file_upload_headers
     except Exception as e:
-        logger.error(f"Error fetching form headers: {e}")
-        raise FormAutomationError("Form headers retrieval failed")
+        logging.error(f"Error fetching form headers: {e}")
+        raise
 
-def match_headers(excel_headers: List[str], form_headers: List[str]) -> Tuple[List[str], List[str], Dict[str, str]]:
+def match_headers(excel_headers, form_headers):
     """Match Excel headers to form headers using fuzzy matching."""
-    matched, unmatched, mapping = [], [], {}
+    matched_headers, mapping, unmatched = [], {}, []
     for excel_header in excel_headers:
         best_match, best_score = None, 0
         for form_header in form_headers:
@@ -169,328 +162,238 @@ def match_headers(excel_headers: List[str], form_headers: List[str]) -> Tuple[Li
             if score > best_score and score >= SIMILARITY_THRESHOLD:
                 best_match, best_score = form_header, score
         if best_match:
-            matched.append(excel_header)
+            matched_headers.append(excel_header)
             mapping[excel_header] = best_match
+            logging.info(f"Fuzzy matched: '{excel_header}' → '{best_match}' (score: {best_score})")
         else:
             unmatched.append(excel_header)
-    logger.info(f"Matched {len(matched)} headers, unmatched: {unmatched}")
-    return matched, unmatched, mapping
+            logging.warning(f"No match for Excel header: '{excel_header}'")
+    
+    logging.info(f"Header mappings: {mapping}")
+    if unmatched:
+        logging.warning(f"Unmatched Excel headers: {unmatched}")
+    return matched_headers, unmatched, mapping
 
-def scroll_into_view(driver: webdriver.Chrome, element) -> None:
-    """Scroll an element into view smoothly."""
-    try:
-        driver.execute_script(
-            "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});",
-            element
-        )
-        time.sleep(0.2)  # Brief pause for scroll to settle
-    except Exception as e:
-        logger.warning(f"Error scrolling element into view: {e}")
+def scroll_into_view(driver, element):
+    """Scroll an element into view."""
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element)
+    time.sleep(0.2)
 
-def clear_inputs(driver):
-    """Clear all form inputs, including text, date, textarea, dropdowns, checkboxes, radio buttons, and file uploads."""
-    logging.debug("Attempting to clear all form inputs.")
-
-    try:
-        # Step 1: Reset the form using JavaScript (works for most inputs)
-        driver.execute_script("""
-            var forms = document.getElementsByTagName('form');
-            for (var i = 0; i < forms.length; i++) {
-                forms[i].reset();
-            }
-        """)
-        logging.debug("Executed JavaScript form reset.")
-
-        # Step 2: Clear text, date, and textarea inputs explicitly
-        text_inputs = driver.find_elements(By.XPATH, "//input[@type='text'] | //input[@type='date'] | //textarea")
-        for field in text_inputs:
-            try:
-                scroll_into_view(driver, field)
-                field.clear()
-                if field.get_attribute("value"):
-                    logging.warning(f"Failed to clear input: {field.get_attribute('outerHTML')[:50]}...")
-                else:
-                    logging.debug(f"Cleared text/textarea input: {field.get_attribute('outerHTML')[:50]}...")
-            except WebDriverException as e:
-                logging.warning(f"Error clearing text input: {e}")
-
-        # Step 3: Reset dropdowns to first option (often blank)
-        dropdowns = driver.find_elements(By.XPATH, "//div[@role='listbox'] | //select")
-        for dropdown in dropdowns:
-            try:
-                scroll_into_view(driver, dropdown)
-                dropdown.click()
-                # Select the first option (assumed to be default/blank)
-                first_option = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//div[@role='option'][1] | //option[1]"))
-                )
-                first_option.click()
-                logging.debug(f"Reset dropdown to first option.")
-            except WebDriverException as e:
-                logging.warning(f"Error resetting dropdown: {e}")
-
-        # Step 4: Uncheck checkboxes and radio buttons
-        checked_inputs = driver.find_elements(By.XPATH, "//input[@type='checkbox' and @checked] | //input[@type='radio' and @checked]")
-        for input_elem in checked_inputs:
-            try:
-                scroll_into_view(driver, input_elem)
-                driver.execute_script("arguments[0].checked = false;", input_elem)
-                logging.debug(f"Unchecked input: {input_elem.get_attribute('outerHTML')[:50]}...")
-            except WebDriverException as e:
-                logging.warning(f"Error unchecking input: {e}")
-
-        # Step 5: Remove selected files (Google Forms specific)
-        remove_file_buttons = driver.find_elements(By.XPATH, "//div[@aria-label='Remove']")
-        for button in remove_file_buttons:
-            try:
-                scroll_into_view(driver, button)
-                button.click()
-                logging.debug("Removed selected file.")
-            except WebDriverException as e:
-                logging.warning(f"Error removing file: {e}")
-
-        # Step 6: Verify form is cleared
-        remaining_inputs = driver.find_elements(By.XPATH, "//input[@type='text' or @type='date'] | //textarea")
-        for input_elem in remaining_inputs:
-            if input_elem.get_attribute("value"):
-                logging.warning(f"Input still has value after clearing: {input_elem.get_attribute('value')}")
-        remaining_checked = driver.find_elements(By.XPATH, "//input[@type='checkbox' and @checked] | //input[@type='radio' and @checked]")
-        if remaining_checked:
-            logging.warning(f"Found {len(remaining_checked)} checked inputs after clearing.")
-
-        logging.info("All form inputs cleared successfully.")
-    except Exception as e:
-        logging.error(f"Failed to clear inputs: {e}")
-        # Fallback: Reload the form
-        logging.info("Reloading form as fallback.")
-        driver.get(driver.current_url)
-        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//form")))
-        logging.debug("Form reloaded.")
-
-def parse_date(value: any) -> Optional[str]:
-    """Parse date into MM/DD/YYYY format."""
-    if not value or isinstance(value, str) and "drive.google.com" in value:
+def parse_date(value):
+    """Parse various date formats into MM/DD/YYYY."""
+    if not value:
         return None
     if isinstance(value, datetime):
         return value.strftime("%m/%d/%Y")
     if isinstance(value, str):
         for fmt in ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y"]:
             try:
-                return datetime.strptime(value, fmt).strftime("%m/%d/%Y")
+                parsed_date = datetime.strptime(value, fmt)
+                return parsed_date.strftime("%m/%d/%Y")
             except ValueError:
                 continue
-    logger.warning(f"Unsupported date format: {value}")
+        logging.warning(f"Unsupported date format: {value}")
     return None
 
-def fill_date_field(driver: webdriver.Chrome, form_header: str, value: any) -> bool:
-    """Fill a date field."""
+def fill_date_field(driver, form_header, date_value):
+    """Fill a date field in the form."""
     try:
-        date_value = parse_date(value)
+        date_value = parse_date(date_value)
         if not date_value:
             return False
 
         month, day, year = date_value.split("/")
-        xpath = f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']"
-        container = driver.find_element(By.XPATH, xpath)
 
-        date_inputs = container.find_elements(By.XPATH, ".//input[@type='date']")
+        date_input_xpath = (
+            f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']//input[@type='date']"
+        )
+        date_inputs = driver.find_elements(By.XPATH, date_input_xpath)
         if date_inputs:
             scroll_into_view(driver, date_inputs[0])
-            date_inputs[0].send_keys(f"{month}{day}{year}")
-            logger.info(f"Filled date field '{form_header}' with {date_value}")
+            date_for_input = f"{month}{day}{year}"
+            date_inputs[0].send_keys(date_for_input)
+            logging.info(f"Filled date field '{form_header}' with '{date_for_input}'")
             return True
 
-        month_input = container.find_element(By.XPATH, ".//input[@aria-label='Month']")
-        day_input = container.find_element(By.XPATH, ".//input[@aria-label='Day of the month']")
-        year_input = container.find_element(By.XPATH, ".//input[@aria-label='Year']")
+        date_container_xpath = (
+            f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']"
+        )
+        date_container = driver.find_element(By.XPATH, date_container_xpath)
+        month_input = date_container.find_element(By.XPATH, ".//input[@aria-label='Month']")
+        day_input = date_container.find_element(By.XPATH, ".//input[@aria-label='Day of the month']")
+        year_input = date_container.find_element(By.XPATH, ".//input[@aria-label='Year']")
 
-        for input_elem, val in [(month_input, month), (day_input, day), (year_input, year)]:
-            scroll_into_view(driver, input_elem)
-            input_elem.clear()
-            input_elem.send_keys(val)
-
-        logger.info(f"Filled date field '{form_header}' with {date_value}")
+        scroll_into_view(driver, month_input)
+        month_input.clear()
+        month_input.send_keys(month)
+        day_input.clear()
+        day_input.send_keys(day)
+        year_input.clear()
+        year_input.send_keys(year)
+        logging.info(f"Filled date field '{form_header}' with '{month}/{day}/{year}'")
         return True
+
     except NoSuchElementException:
-        logger.warning(f"Date field '{form_header}' not found")
+        logging.warning(f"Date field '{form_header}' not found or unsupported")
         return False
     except Exception as e:
-        logger.warning(f"Error filling date field '{form_header}': {e}")
+        logging.warning(f"Error filling date field '{form_header}': {e}")
         return False
 
-@retry(stop_max_attempt_number=3, wait_fixed=5000)
-def upload_file(driver: webdriver.Chrome, file_path: str) -> bool:
-    """Upload a file through Google's file picker iframe and check completion."""
-    try:
-        logger.info(f"Attempting to upload file: {file_path}")
-        WebDriverWait(driver, 30).until(
-            EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[contains(@src, 'docs.google.com/picker')]"))
-        )
-        file_input = WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
-        )
-        file_input.send_keys(file_path)
-        logger.info(f"File path sent to input: {file_path}")
-        insert_btn = WebDriverWait(driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, "//div[@role='dialog']//span[text()='Insert']/ancestor::button"))
-        )
-        driver.execute_script("arguments[0].click();", insert_btn)
-        driver.switch_to.default_content()
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@role='list' and @aria-label='Selected files']//div"))
-        )
-        logger.info(f"File '{file_path}' uploaded successfully")
-        return True
-    except TimeoutException:
-        logger.warning(f"Timeout waiting for file upload to complete: {file_path}")
-        driver.switch_to.default_content()
-        return False
-    except Exception as e:
-        logger.warning(f"File upload failed: {e}")
-        driver.switch_to.default_content()
-        return False
+def fill_file_upload(driver, form_header, file_urls, max_files):
+    """Upload multiple files to a form field from Google Drive URLs."""
+    uploaded_files = []
+    file_urls = [url for url in file_urls if url and "drive.google.com" in url][:max_files]
 
-def fill_file_upload(driver: webdriver.Chrome, form_header: str, file_url: str) -> bool:
-    """Handle file upload for a form field and verify completion."""
-    try:
-        if not file_url or "drive.google.com" not in file_url:
-            logger.warning(f"Invalid file URL for '{form_header}': {file_url}")
-            return False
+    for idx, file_url in enumerate(file_urls, 1):
+        temp_file = os.path.join(TEMP_DIR, f"image_{form_header.replace(' ', '_')}_{idx}_{int(time.time())}.jpg")
+        try:
+            # Download the file
+            downloaded_file = download_google_drive_file(file_url, temp_file)
+            if not downloaded_file or not os.path.exists(downloaded_file):
+                logging.warning(f"Failed to download file from '{file_url}'")
+                continue
 
-        temp_file = os.path.join(TEMP_DIR, f"image_{int(time.time())}.jpg")
-        downloaded_file = download_google_drive_file(file_url, temp_file)
-        if not downloaded_file:
-            logger.warning(f"Failed to download file for '{form_header}'")
-            return False
+            # Wait until file is fully written
+            start_time = time.time()
+            while time.time() - start_time < 15:
+                if os.path.exists(downloaded_file) and os.path.getsize(downloaded_file) > 0:
+                    break
+                time.sleep(0.5)
+            else:
+                logging.warning(f"File not ready for upload: {downloaded_file}")
+                continue
 
-        # Ensure file is ready (no wait time, just a check)
-        if not os.path.exists(downloaded_file) or os.path.getsize(downloaded_file) == 0:
-            logger.warning(f"File not ready for upload: {downloaded_file}")
-            return False
-        logger.info(f"File {downloaded_file} is ready for upload")
-
-        # Click "Add File" button with retry for interception
-        button_xpath = f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']/ancestor::div[@role='listitem']//div[@role='button' and contains(@aria-label, 'Add File')]"
-        for _ in range(3):
+            # Find "Add File" button
+            button_xpath = (
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
+                f"//div[@role='button' and contains(@aria-label, 'Add File')]"
+            )
             try:
-                upload_button = WebDriverWait(driver, 30).until(
+                add_file_btn = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, button_xpath))
                 )
-                scroll_into_view(driver, upload_button)
-                driver.execute_script("arguments[0].click();", upload_button)
-                logger.info(f"Clicked 'Add File' button for '{form_header}'")
-                break
-            except ElementClickInterceptedException as e:
-                logger.warning(f"Add File button click intercepted: {e}")
-                return False
-
-        # Upload the file and check completion
-        return upload_file(driver, downloaded_file)
-
-    except TimeoutException:
-        logger.warning(f"Timeout during file upload for '{form_header}'")
-        return False
-    except Exception as e:
-        logger.warning(f"Error uploading file for '{form_header}': {e}")
-        return False
-    finally:
-        if os.path.exists(temp_file):
-            try:
-                os.remove(temp_file)
-                logger.debug(f"Cleaned up temp file: {temp_file}")
+                scroll_into_view(driver, add_file_btn)
+                driver.execute_script("arguments[0].click();", add_file_btn)
+                logging.info(f"Clicked 'Add File' button for '{form_header}' (file {idx})")
             except Exception as e:
-                logger.warning(f"Failed to delete temp file {temp_file}: {e}")
-def fill_google_form(driver, row, headers, header_mapping, is_first_submission: bool = False):
+                logging.warning(f"Failed to click 'Add File' button for '{form_header}' (file {idx}): {e}")
+                continue
+
+            # Switch to file picker iframe
+            try:
+                WebDriverWait(driver, 20).until(
+                    EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[contains(@src, 'docs.google.com/picker')]"))
+                )
+                logging.info(f"Switched to file picker iframe for '{form_header}' (file {idx})")
+            except Exception as e:
+                logging.warning(f"Failed to switch to file picker iframe for '{form_header}' (file {idx}): {e}")
+                driver.switch_to.default_content()
+                continue
+
+            # Upload the file
+            try:
+                file_input = WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+                )
+                file_input.send_keys(downloaded_file)
+                logging.info(f"File sent to input: {downloaded_file} for '{form_header}' (file {idx})")
+
+                # Wait for the file to appear in the picker
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//div[@class='docs-uploads-container']"))
+                )
+
+                # Click "Insert" button
+                insert_btn = WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.XPATH, "//div[@role='dialog']//span[text()='Insert']/ancestor::button"))
+                )
+                driver.execute_script("arguments[0].click();", insert_btn)
+                logging.info(f"Clicked Insert button for '{form_header}' (file {idx})")
+                uploaded_files.append(downloaded_file)
+            except Exception as e:
+                logging.warning(f"File upload failed for '{form_header}' (file {idx}): {e}")
+                driver.switch_to.default_content()
+                continue
+            finally:
+                driver.switch_to.default_content()
+
+        except Exception as e:
+            logging.error(f"Unexpected error during file upload for '{form_header}' (file {idx}): {e}")
+            driver.switch_to.default_content()
+            continue
+
+    return uploaded_files
+
+def fill_google_form(driver, row, headers, header_mapping, file_upload_headers):
+    """Fill and submit a Google Form for one row, handling multiple file upload fields."""
     try:
         driver.get(GOOGLE_FORM_URL)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//form")))
-        
-        # Clear inputs only for the first submission
-        if is_first_submission:
-            logger.info("Clearing inputs for the first submission")
-            clear_inputs(driver)
 
+        fields_filled = True
+        all_uploaded_files = []
+        file_upload_urls = {header: [] for header in file_upload_headers}
+
+        # Handle email collection checkbox
+        try:
+            checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
+            checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
+            scroll_into_view(driver, checkbox)
+            checkbox.click()
+            logging.info("Checked 'Email' collection checkbox")
+        except TimeoutException:
+            logging.warning("Email collection checkbox not found or not clickable")
+
+        # Collect file URLs for each file upload field
         for excel_header, value in zip(headers, row):
-            if excel_header not in header_mapping or value is None:
+            if excel_header not in header_mapping or not value:
                 continue
-
             form_header = header_mapping[excel_header]
             value_str = str(value).strip()
-            logging.info(f"Processing field '{form_header}' with value '{value_str}'")
 
-            # Wait for the field header to be present
-            try:
-                # Use partial match to handle long headers and special characters
-                header_xpath = (
-                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]"
-                )
-                WebDriverWait(driver, 5).until(
-                    EC.presence_of_element_located((By.XPATH, header_xpath))
-                )
-                logger.debug(f"Found header: {form_header[:50]}...")
-            except TimeoutException:
-                logging.warning(f"Field header '{form_header}' not found in form")
+            # Check if the form header is a file upload field
+            if form_header in file_upload_headers and value_str.startswith("http"):
+                file_upload_urls[form_header].append(value_str)
+                logging.debug(f"Added URL to '{form_header}': {value_str}")
                 continue
 
-            # Check if the field is a date field
+            # Handle non-file fields (text, date, etc.)
             date_input_xpath = (
                 f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//"
                 f"input[@type='date' or @aria-label='Month' or @aria-label='Day of the month' or @aria-label='Year']"
             )
-            date_inputs = driver.find_elements(By.XPATH, date_input_xpath)
-            if date_inputs:
-                if fill_date_field(driver, form_header, value):
-                    continue
-            # Check if the field is a file upload by looking for the "Add File" button
-            file_button_xpath = (
-                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//"
-                f"div[@role='button' and contains(@aria-label, 'Add File')]"
-            )
-            file_buttons = driver.find_elements(By.XPATH, file_button_xpath)
-            if file_buttons and value_str.startswith("http"):
-                try:
-                    scroll_into_view(driver, file_buttons[0])
-                    if fill_file_upload(driver, form_header, value_str):
-                        logging.info(f"✅ Uploaded file for '{form_header}'")
-                        continue
-                except Exception as e:
-                    logging.warning(f"⚠️ Error uploading file for '{form_header}': {e}")
-                    continue
+            if driver.find_elements(By.XPATH, date_input_xpath):
+                if not fill_date_field(driver, form_header, value):
+                    fields_filled = False
+                continue
 
             try:
-                # Try text input
                 input_xpath = (
                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//"
                     f"input[@type='text' or @type='number']"
                 )
                 inputs = driver.find_elements(By.XPATH, input_xpath)
                 if inputs:
-                    # Wait for the input to be interactable
-                    WebDriverWait(driver, 5).until(
-                        EC.element_to_be_clickable((By.XPATH, input_xpath))
-                    )
+                    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, input_xpath)))
                     scroll_into_view(driver, inputs[0])
                     inputs[0].clear()
                     inputs[0].send_keys(value_str)
                     logging.info(f"Filled text field '{form_header}' with '{value_str}'")
                     continue
 
-                # Try textarea
                 textarea_xpath = (
                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//textarea"
                 )
                 textareas = driver.find_elements(By.XPATH, textarea_xpath)
                 if textareas:
-                    WebDriverWait(driver, 5).until(
-                        EC.element_to_be_clickable((By.XPATH, textarea_xpath))
-                    )
+                    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, textarea_xpath)))
                     scroll_into_view(driver, textareas[0])
                     textareas[0].clear()
                     textareas[0].send_keys(value_str)
                     logging.info(f"Filled textarea field '{form_header}' with '{value_str}'")
                     continue
 
-                # Try dropdown
                 dropdown_xpath = (
                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]/ancestor::div[@role='listitem']//div[@role='listbox']"
                 )
@@ -500,73 +403,112 @@ def fill_google_form(driver, row, headers, header_mapping, is_first_submission: 
                     dropdowns[0].click()
                     time.sleep(0.5)
                     options = driver.find_elements(By.XPATH, "//div[@role='option']")
+                    matched = False
                     for opt in options:
                         if value_str.lower() in opt.text.lower():
                             scroll_into_view(driver, opt)
                             opt.click()
                             logging.info(f"Selected dropdown option '{opt.text}' for '{form_header}'")
+                            matched = True
                             break
+                    if not matched:
+                        logging.warning(f"No matching dropdown option for '{form_header}' value '{value_str}'")
+                        fields_filled = False
                     continue
-                # Try checkbox
-                checkbox_xpath = f"//div[@role='listitem']//span[normalize-space(.)='{value_str}']/ancestor::label"
+
+                checkbox_xpath = (
+                    f"//div[@role='listitem']//span[normalize-space(.)='{value_str}']/ancestor::label"
+                )
                 checkboxes = driver.find_elements(By.XPATH, checkbox_xpath)
                 if checkboxes:
                     scroll_into_view(driver, checkboxes[0])
                     checkboxes[0].click()
                     logging.info(f"Checked checkbox '{form_header}' with value '{value_str}'")
                     continue
+
                 logging.warning(f"No matching input found for field '{form_header}' with value '{value_str}'")
+                fields_filled = False
 
             except Exception as e:
                 logging.warning(f"Failed to process field '{form_header}' with value '{value_str}': {e}")
-                continue
+                fields_filled = False
 
+        # Handle file uploads for detected file upload fields
+        for idx, form_header in enumerate(file_upload_headers):
+            if not file_upload_urls[form_header]:
+                continue
+            # First file upload field: up to 5 files; second: 1 file
+            max_files = 5 if idx == 0 else 1
+            uploaded_files = fill_file_upload(driver, form_header, file_upload_urls[form_header], max_files)
+            if uploaded_files:
+                logging.info(f"Completed upload to '{form_header}'")
+                all_uploaded_files.extend(uploaded_files)
+            else:
+                logging.warning(f"Failed to upload to '{form_header}'")
+                fields_filled = False
+
+        # Submit the form
         try:
-            submit_xpath = "//span[contains(text(), 'Submit')]/ancestor::div[@role='button']"
-            submit_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, submit_xpath)))
+            submit_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'Submit')]/ancestor::div[@role='button']")))
             scroll_into_view(driver, submit_btn)
             submit_btn.click()
             WebDriverWait(driver, 10).until(EC.url_contains("formResponse"))
-            logging.info("✅ Form submitted successfully.")
-        except TimeoutException:
-            logging.error("❌ Submit button not clickable or form submission failed.")
+            logging.info("✅ Form submitted successfully")
         except Exception as e:
-            logging.error(f"❌ Submit failed: {e}")
+            logging.error(f"❌ Form submission failed: {e}")
+            fields_filled = False
+
+        # Clean up uploaded files
+        for file_path in all_uploaded_files:
+            try:
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+                    logging.info(f"Removed temporary file: {file_path}")
+            except Exception as e:
+                logging.warning(f"Failed to remove temporary file {file_path}: {e}")
+
+        # Refresh the form to ensure a clean state for the next submission
+        driver.get(GOOGLE_FORM_URL)
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//form")))
+        logging.info("🔄 Form page refreshed for next submission")
+
+        return fields_filled
 
     except Exception as e:
         logging.error(f"Error filling form: {e}")
+        return False
 
 def main():
-    """Main function to orchestrate form automation."""
+    """Main function to orchestrate the automation process."""
     driver = None
     try:
-        kill_chrome_processes()
+        kill_chrome()
         driver = setup_driver()
-        form_headers = get_form_headers(driver)
+        form_headers, file_upload_headers = get_form_headers_and_file_fields(driver)
         excel_headers, rows = read_excel_data(EXCEL_FILE)
         matched_headers, unmatched_headers, header_mapping = match_headers(excel_headers, form_headers)
 
-        if unmatched_headers:
-            logger.warning(f"Unmatched Excel headers: {unmatched_headers}")
-        logger.info(f"Header mapping: {header_mapping}")
-
         for idx, row in enumerate(rows, start=2):
-            logger.info(f"Processing row {idx}")
-            # Clear inputs only for the first row
-            fill_google_form(driver, row, excel_headers, header_mapping, is_first_submission=(idx == 2))
-            logger.info(f"Row {idx} processed successfully")
+            logging.info(f"⏳ Processing row {idx}")
+            fill_google_form(driver, row, excel_headers, header_mapping, file_upload_headers)
+            time.sleep(1)  # Brief pause between submissions
 
-    except FormAutomationError as e:
-        logger.error(f"Automation failed: {e}")
     except Exception as e:
-        logger.error(f"Unexpected error: {e}")
+        logging.error(f"Unhandled error in main: {e}")
     finally:
         if driver:
-            driver.quit()
-            logger.info("WebDriver closed")
+            try:
+                driver.quit()
+                logging.info("🛑 Driver closed")
+            except:
+                pass
         if os.path.exists(TEMP_DIR):
-            shutil.rmtree(TEMP_DIR, ignore_errors=True)
-            logger.info("Temporary directory cleaned up")
+            try:
+                shutil.rmtree(TEMP_DIR)
+                logging.info("🧹 Cleaned up temporary directory")
+            except Exception as e:
+                logging.warning(f"Failed to clean up temporary directory: {e}")
 
 if __name__ == "__main__":
     main()
