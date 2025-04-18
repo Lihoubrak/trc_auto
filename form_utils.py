@@ -18,7 +18,7 @@ def get_form_headers(driver):
             EC.presence_of_element_located((By.XPATH, "//span[@class='M7eMe']"))
         )
         headers = [
-            elem.text.strip().replace('\n', ' ')  # Normalize newlines to spaces
+            elem.text.strip()
             for elem in driver.find_elements(By.XPATH, "//span[@class='M7eMe']")
             if elem.text.strip()
         ]
@@ -103,22 +103,22 @@ def fill_form_field(driver, form_header, value, field_type="text"):
 
         if field_type == "date":
             return fill_date_field(driver, form_header, value)
-
+        form_header_cleaned = form_header.replace("\n", "")
         xpath_map = {
             "text": (
-                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]"
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
                 f"/ancestor::div[@role='listitem']//input[@type='text' or @type='number']"
             ),
             "textarea": (
-                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]"
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
                 f"/ancestor::div[@role='listitem']//textarea"
             ),
             "dropdown": (
-                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]"
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
                 f"/ancestor::div[@role='listitem']//div[@role='listbox']"
             ),
             "checkbox": (
-                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header[:50]}')]"
+                f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
                 f"/ancestor::div[@role='listitem']//div[@role='checkbox']"
             ),
         }
@@ -170,9 +170,8 @@ def fill_form_field(driver, form_header, value, field_type="text"):
         if not elements:
             logging.warning(f"No elements found for form header '{form_header}' and type '{field_type}'")
             return False
-
+    
         scroll_into_view(driver, elements[0])
-
         if field_type in ["text", "textarea"]:
             elements[0].clear()
             elements[0].send_keys(value_str)
@@ -208,17 +207,17 @@ def fill_google_form(driver, row, headers, header_mapping):
 
         email_checkbox_handled = False
         for excel_header, value in zip(headers, row):
-            if not email_checkbox_handled:
-                try:
-                    checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
-                    checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
-                    scroll_into_view(driver, checkbox)
-                    checkbox.click()
-                    logging.info("Checked 'Email' collection checkbox")
-                    email_checkbox_handled = True
-                except TimeoutException:
-                    logging.info("No email checkbox found — skipping")
-                    email_checkbox_handled = True
+            # if not email_checkbox_handled:
+            #     try:
+            #         checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
+            #         checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
+            #         scroll_into_view(driver, checkbox)
+            #         checkbox.click()
+            #         logging.info("Checked 'Email' collection checkbox")
+            #         email_checkbox_handled = True
+            #     except TimeoutException:
+            #         logging.info("No email checkbox found — skipping")
+            #         email_checkbox_handled = True
 
             if excel_header not in header_mapping or not value:
                 logging.info(f"Skipping empty or unmapped field: {excel_header}")
@@ -226,7 +225,7 @@ def fill_google_form(driver, row, headers, header_mapping):
 
             form_header = header_mapping[excel_header]
             logging.info(f"Processing field: {form_header}")
-
+            
             is_image_field = (
                 "រូបភាពនៃស្ថានភាពការខូចខាតនៃខ្សែកាប្លិ៍ដោយមាន lat/long <10MB (Picture of Damage Cable with lat/long <10MB):"
                 in form_header or "រូបភាពនៃគំនូសនៅលើ Google Map ដែលមានចំណុចចាប់ផ្តើមនិងបញ្ចប់ (Picture of drawing in google map with start and end lat/long):" in form_header
@@ -327,7 +326,6 @@ def fill_google_form(driver, row, headers, header_mapping):
             if not filled:
                 logging.warning(f"No matching input found for '{form_header}'")
                 fields_filled = False
-
         # if fields_filled:
         #     try:
         #         submit_btn = WebDriverWait(driver, 10).until(

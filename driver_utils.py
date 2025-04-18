@@ -27,6 +27,7 @@ def initialize_driver():
     options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
     options.add_argument(f"--profile-directory={PROFILE_DIR}")
     options.add_argument("--start-maximized")
+    options.add_argument("--lang=km-KH")
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
