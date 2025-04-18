@@ -114,8 +114,12 @@ def fill_form_field(driver, form_header, value, field_type="text"):
 
         if field_type == "date":
             return fill_date_field(driver, form_header, value)
+<<<<<<< HEAD
 
         form_header_cleaned = re.sub(r'\s+', ' ', form_header.replace("\xa0", " ")).strip()
+=======
+        form_header_cleaned = form_header.replace("\n", "")
+>>>>>>> bf0ed8012429c947cb758de90ad96527de490932
         xpath_map = {
             "text": (
                 f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
@@ -182,7 +186,7 @@ def fill_form_field(driver, form_header, value, field_type="text"):
         if not elements:
             logging.warning(f"No elements found for form header '{form_header}' and type '{field_type}'")
             return False
-
+    
         scroll_into_view(driver, elements[0])
         if field_type in ["text", "textarea"]:
             elements[0].clear()
@@ -228,6 +232,7 @@ def fill_google_form(driver, row, headers, header_mapping):
         WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//form")))
         logging.info("Google Form loaded successfully")
 
+<<<<<<< HEAD
         # Handle email checkbox (uncommented for clarity, but can be skipped if not needed)
         # email_checkbox_handled = False
         # try:
@@ -240,6 +245,21 @@ def fill_google_form(driver, row, headers, header_mapping):
         # except TimeoutException:
         #     logging.info("No email checkbox found — skipping")
         #     email_checkbox_handled = True
+=======
+        email_checkbox_handled = False
+        for excel_header, value in zip(headers, row):
+            # if not email_checkbox_handled:
+            #     try:
+            #         checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
+            #         checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
+            #         scroll_into_view(driver, checkbox)
+            #         checkbox.click()
+            #         logging.info("Checked 'Email' collection checkbox")
+            #         email_checkbox_handled = True
+            #     except TimeoutException:
+            #         logging.info("No email checkbox found — skipping")
+            #         email_checkbox_handled = True
+>>>>>>> bf0ed8012429c947cb758de90ad96527de490932
 
         # Process each header sequentially
         for excel_header, value in zip(headers, row):
@@ -249,8 +269,12 @@ def fill_google_form(driver, row, headers, header_mapping):
 
             form_header = header_mapping[excel_header]
             logging.info(f"Processing field: {form_header}")
+<<<<<<< HEAD
 
             # Check if the field is an image upload field
+=======
+            
+>>>>>>> bf0ed8012429c947cb758de90ad96527de490932
             is_image_field = (
                 "រូបភាពនៃស្ថានភាពការខូចខាតនៃខ្សែកាប្លិ៍ដោយមាន lat/long <10MB (Picture of Damage Cable with lat/long <10MB):"
                 in form_header or "រូបភាពនៃគំនូសនៅលើ Google Map ដែលមានចំណុចចាប់ផ្តើមនិងបញ្ចប់ (Picture of drawing in google map with start and end lat/long):" in form_header
@@ -384,9 +408,12 @@ def fill_google_form(driver, row, headers, header_mapping):
             if not filled:
                 logging.warning(f"Failed to fill field '{form_header}' with value '{value}'")
                 fields_filled = False
+<<<<<<< HEAD
 
         # Submit the form only if all fields were filled successfully
         # Uncomment and adjust as needed
+=======
+>>>>>>> bf0ed8012429c947cb758de90ad96527de490932
         # if fields_filled:
         #     try:
         #         submit_btn = WebDriverWait(driver, 10).until(
