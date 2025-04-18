@@ -4,7 +4,7 @@ from pathlib import Path
 import openpyxl
 
 def read_excel_data(filepath):
-    """Read headers and data from Excel file, ignoring truly empty rows."""
+    """Read headers and all data rows from Excel file, including empty rows."""
     filepath = Path(filepath)
     if not filepath.exists():
         raise FileNotFoundError(f"Excel file not found: {filepath}")
@@ -16,11 +16,10 @@ def read_excel_data(filepath):
         else str(cell.value).strip()
         for cell in sheet[1] if cell.value
     ]
-    # Only include rows with at least one non-empty, non-whitespace value
+    # Read all rows without filtering
     data = [
         ["" if val is None else val for val in row]
         for row in sheet.iter_rows(min_row=2, values_only=True)
-        if any(val and str(val).strip() for val in row)
     ]
     logging.info(f"Read {len(data)} rows from {filepath.name}: {data}")
     return headers, data

@@ -197,7 +197,7 @@ def fill_form_field(driver, form_header, value, field_type="text"):
         elif field_type == "dropdown":
             elements[0].click()
             time.sleep(0.5)
-            option_xpath = f"//div[@role='option' and contains(., '{value_str}')]"
+            option_xpath = f"//div[@role='option' and contains(., '{value_str[:50]}')]"
             options = driver.find_elements(By.XPATH, option_xpath)
             if options:
                 scroll_into_view(driver, options[0])
@@ -227,26 +227,34 @@ def fill_google_form(driver, row, headers, header_mapping):
         driver.get(GOOGLE_FORM_URL)
         WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//form")))
         logging.info("Google Form loaded successfully")
-
-        # Handle email checkbox (uncommented for clarity, but can be skipped if not needed)
-        # email_checkbox_handled = False
-        # try:
-        #     checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
-        #     checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
-        #     scroll_into_view(driver, checkbox)
-        #     checkbox.click()
-        #     logging.info("Checked 'Email' collection checkbox")
-        #     email_checkbox_handled = True
-        # except TimeoutException:
-        #     logging.info("No email checkbox found — skipping")
-        #     email_checkbox_handled = True
+        # Handle email checkbox once at the start
+        email_checkbox_handled = False
+        if not email_checkbox_handled:
+            try:
+                checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
+                checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
+                scroll_into_view(driver, checkbox)
+                
+                # Check if the checkbox is already checked
+                is_checked = checkbox.get_attribute("aria-checked") == "true"
+                if not is_checked:
+                    checkbox.click()
+                    logging.info("Checked 'Email' collection checkbox")
+                else:
+                    logging.info("Email checkbox already checked, skipping")
+                email_checkbox_handled = True
+            except TimeoutException:
+                logging.info("No email checkbox found — skipping")
+                email_checkbox_handled = True
+            except Exception as e:
+                logging.error(f"Error handling email checkbox: {e}")
+                email_checkbox_handled = True
 
         # Process each header sequentially
         for excel_header, value in zip(headers, row):
             if excel_header not in header_mapping or not value:
                 logging.info(f"Skipping empty or unmapped field: {excel_header}")
                 continue
-
             form_header = header_mapping[excel_header]
             logging.info(f"Processing field: {form_header}")
 
@@ -387,19 +395,19 @@ def fill_google_form(driver, row, headers, header_mapping):
 
         # Submit the form only if all fields were filled successfully
         # Uncomment and adjust as needed
-        # if fields_filled:
-        #     try:
-        #         submit_btn = WebDriverWait(driver, 10).until(
-        #             EC.element_to_be_clickable((By.XPATH, "//span[text()='Submit']/ancestor::div[@role='button']"))
-        #         )
-        #         scroll_into_view(driver, submit_btn)
-        #         driver.execute_script("arguments[0].click();", submit_btn)
-        #         WebDriverWait(driver, 15).until(EC.url_contains("formResponse"))
-        #         logging.info("Form submitted successfully")
-        #         return True
-        #     except Exception as e:
-        #         logging.error(f"Form submission failed: {e}")
-        #         fields_filled = False
+        if fields_filled:
+            try:
+                submit_btn = WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.XPATH, "//span[text()='Submit']/ancestor::div[@role='button']"))
+                )
+                scroll_into_view(driver, submit_btn)
+                driver.execute_script("arguments[0].click();", submit_btn)
+                WebDriverWait(driver, 15).until(EC.url_contains("formResponse"))
+                logging.info("Form submitted successfully")
+                return True
+            except Exception as e:
+                logging.error(f"Form submission failed: {e}")
+                fields_filled = False
 
     except Exception as e:
         logging.error(f"Error while filling the form: {e}")

@@ -26,7 +26,7 @@ def main():
             logging.info(f"Processing row {idx}: {row}")
             success = fill_google_form(driver, row, excel_headers, header_mapping)
             logging.info(f"Row {idx} processed {'successfully' if success else 'with errors'}")
-            break  # Break after processing one row to avoid duplicates
+            # break  # Break after processing one row to avoid duplicates
 
     except Exception as e:
         logging.error(f"Main process error: {e}")
