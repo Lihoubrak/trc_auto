@@ -5,7 +5,7 @@ import tempfile
 import requests
 from urllib.parse import urlparse
 
-def download_google_drive_image(google_drive_link, temp_dir=r"C:\Users\user\Desktop\trc_auto\images"):
+def download_google_drive_image(google_drive_link, temp_dir="images"):
     """Download an image from a Google Drive link."""
     try:
         valid_patterns = [

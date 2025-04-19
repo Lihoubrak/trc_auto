@@ -1,7 +1,7 @@
 # Constants
-GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform"
-EXCEL_FILE = "test - Copy.xlsx"
-CHROMEDRIVER_PATH = r"D:\trc_auto\chromedriver.exe"
+GOOGLE_FORM_URL = ""
+EXCEL_FILE = ""
+CHROMEDRIVER_PATH = "chromedriver.exe"
 SIMILARITY_THRESHOLD = 80
-USER_DATA_DIR = r"C:\Users\user\AppData\Local\Google\Chrome\User Data"
-PROFILE_DIR = "Profile 5"
+USER_DATA_DIR = r""
+PROFILE_DIR = ""
