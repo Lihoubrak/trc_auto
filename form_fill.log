@@ -1,0 +1,193 @@
+2025-04-21 17:27:27,475 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-21 17:27:27,488 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-21 17:27:30,561 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-21 17:27:30,563 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-21 17:27:30,564 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-21 17:27:30,605 - INFO - Total rows to process: 17
+2025-04-21 17:27:30,957 - INFO - ====== WebDriver manager ======
+2025-04-21 17:27:31,874 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-21 17:27:32,157 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-21 17:27:32,387 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-21 17:27:33,771 - INFO - WebDriver initialized successfully
+2025-04-21 17:27:35,228 - INFO - Retrieved 18 form headers
+2025-04-21 17:27:35,229 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-21 17:27:35,229 - WARNING - No match for Excel header: 'Company'
+2025-04-21 17:27:35,230 - WARNING - No match for Excel header: 'Staff name'
+2025-04-21 17:27:35,230 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-21 17:27:35,230 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-21 17:27:35,295 - WARNING - No match for Excel header: 'Account number'
+2025-04-21 17:27:35,295 - WARNING - No match for Excel header: 'Note'
+2025-04-21 17:27:35,295 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-21 17:27:35,296 - INFO - Row 2 already inserted, skipping
+2025-04-21 17:27:35,296 - INFO - Row 3 already inserted, skipping
+2025-04-21 17:27:35,296 - INFO - Row 4 already inserted, skipping
+2025-04-21 17:27:35,296 - INFO - Row 5 already inserted, skipping
+2025-04-21 17:27:35,296 - INFO - Row 6 already inserted, skipping
+2025-04-21 17:27:35,297 - INFO - Row 7 already inserted, skipping
+2025-04-21 17:27:36,824 - INFO - Google Form loaded successfully
+2025-04-21 17:27:37,139 - INFO - Checked 'Email' collection checkbox
+2025-04-21 17:27:37,139 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-21 17:27:37,140 - INFO - Skipping empty or unmapped field: Company
+2025-04-21 17:27:37,140 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-21 17:27:37,140 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-21 17:27:37,140 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-21 17:27:41,128 - WARNING - Unsupported date format: Access
+2025-04-21 17:27:48,067 - INFO - Filled 'Number of cable * Core' with value: 8 core
+2025-04-21 17:27:48,070 - WARNING - Unsupported date format: Phum Chres Village , Street Betong, Sangkat Kouk Kleang , Khan Sen Sok , Phnom Penh City
+2025-04-21 17:27:48,972 - WARNING - Unsupported date format: Phum Chres Village , Street Betong, Sangkat Kouk Kleang , Khan Sen Sok , Phnom Penh City
+2025-04-21 17:27:49,864 - WARNING - Unsupported date format: Phnom Penh
+2025-04-21 17:27:52,941 - WARNING - Unsupported date format: 11.588820°104.853449°
+2025-04-21 17:27:53,750 - WARNING - Unsupported date format: 11.588525°104.853452°
+2025-04-21 17:27:57,378 - WARNING - Unsupported date format: 80
+2025-04-21 17:27:58,703 - WARNING - Unsupported date format: Fire cable on pole
+2025-04-21 17:28:03,925 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmpr5dg4sh0.jpg
+2025-04-21 17:28:04,184 - INFO - Clicked 'Add File' button
+2025-04-21 17:28:04,208 - INFO - Picker dialog div is visible
+2025-04-21 17:28:05,211 - INFO - Switched to new file picker iframe
+2025-04-21 17:28:05,373 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmpr5dg4sh0.jpg, input value: 
+2025-04-21 17:28:12,526 - INFO - File 'tmpr5dg4sh0.jpg' confirmed in form's file list with displayed name: 'tmpr5dg4sh0.jpg'
+2025-04-21 17:28:12,531 - INFO - Picker dialog and iframe closed
+2025-04-21 17:28:12,543 - INFO - No loading indicators detected for 'tmpr5dg4sh0.jpg'
+2025-04-21 17:28:28,791 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmp2pf3made.jpg
+2025-04-21 17:28:29,046 - INFO - Clicked 'Add File' button
+2025-04-21 17:28:29,054 - INFO - Picker dialog div is visible
+2025-04-21 17:28:30,013 - INFO - Switched to new file picker iframe
+2025-04-21 17:28:30,159 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmp2pf3made.jpg, input value: 
+2025-04-21 17:28:42,408 - INFO - File 'tmp2pf3made.jpg' confirmed in form's file list with displayed name: 'tmp2pf3made.jpg'
+2025-04-21 17:28:42,414 - INFO - Picker dialog and iframe closed
+2025-04-21 17:28:42,426 - INFO - No loading indicators detected for 'tmp2pf3made.jpg'
+2025-04-21 17:28:43,930 - INFO - Skipping empty or unmapped field: Account number
+2025-04-21 17:28:43,930 - INFO - Skipping empty or unmapped field: Note
+2025-04-21 17:28:50,209 - INFO - Form submitted successfully
+2025-04-21 17:28:50,210 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmpr5dg4sh0.jpg
+2025-04-21 17:28:50,210 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmp2pf3made.jpg
+2025-04-21 17:28:50,210 - INFO - Row 8 processed successfully
+2025-04-21 17:28:50,240 - INFO - Excel file saved after processing row 8
+2025-04-21 17:28:51,363 - INFO - Google Form loaded successfully
+2025-04-21 17:28:51,672 - INFO - Checked 'Email' collection checkbox
+2025-04-21 17:28:51,673 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-21 17:28:51,673 - INFO - Skipping empty or unmapped field: Company
+2025-04-21 17:28:51,673 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-21 17:28:51,673 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-21 17:28:51,674 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-21 17:28:55,560 - WARNING - Unsupported date format: Access
+2025-04-21 17:29:02,502 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-21 17:29:04,260 - WARNING - Unsupported date format: Preah Vihear
+2025-04-21 17:29:07,346 - WARNING - Unsupported date format: +13.809578, +104.981006
+2025-04-21 17:29:08,147 - WARNING - Unsupported date format: +13.809338, +104.981233
+2025-04-21 17:29:08,950 - WARNING - Unsupported date format: Fiber Optical Cable Slicing/Fiber Optical Cleaver
+2025-04-21 17:29:11,749 - WARNING - Unsupported date format: 139
+2025-04-21 17:29:28,470 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmppvve689i.jpg
+2025-04-21 17:29:28,726 - INFO - Clicked 'Add File' button
+2025-04-21 17:29:28,752 - INFO - Picker dialog div is visible
+2025-04-21 17:29:29,636 - INFO - Switched to new file picker iframe
+2025-04-21 17:29:29,784 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmppvve689i.jpg, input value: 
+2025-04-21 17:29:48,652 - INFO - File 'tmppvve689i.jpg' confirmed in form's file list with displayed name: 'tmppvve689i.jpg'
+2025-04-21 17:29:48,657 - INFO - Picker dialog and iframe closed
+2025-04-21 17:29:48,669 - INFO - No loading indicators detected for 'tmppvve689i.jpg'
+2025-04-21 17:29:51,426 - ERROR - Failed to download file from https://drive.google.com/uc?export=download&id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP8: Status 404
+2025-04-21 17:29:51,930 - INFO - Skipping empty or unmapped field: Account number
+2025-04-21 17:29:51,931 - INFO - Skipping empty or unmapped field: Note
+2025-04-21 17:29:51,932 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmppvve689i.jpg
+2025-04-21 17:29:51,963 - INFO - Excel file saved with error note for row 9
+2025-04-21 17:29:54,178 - INFO - WebDriver closed
+2025-04-21 17:36:10,759 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-21 17:36:10,786 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-21 17:36:13,314 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-21 17:36:13,315 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-21 17:36:13,316 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-21 17:36:13,357 - INFO - Total rows to process: 17
+2025-04-21 17:36:13,738 - INFO - ====== WebDriver manager ======
+2025-04-21 17:36:14,869 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-21 17:36:15,523 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-21 17:36:16,078 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-21 17:36:18,237 - INFO - WebDriver initialized successfully
+2025-04-21 17:36:20,121 - INFO - Retrieved 18 form headers
+2025-04-21 17:36:20,122 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-21 17:36:20,122 - WARNING - No match for Excel header: 'Company'
+2025-04-21 17:36:20,123 - WARNING - No match for Excel header: 'Staff name'
+2025-04-21 17:36:20,123 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-21 17:36:20,123 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-21 17:36:20,183 - WARNING - No match for Excel header: 'Account number'
+2025-04-21 17:36:20,184 - WARNING - No match for Excel header: 'Note'
+2025-04-21 17:36:20,184 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-21 17:36:20,184 - INFO - Row 2 already inserted, skipping
+2025-04-21 17:36:20,185 - INFO - Row 3 already inserted, skipping
+2025-04-21 17:36:20,185 - INFO - Row 4 already inserted, skipping
+2025-04-21 17:36:20,185 - INFO - Row 5 already inserted, skipping
+2025-04-21 17:36:20,185 - INFO - Row 6 already inserted, skipping
+2025-04-21 17:36:20,185 - INFO - Row 7 already inserted, skipping
+2025-04-21 17:36:20,185 - INFO - Row 8 already inserted, skipping
+2025-04-21 17:36:21,609 - INFO - Google Form loaded successfully
+2025-04-21 17:36:21,862 - INFO - Email checkbox already checked, skipping
+2025-04-21 17:36:21,862 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-21 17:36:21,862 - INFO - Skipping empty or unmapped field: Company
+2025-04-21 17:36:21,863 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-21 17:36:21,863 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-21 17:36:21,863 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-21 17:36:25,820 - WARNING - Unsupported date format: Access
+2025-04-21 17:36:32,758 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-21 17:36:34,506 - WARNING - Unsupported date format: Preah Vihear
+2025-04-21 17:36:37,586 - WARNING - Unsupported date format: +13.809578, +104.981006
+2025-04-21 17:36:38,397 - WARNING - Unsupported date format: +13.809338, +104.981233
+2025-04-21 17:36:39,209 - WARNING - Unsupported date format: Fiber Optical Cable Slicing/Fiber Optical Cleaver
+2025-04-21 17:36:41,501 - WARNING - Unsupported date format: 139
+2025-04-21 17:37:00,213 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmpna78h8p_.jpg
+2025-04-21 17:37:00,467 - INFO - Clicked 'Add File' button
+2025-04-21 17:37:01,005 - INFO - Picker dialog div is visible
+2025-04-21 17:37:01,477 - INFO - Switched to new file picker iframe
+2025-04-21 17:37:01,672 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmpna78h8p_.jpg, input value: 
+2025-04-21 17:37:14,421 - INFO - File 'tmpna78h8p_.jpg' confirmed in form's file list with displayed name: 'tmpna78h8p_.jpg'
+2025-04-21 17:37:14,427 - INFO - Picker dialog and iframe closed
+2025-04-21 17:37:14,438 - INFO - No loading indicators detected for 'tmpna78h8p_.jpg'
+2025-04-21 17:37:23,396 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmp6re0nrnu.jpg
+2025-04-21 17:37:23,654 - INFO - Clicked 'Add File' button
+2025-04-21 17:37:23,662 - INFO - Picker dialog div is visible
+2025-04-21 17:37:25,015 - INFO - Switched to new file picker iframe
+2025-04-21 17:37:25,158 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmp6re0nrnu.jpg, input value: 
+2025-04-21 17:37:32,352 - INFO - File 'tmp6re0nrnu.jpg' confirmed in form's file list with displayed name: 'tmp6re0nrnu.jpg'
+2025-04-21 17:37:32,358 - INFO - Picker dialog and iframe closed
+2025-04-21 17:37:32,371 - INFO - No loading indicators detected for 'tmp6re0nrnu.jpg'
+2025-04-21 17:37:33,876 - INFO - Skipping empty or unmapped field: Account number
+2025-04-21 17:37:33,876 - INFO - Skipping empty or unmapped field: Note
+2025-04-21 17:37:40,146 - INFO - Form submitted successfully
+2025-04-21 17:37:40,147 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmpna78h8p_.jpg
+2025-04-21 17:37:40,147 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmp6re0nrnu.jpg
+2025-04-21 17:37:40,148 - INFO - Row 9 processed successfully
+2025-04-21 17:37:40,201 - INFO - Excel file saved after processing row 9
+2025-04-21 17:37:41,836 - INFO - Google Form loaded successfully
+2025-04-21 17:37:42,158 - INFO - Checked 'Email' collection checkbox
+2025-04-21 17:37:42,158 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-21 17:37:42,158 - INFO - Skipping empty or unmapped field: Company
+2025-04-21 17:37:42,159 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-21 17:37:42,159 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-21 17:37:42,159 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-21 17:37:50,851 - WARNING - Unsupported date format: BAT003-DN02-SN08
+2025-04-21 17:37:51,700 - WARNING - Unsupported date format: Access
+2025-04-21 17:38:09,772 - INFO - Filled 'Number of cable * Core' with value: 8 FO
+2025-04-21 17:38:11,555 - WARNING - Unsupported date format: Battambang
+2025-04-21 17:38:20,223 - WARNING - Unsupported date format: 13.09624, 103.204001
+2025-04-21 17:38:21,051 - WARNING - Unsupported date format: 13.09624, 103.204001
+2025-04-21 17:38:25,240 - WARNING - Unsupported date format: Maintenance box
+2025-04-21 17:38:30,928 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmpuoyuqksy.jpg
+2025-04-21 17:38:31,196 - INFO - Clicked 'Add File' button
+2025-04-21 17:38:31,225 - INFO - Picker dialog div is visible
+2025-04-21 17:38:32,169 - INFO - Switched to new file picker iframe
+2025-04-21 17:38:32,368 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmpuoyuqksy.jpg, input value: 
+2025-04-21 17:38:39,524 - INFO - File 'tmpuoyuqksy.jpg' confirmed in form's file list with displayed name: 'tmpuoyuqksy.jpg'
+2025-04-21 17:38:39,532 - INFO - Picker dialog and iframe closed
+2025-04-21 17:38:39,544 - INFO - No loading indicators detected for 'tmpuoyuqksy.jpg'
+2025-04-21 17:38:45,365 - INFO - Downloaded image to C:\Users\user\Desktop\trc_auto\images\tmpt13p4ab7.jpg
+2025-04-21 17:38:45,613 - INFO - Clicked 'Add File' button
+2025-04-21 17:38:45,623 - INFO - Picker dialog div is visible
+2025-04-21 17:38:46,693 - INFO - Switched to new file picker iframe
+2025-04-21 17:38:46,990 - INFO - Sent file path to input: C:\Users\user\Desktop\trc_auto\images\tmpt13p4ab7.jpg, input value: 
+2025-04-21 17:38:55,165 - INFO - File 'tmpt13p4ab7.jpg' confirmed in form's file list with displayed name: 'tmpt13p4ab7.jpg'
+2025-04-21 17:38:55,172 - INFO - Picker dialog and iframe closed
+2025-04-21 17:38:55,183 - INFO - No loading indicators detected for 'tmpt13p4ab7.jpg'
+2025-04-21 17:38:56,688 - INFO - Skipping empty or unmapped field: Account number
+2025-04-21 17:38:56,688 - INFO - Skipping empty or unmapped field: Note
+2025-04-21 17:38:56,689 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmpuoyuqksy.jpg
+2025-04-21 17:38:56,689 - INFO - Deleted temp file: C:\Users\user\Desktop\trc_auto\images\tmpt13p4ab7.jpg
+2025-04-21 17:38:56,717 - INFO - Excel file saved with error note for row 10
+2025-04-21 17:38:58,947 - INFO - WebDriver closed

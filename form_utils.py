@@ -7,14 +7,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from retrying import retry
-from config import GOOGLE_FORM_URL
 from image_utils import download_google_drive_image
 import re
-
-def get_form_headers(driver):
+# Set up logging configuration at the start
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),  # Output to console
+        logging.FileHandler('form_fill.log')  # Output to file
+    ]
+)
+def get_form_headers(driver, config):
     """Retrieve headers from the Google Form."""
     try:
-        driver.get(GOOGLE_FORM_URL)
+        driver.get(config.get("GOOGLE_FORM_URL"))
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//span[@class='M7eMe']"))
         )
@@ -43,7 +50,7 @@ def parse_date(value):
     if isinstance(value, datetime):
         return value.strftime("%m/%d/%Y")
     if isinstance(value, str):
-        for fmt in ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y"]:
+        for fmt in ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%m-%d-%Y"]:
             try:
                 return datetime.strptime(value, fmt).strftime("%m/%d/%Y")
             except ValueError:
@@ -218,13 +225,13 @@ def fill_form_field(driver, form_header, value, field_type="text"):
         logging.error(f"Error filling form field '{form_header}' with type '{field_type}': {e}")
         return False
 
-def fill_google_form(driver, row, headers, header_mapping):
+def fill_google_form(driver, row, headers, header_mapping, config):
     """Fill and submit a Google Form for one row of data."""
     temp_files = []
     fields_filled = True
 
     try:
-        driver.get(GOOGLE_FORM_URL)
+        driver.get(config.get("GOOGLE_FORM_URL"))
         WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//form")))
         logging.info("Google Form loaded successfully")
         # Handle email checkbox once at the start
@@ -270,87 +277,129 @@ def fill_google_form(driver, row, headers, header_mapping):
                         temp_files.append(temp_file_path)
                         uploaded = False
                         file_name = os.path.basename(temp_file_path)
+                        logging.debug(f"Attempting to upload file: {file_name} for field: {form_header}")
 
                         @retry(stop_max_attempt_number=3, wait_fixed=2000)
                         def attempt_upload():
                             nonlocal uploaded
                             try:
+                                # Locate the upload button
                                 upload_btn_xpath = (
                                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']//"
                                     f"div[@role='button' and contains(@aria-label, 'Add File')]"
                                 )
-                                upload_button = WebDriverWait(driver, 15).until(
+                                upload_button = WebDriverWait(driver, 5).until(
                                     EC.element_to_be_clickable((By.XPATH, upload_btn_xpath))
                                 )
                                 scroll_into_view(driver, upload_button)
                                 logging.info(f"Located 'Add File' button for '{form_header}'")
 
+                                # Click the upload button
                                 driver.execute_script("arguments[0].click();", upload_button)
                                 logging.info("Clicked 'Add File' button")
 
+                                # Wait for the picker dialog
                                 picker_dialog_xpath = "//div[contains(@class, 'fFW7wc XKSfm-Sx9Kwc picker-dialog') and not(contains(@style, 'display: none'))]"
-                                WebDriverWait(driver, 20).until(
+                                WebDriverWait(driver, 10).until(
                                     EC.presence_of_element_located((By.XPATH, picker_dialog_xpath))
                                 )
                                 logging.info("Picker dialog div is visible")
 
+                                # Switch to the iframe
                                 iframe_xpath = f"{picker_dialog_xpath}//iframe[contains(@src, 'docs.google.com/picker')]"
-                                WebDriverWait(driver, 20).until(
+                                WebDriverWait(driver, 10).until(
                                     EC.frame_to_be_available_and_switch_to_it((By.XPATH, iframe_xpath))
                                 )
                                 logging.info("Switched to new file picker iframe")
 
+                                # Send the file path
                                 file_input = WebDriverWait(driver, 15).until(
                                     EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
                                 )
                                 file_input.send_keys(temp_file_path)
-                                logging.info(f"Sent file path to input: {temp_file_path}")
+                                input_value = file_input.get_attribute("value")
+                                logging.info(f"Sent file path to input: {temp_file_path}, input value: {input_value}")
 
+                                # Switch back to default content
                                 driver.switch_to.default_content()
+                                logging.debug("Switched back to default content")
 
-                                WebDriverWait(driver, 30).until(
-                                    EC.invisibility_of_element_located((By.XPATH, picker_dialog_xpath))
-                                )
-                                logging.info("Picker dialog and iframe closed")
-
+                                # Verify file in the file list
                                 file_list_xpath = (
                                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
                                     f"//div[@role='listitem']//div[contains(@class, 'ZXoVYe ybj8pf') and contains(text(), '{file_name}')]"
                                 )
-                                WebDriverWait(driver, 20).until(
+                                logging.debug(f"file_list_xpath: {file_list_xpath}")
+                                file_element = WebDriverWait(driver, 30).until(
                                     EC.presence_of_element_located((By.XPATH, file_list_xpath))
                                 )
-                                logging.info(f"File '{file_name}' confirmed in form's file list")
-                                time.sleep(1)  # Added: Ensure file is fully processed
+                                displayed_file_name = file_element.text.strip()
+                                logging.info(f"File '{file_name}' confirmed in form's file list with displayed name: '{displayed_file_name}'")
+
+                                # Relaxed file name verification
+                                if file_name not in displayed_file_name:
+                                    logging.warning(f"File name mismatch: expected '{file_name}', got '{displayed_file_name}'")
+                                    raise ValueError(f"File name verification failed: expected '{file_name}', got '{displayed_file_name}'")
+
+                                # Check if picker dialog is closed
+                                try:
+                                    WebDriverWait(driver, 10).until(
+                                        EC.invisibility_of_element_located((By.XPATH, picker_dialog_xpath))
+                                    )
+                                    logging.info("Picker dialog and iframe closed")
+                                except TimeoutException:
+                                    logging.warning("Picker dialog did not close within 10s, but file is verified, proceeding")
+
+                                # Check for loading indicators
+                                try:
+                                    loading_indicator_xpath = (
+                                        f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
+                                        f"//div[contains(@class, 'loading') or contains(@class, 'spinner') or contains(@class, 'progress')]"
+                                    )
+                                    WebDriverWait(driver, 5).until(
+                                        EC.invisibility_of_element_located((By.XPATH, loading_indicator_xpath))
+                                    )
+                                    logging.info(f"No loading indicators detected for '{file_name}'")
+                                except TimeoutException:
+                                    logging.info(f"No loading indicators found for '{file_name}', assuming upload complete")
+
+                                time.sleep(1)  # Ensure UI stability
+                                uploaded = True  # Explicitly set uploaded to True
+                                logging.debug(f"Upload attempt successful for '{file_name}'")
                                 return True
 
                             except TimeoutException as te:
                                 logging.error(f"Timeout during file upload attempt for '{form_header}': {te}")
+                                driver.save_screenshot(f"error_{form_header}_{file_name}.png")
+                                logging.info(f"Screenshot saved: error_{form_header}_{file_name}.png")
                                 driver.switch_to.default_content()
                                 raise
                             except Exception as e:
                                 logging.error(f"Error during file upload attempt for '{form_header}': {e}")
+                                driver.save_screenshot(f"error_{form_header}_{file_name}.png")
+                                logging.info(f"Screenshot saved: error_{form_header}_{file_name}.png")
                                 driver.switch_to.default_content()
                                 raise
 
                         try:
                             uploaded = attempt_upload()
+                            logging.debug(f"Post-upload attempt: uploaded={uploaded} for '{file_name}'")
                         except Exception as e:
                             logging.error(f"Failed to upload file '{file_name}' for '{form_header}' after retries: {e}")
                             uploaded = False
 
-                        if not uploaded:
+                        if uploaded:
+                            logging.info(f"Successfully uploaded and verified file '{file_name}' for '{form_header}'")
+                        else:
                             logging.error(f"Failed to upload file '{file_name}' for '{form_header}'")
                             fields_filled = False
-                        else:
-                            logging.info(f"Successfully uploaded and verified file '{file_name}' for '{form_header}'")
                     else:
                         logging.warning(f"Failed to download image from Google Drive for '{form_header}': {value}")
                         fields_filled = False
                 else:
                     logging.warning(f"Invalid Google Drive URL for image field '{form_header}': {value}")
                     fields_filled = False
-                time.sleep(0.5)  # Added: Pause after image field processing
+                time.sleep(0.5)  # Pause after image field processing
                 continue
 
             # Handle special case for "Number of cable * Core"
@@ -394,7 +443,6 @@ def fill_google_form(driver, row, headers, header_mapping):
                 fields_filled = False
 
         # Submit the form only if all fields were filled successfully
-        # Uncomment and adjust as needed
         if fields_filled:
             try:
                 submit_btn = WebDriverWait(driver, 10).until(

@@ -1,28 +1,37 @@
 import logging
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
+from pathlib import Path
+import json
+import os
+import openpyxl
+import sys
+import threading
 from logging_config import configure_logging
 from driver_utils import terminate_chrome_processes, initialize_driver
 from excel_utils import read_excel_data
 from form_utils import get_form_headers, fill_google_form
 from matching_utils import match_headers
-from config import GOOGLE_FORM_URL, EXCEL_FILE, USER_DATA_DIR, PROFILE_DIR
-from pathlib import Path
-import openpyxl
-import sys
-import config
-import threading
-import importlib
-import json
-import os
 
-CONFIG_PY = "config.py"
+# Dynamic resource path for PyInstaller
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and PyInstaller."""
+    if hasattr(sys, '_MEIPASS'):
+        base_path = Path(sys._MEIPASS)
+    else:
+        base_path = Path(__file__).parent
+    return str(base_path / relative_path)
+
+# Application data directory
+APP_DATA_DIR = Path(os.getenv("APPDATA")) / "TRC_AUTO"
+APP_DATA_DIR.mkdir(exist_ok=True)
+CONFIG_JSON = str(APP_DATA_DIR / "config.json")
 
 class ConfigGUI:
-    """GUI for overriding configuration settings in config.py."""
+    """GUI for managing configuration settings stored in config.json."""
     def __init__(self, root):
         self.root = root
-        self.root.title("Configuration Settings")
+        self.root.title("Google Form Automation - Configuration")
         self.root.geometry("600x400")
         self.root.resizable(False, False)
         self.entries = {}
@@ -31,18 +40,36 @@ class ConfigGUI:
         self.create_widgets()
 
     def load_config(self):
-        """Load current configuration from config.py and account info from Local State."""
-        self.config_values = {
-            "GOOGLE_FORM_URL": GOOGLE_FORM_URL or "",
-            "EXCEL_FILE": str(Path(EXCEL_FILE)) if EXCEL_FILE else "C:\\Users\\KHC\\Desktop\\trc_auto\\test.xlsx",
-            "USER_DATA_DIR": str(Path(USER_DATA_DIR)) if USER_DATA_DIR else "C:\\Users\\KHC\\AppData\\Local\\Google\\Chrome\\User Data",
-            "PROFILE_DIR": PROFILE_DIR if PROFILE_DIR else "Profile 1"
+        """Load configuration from config.json."""
+        default_user_data = Path(os.getenv("LOCALAPPDATA")) / "Google" / "Chrome" / "User Data"
+        default_config = {
+            "GOOGLE_FORM_URL": "",
+            "EXCEL_FILE": "",
+            "USER_DATA_DIR": str(default_user_data),
+            "PROFILE_DIR": "Default",
+            "SIMILARITY_THRESHOLD": 80
         }
-        logging.info(f"Loaded config: {self.config_values}")
+
+        try:
+            if not Path(CONFIG_JSON).exists():
+                with open(CONFIG_JSON, 'w', encoding='utf-8') as f:
+                    json.dump(default_config, f, indent=4)
+            with open(CONFIG_JSON, 'r', encoding='utf-8') as f:
+                self.config_values = json.load(f)
+            logging.info(f"Loaded config from {CONFIG_JSON}: {self.config_values}")
+        except Exception as e:
+            logging.error(f"Failed to load {CONFIG_JSON}: {e}")
+            self.config_values = default_config
+
+        # Ensure all required keys are present
+        for key, value in default_config.items():
+            if key not in self.config_values:
+                self.config_values[key] = value
+
         self.account_name, self.email = self.get_account_info()
 
     def get_account_info(self):
-        """Read account name and email from Local State file."""
+        """Retrieve account name and email from Chrome's Local State file."""
         try:
             local_state_path = Path(self.config_values["USER_DATA_DIR"]) / "Local State"
             if not local_state_path.is_file():
@@ -65,50 +92,39 @@ class ConfigGUI:
             return "Not available", "Not available"
 
     def save_config(self):
-        """Save configuration by rewriting config.py."""
+        """Save configuration to config.json."""
         try:
-            google_form_url = self.entries["GOOGLE_FORM_URL"].get().strip()
-            excel_file = str(Path(self.entries["EXCEL_FILE"].get())).replace('\\', '\\\\')
-            user_data_dir = str(Path(self.entries["USER_DATA_DIR"].get())).replace('\\', '\\\\')
-            profile_dir = self.entries["PROFILE_DIR"].get().strip()
-
-            config_content = f"""# Constants
-GOOGLE_FORM_URL = "{google_form_url}"
-EXCEL_FILE = r"{excel_file}"
-CHROMEDRIVER_PATH = "chromedriver.exe"
-SIMILARITY_THRESHOLD = 80
-USER_DATA_DIR = r"{user_data_dir}"
-PROFILE_DIR = "{profile_dir}"
-"""
-            with open(CONFIG_PY, "w", encoding='utf-8') as f:
-                f.write(config_content)
-            logging.info("Configuration saved to config.py")
+            config_data = {
+                "GOOGLE_FORM_URL": self.entries["GOOGLE_FORM_URL"].get().strip(),
+                "EXCEL_FILE": str(Path(self.entries["EXCEL_FILE"].get())) if self.entries["EXCEL_FILE"].get() else "",
+                "USER_DATA_DIR": str(Path(self.entries["USER_DATA_DIR"].get())),
+                "PROFILE_DIR": self.entries["PROFILE_DIR"].get().strip(),
+                "SIMILARITY_THRESHOLD": self.config_values.get("SIMILARITY_THRESHOLD", 80)
+            }
+            with open(CONFIG_JSON, "w", encoding='utf-8') as f:
+                json.dump(config_data, f, indent=4)
+            logging.info(f"Configuration saved to {CONFIG_JSON}")
         except Exception as e:
-            logging.error(f"Failed to save config.py: {e}")
-            raise
+            logging.error(f"Failed to save {CONFIG_JSON}: {e}")
+            messagebox.showerror("Error", f"Failed to save configuration: {e}")
 
     def clear_config(self):
-        """Reset config.py to default values."""
+        """Reset config.json to default values."""
         if messagebox.askyesno("Confirm", "Are you sure you want to reset settings to defaults?"):
             try:
-                config_content = """# Constants
-GOOGLE_FORM_URL = ""
-EXCEL_FILE = ""
-CHROMEDRIVER_PATH = "chromedriver.exe"
-SIMILARITY_THRESHOLD = 80
-USER_DATA_DIR = r""
-PROFILE_DIR = ""
-"""
-                with open(CONFIG_PY, "w", encoding='utf-8') as f:
-                    f.write(config_content)
-                logging.info("Configuration reset to defaults in config.py")
-
-                self.config_values = {
+                default_user_data = Path(os.getenv("LOCALAPPDATA")) / "Google" / "Chrome" / "User Data"
+                default_config = {
                     "GOOGLE_FORM_URL": "",
                     "EXCEL_FILE": "",
-                    "USER_DATA_DIR": "",
-                    "PROFILE_DIR": ""
+                    "USER_DATA_DIR": str(default_user_data),
+                    "PROFILE_DIR": "Default",
+                    "SIMILARITY_THRESHOLD": 80
                 }
+                with open(CONFIG_JSON, "w", encoding='utf-8') as f:
+                    json.dump(default_config, f, indent=4)
+                logging.info(f"Configuration reset to defaults in {CONFIG_JSON}")
+
+                self.config_values = default_config
                 for key, entry in self.entries.items():
                     entry.delete(0, tk.END)
                     entry.insert(0, self.config_values[key])
@@ -119,8 +135,8 @@ PROFILE_DIR = ""
 
                 messagebox.showinfo("Success", "Settings reset to defaults")
             except Exception as e:
-                logging.error(f"Failed to reset config.py: {e}")
-                messagebox.showerror("Error", f"Failed to reset config.py: {e}")
+                logging.error(f"Failed to reset {CONFIG_JSON}: {e}")
+                messagebox.showerror("Error", f"Failed to reset configuration: {e}")
 
     def create_widgets(self):
         """Create GUI widgets for configuration inputs and account info."""
@@ -161,28 +177,32 @@ PROFILE_DIR = ""
         """Open file/directory dialog for specific configuration fields and update account info."""
         if config_key == "EXCEL_FILE":
             file_path = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx *.xls")])
+            if file_path and Path(file_path).is_file():
+                self.entries[config_key].delete(0, tk.END)
+                self.entries[config_key].insert(0, str(Path(file_path)))
+                self.config_values[config_key] = str(Path(file_path))
+                logging.info(f"Selected {config_key}: {file_path}")
+            else:
+                messagebox.showerror("Error", "Invalid Excel file selected")
         elif config_key == "USER_DATA_DIR":
-            file_path = filedialog.askdirectory()
-        else:
-            return
-        if file_path:
-            self.entries[config_key].delete(0, tk.END)
-            self.entries[config_key].insert(0, str(Path(file_path)))
-            logging.info(f"Selected {config_key}: {file_path}")
-
-            self.config_values[config_key] = str(Path(file_path))
-            if config_key in ["USER_DATA_DIR", "PROFILE_DIR"]:
+            dir_path = filedialog.askdirectory()
+            if dir_path and Path(dir_path).is_dir():
+                self.entries[config_key].delete(0, tk.END)
+                self.entries[config_key].insert(0, str(Path(dir_path)))
+                self.config_values[config_key] = str(Path(dir_path))
                 self.account_name, self.email = self.get_account_info()
                 self.account_name_label.config(text=f"Account Name: {self.account_name}")
                 self.email_label.config(text=f"Email: {self.email}")
+                logging.info(f"Selected {config_key}: {dir_path}")
+            else:
+                messagebox.showerror("Error", "Invalid directory selected")
 
     def prevent_close(self):
         """Prevent closing the window during automation."""
         messagebox.showwarning("Warning", "Please wait for the automation to complete before closing the application.")
-        return
 
     def save_and_run(self):
-        """Validate inputs, save to config.py, update config module, and run automation in a separate thread."""
+        """Validate inputs, save to config.json, and run automation in a separate thread."""
         if self.is_running:
             messagebox.showwarning("Warning", "Automation is already running. Please wait for it to complete.")
             return
@@ -194,7 +214,7 @@ PROFILE_DIR = ""
             user_data_dir = self.entries["USER_DATA_DIR"].get().strip()
             profile_dir = self.entries["PROFILE_DIR"].get().strip()
 
-            # Log the input values for debugging
+            # Log inputs for debugging
             logging.info(f"Inputs - Google Form URL: {google_form_url}, Excel File: {excel_file}, User Data Dir: {user_data_dir}, Profile Dir: {profile_dir}")
 
             # Validate inputs
@@ -214,17 +234,14 @@ PROFILE_DIR = ""
             if not profile_dir:
                 raise ValueError("Profile directory cannot be empty")
 
-            # Update config module
-            config.GOOGLE_FORM_URL = google_form_url
-            config.EXCEL_FILE = str(excel_path)
-            config.USER_DATA_DIR = user_data_dir
-            config.PROFILE_DIR = profile_dir
-
+            # Update config_values and save
+            self.config_values["GOOGLE_FORM_URL"] = google_form_url
+            self.config_values["EXCEL_FILE"] = str(excel_path)
+            self.config_values["USER_DATA_DIR"] = user_data_dir
+            self.config_values["PROFILE_DIR"] = profile_dir
             self.save_config()
-            importlib.reload(config)
 
-            self.config_values["USER_DATA_DIR"] = config.USER_DATA_DIR
-            self.config_values["PROFILE_DIR"] = config.PROFILE_DIR
+            # Update account info
             self.account_name, self.email = self.get_account_info()
             self.account_name_label.config(text=f"Account Name: {self.account_name}")
             self.email_label.config(text=f"Email: {self.email}")
@@ -246,7 +263,7 @@ PROFILE_DIR = ""
     def run_automation(self):
         """Run the main automation process and display the result."""
         try:
-            result = main()
+            result = main(self.config_values)
             self.root.after(0, lambda: self.show_result(result))
         except Exception as e:
             self.root.after(0, lambda: self.show_result(f"Unexpected error: {e}"))
@@ -255,14 +272,13 @@ PROFILE_DIR = ""
 
     def show_result(self, result):
         """Display the result of the automation process."""
-        google_form_name = config.GOOGLE_FORM_URL.split('/')[-2] if '/' in config.GOOGLE_FORM_URL else "Google Form"
+        google_form_name = self.config_values["GOOGLE_FORM_URL"].split('/')[-2] if '/' in self.config_values["GOOGLE_FORM_URL"] else "Google Form"
 
         if result == "Success":
             message = f"Automation completed successfully! Excel file has been updated."
             messagebox.showinfo("Success", message)
             self.status_label.config(text="Completed: Excel file updated", foreground="green")
         else:
-            # Avoid misleading message about Excel file update
             message = f"{result}"
             messagebox.showerror("Error", message)
             self.status_label.config(text="Error: Check logs for details", foreground="red")
@@ -275,12 +291,12 @@ PROFILE_DIR = ""
         if self.status_label.cget("text").startswith("Running"):
             self.status_label.config(text="Ready", foreground="black")
 
-def main():
+def main(config):
     """Main function to orchestrate the automation process."""
     configure_logging()
     driver = None
     wb = None
-    filepath = Path(config.EXCEL_FILE)
+    filepath = Path(config["EXCEL_FILE"])
     try:
         # Validate file existence
         if not filepath:
@@ -293,10 +309,10 @@ def main():
             wb = openpyxl.load_workbook(filepath)
         except Exception as e:
             logging.error(f"Failed to load Excel file: {e}")
-            raise ValueError(f"Failed to load Excel file: {e}")
+            raise ValueError(f"Failed_hash to load Excel file: {e}")
 
         sheet = wb.active
-        excel_headers, rows = read_excel_data(config.EXCEL_FILE)
+        excel_headers, rows = read_excel_data(config["EXCEL_FILE"])
         logging.info(f"Total rows to process: {len(rows)}")
 
         # Find or add 'Note' column
@@ -317,8 +333,8 @@ def main():
             return "Success"
 
         terminate_chrome_processes()
-        driver = initialize_driver()
-        form_headers = get_form_headers(driver)
+        driver = initialize_driver(config)
+        form_headers = get_form_headers(driver, config)
         header_mapping, unmatched_headers = match_headers(excel_headers, form_headers)
 
         for idx, row in enumerate(rows, start=2):
@@ -328,7 +344,7 @@ def main():
                 continue
 
             logging.info(f"Processing row {idx}: {row}")
-            success = fill_google_form(driver, row, excel_headers, header_mapping)
+            success = fill_google_form(driver, row, excel_headers, header_mapping, config)
 
             if success:
                 sheet.cell(row=idx, column=note_column).value = "Inserted"

@@ -1,7 +1,7 @@
 import logging
 import re
 from fuzzywuzzy import fuzz
-from config import SIMILARITY_THRESHOLD
+
 
 def normalize(text):
     """Normalize the text while preserving line breaks and other special characters."""
@@ -12,7 +12,7 @@ def match_headers(excel_headers, form_headers):
     """Match Excel headers to form headers using fuzzy matching."""
     mapping = {}
     unmatched = []
-
+    SIMILARITY_THRESHOLD = 80
     for excel_header in excel_headers:
         excel_clean = normalize(excel_header)
         best_match, best_score = None, 0
