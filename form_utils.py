@@ -66,73 +66,41 @@ def scroll_into_view(driver, element):
     """Scroll an element into view."""
     driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element)
     time.sleep(0.1)  # Reduced from 0.2s for faster execution
-
-def parse_date(value, target_format="DD-MM-YYYY"):
-    """Parse a date value into the specified target format."""
-    print("Raw date input:", value)
-    
+def parse_date(value):
+    """Parse various date formats into MM/DD/YYYY."""
     if not value:
         return None
-
     if isinstance(value, datetime):
-        dt = value
-    elif isinstance(value, str):
-        # Support "YYYY-MM-DD HH:MM:SS" format (e.g., "2025-03-26 00:00:00")
-        for fmt in ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%m-%d-%Y", "%d-%m-%Y"]:
+        return value.strftime("%m/%d/%Y")
+    if isinstance(value, str):
+        for fmt in ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y"]:
             try:
-                dt = datetime.strptime(value, fmt)
-                break
+                return datetime.strptime(value, fmt).strftime("%m/%d/%Y")
             except ValueError:
                 continue
-        else:
-            logging.warning(f"Unsupported date format: {value}")
-            return None
-    else:
-        logging.warning(f"Invalid date input type: {type(value)}")
-        return None
-
-    if target_format == "MM-DD-YYYY":
-        return dt.strftime("%m-%d-%Y")
-    elif target_format == "DD-MM-YYYY":
-        return dt.strftime("%d-%m-%Y")
-    elif target_format == "YYYY-MM-DD":
-        return dt.strftime("%Y-%m-%d")
-    else:
-        logging.warning(f"Unsupported target format: {target_format}")
-        return dt.strftime("%d-%m-%Y")  # default fallback
+    logging.warning(f"Unsupported date format: {value}")
+    return None
 
 def fill_date_field(driver, form_header, date_value):
-    """Fill a date field in the Google Form using JavaScript for consistency across locales."""
+    """Fill a date field in the Google Form."""
     try:
-        date_value = parse_date(date_value)  # Returns "26-03-2025" for "2025-03-26 00:00:00"
+        print("...date_value",date_value)
+        date_value = parse_date(date_value)
         if not date_value:
             return False
-        print(".................date_value................",date_value)
+
+        month, day, year = date_value.split("/")
         date_input_xpath = (
             f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']"
             f"/ancestor::div[@role='listitem']//input[@type='date']"
         )
         date_inputs = driver.find_elements(By.XPATH, date_input_xpath)
         if date_inputs:
-            date_input = date_inputs[0]
-            scroll_into_view(driver, date_input)
+            scroll_into_view(driver, date_inputs[0])
+            date_inputs[0].send_keys(f"{month}{day}{year}")
+            logging.info(f"Filled date field '{form_header}' with '{month}{day}{year}'")
+            return True
 
-            # Convert DD-MM-YYYY to YYYY-MM-DD for HTML date input
-            day, month, year = date_value.split("-")
-            html_date_format = f"{year}-{month}-{day}"  # "2025-03-26"
-
-            # Use JavaScript to set the value directly, bypassing locale issues
-            driver.execute_script("arguments[0].value = arguments[1];", date_input, html_date_format)
-
-            # Verify the field value (should always be YYYY-MM-DD in the value attribute)
-            if date_input.get_attribute("value") == html_date_format:
-                logging.info(f"Filled date field '{form_header}' with '{day}-{month}-{year}'")
-                return True
-            else:
-                logging.warning(f"Date field '{form_header}' not filled correctly. Expected {html_date_format}, got {date_input.get_attribute('value')}")
-                return False
-
-        # Fallback for separate month/day/year inputs
         date_container_xpath = (
             f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']"
             f"/ancestor::div[@role='listitem']"
@@ -144,15 +112,11 @@ def fill_date_field(driver, form_header, date_value):
             "year": date_container.find_element(By.XPATH, ".//input[@aria-label='Year']")
         }
 
-        day, month, year = date_value.split("-")
-        for field, value in zip(inputs, [month, day , year]):
+        for field, value in zip(inputs, [month, day, year]):
             scroll_into_view(driver, inputs[field])
             inputs[field].clear()
             inputs[field].send_keys(value)
-            if inputs[field].get_attribute("value") != value:
-                logging.warning(f"Date subfield '{field}' for '{form_header}' not filled correctly")
-                return False
-        logging.info(f"Filled date field '{form_header}' with '{day}-{month}-{year}'")
+        logging.info(f"Filled date field '{form_header}' with '{month}/{day}/{year}'")
         return True
 
     except NoSuchElementException:
@@ -161,7 +125,7 @@ def fill_date_field(driver, form_header, date_value):
     except Exception as e:
         logging.error(f"Error filling date field '{form_header}': {e}")
         return False
-
+    
 @retry(stop_max_attempt_number=3, wait_fixed=500)  # Reduced from 1000ms for faster retries
 def fill_form_field(driver, form_header, value, field_type="text"):
     """Fill a specific form field based on its type, optimized for speed and reliability."""
@@ -252,7 +216,7 @@ def fill_form_field(driver, form_header, value, field_type="text"):
                 driver.execute_script("arguments[0].click();", options[0])  # Use JS click for reliability
                 time.sleep(0.2)  # Reduced from 0.5s
                 selected = driver.find_element(By.XPATH, xpath).text
-                if value_str.lower() in selected.lower():
+                if value_str in selected:
                     logging.info(f"Selected dropdown option '{value_str}' for '{form_header}'")
                     return True
                 else:
@@ -315,6 +279,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
             if field_type == "file":
                 if isinstance(value, str) and "drive.google.com" in value:
                     temp_file_path = download_google_drive_image(value)
+                    
                     if temp_file_path:
                         temp_files.append(temp_file_path)
                         uploaded = False
@@ -329,7 +294,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']//"
                                     f"div[@role='button' and contains(@aria-label, 'Add File')]"
                                 )
-                                upload_button = WebDriverWait(driver, 5).until(
+                                upload_button = WebDriverWait(driver, 30).until(
                                     EC.element_to_be_clickable((By.XPATH, upload_btn_xpath))
                                 )
                                 scroll_into_view(driver, upload_button)
@@ -360,7 +325,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                                 )
                                 displayed_file_name = file_element.text.strip()
 
-                                if file_name not in displayed_file_name:
+                                if file_name.lower() in displayed_file_name.lower():
                                     logging.warning(f"File name mismatch: expected '{file_name}', got '{displayed_file_name}'")
                                     uploaded = False
                                 else:

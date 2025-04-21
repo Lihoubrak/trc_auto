@@ -1,0 +1,8 @@
+{
+  "GOOGLE_FORM_URL": "https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header",
+  "EXCEL_FILE": "",
+  "USER_DATA_DIR": "",
+  "PROFILE_DIR": "",
+  "CHROMEDRIVER_PATH": "chromedriver.exe",
+  "SIMILARITY_THRESHOLD": 80
+}
