@@ -6,3 +6,5 @@ requests
 webdriver_manager
 retrying
 psutil
+aiohttp
+aiofiles

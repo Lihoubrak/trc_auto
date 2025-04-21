@@ -9,6 +9,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from retrying import retry
 from image_utils import download_google_drive_image
 import re
+
 # Set up logging configuration at the start
 logging.basicConfig(
     level=logging.INFO,
@@ -18,6 +19,29 @@ logging.basicConfig(
         logging.FileHandler('form_fill.log')  # Output to file
     ]
 )
+
+# Define field type mapping for specific headers
+FIELD_TYPE_MAPPING = {
+    "កាលបរិច្ឆេទនៃការកាត់ផ្តាច់-Date of Damage:": "date",
+    "កាលបរិច្ឆេទគ្រោងបញ្ចប់ការថែទាំ-Finished Date of Repairing:": "date",
+    "រូបភាពនៃស្ថានភាពការខូចខាតនៃខ្សែកាប្លិ៍ដោយមាន lat/long <10MB (Picture of Damage Cable with lat/long <10MB):": "file",
+    "រូបភាពនៃគំនូសនៅលើ Google Map ដែលមានចំណុចចាប់ផ្តើមនិងបញ្ចប់ (Picture of drawing in google map with start and end lat/long):": "file",
+    "Email": "checkbox",
+    "ស្នើចុះថែទាំខ្សែក្នុងវង្វង់ចំណុចចាប់ផ្តើមនិងបញ្ចប់ Lat/Long ខាងលើ ដើម្បី៖": "checkbox",
+    "ក្រុមហ៊ុនស្នើសុំ-Requested Company:": "dropdown",
+    "ប្រភេទហេដ្ឋារចនាសម្ព័ន្ធ-Type of Infrastructure:": "dropdown",
+    "ប្រភេទនៃការជួសជុល-Overhead or Underground:": "dropdown",
+    "ខេត្ត/ក្រុង": "dropdown",
+    "ជួសជុលជូនក្រុមហ៊ុនឬអតិថិជន-Repair for company/customers:": "text",
+    "ចំនួនខ្សែកាប្លិ៍xចំនួន\nបណ្តូលខ្សែកាប្លិ៍ -Number of cable * Core:": "text",
+    "អាសយដ្ឋានចំនុចចាប់ផ្តើម(លេខផ្លូវ ភូមិ ឃុំ/សង្កាត់ ស្រុក/ខណ្ឌ ខេត្ត/រាជធានី)-Starting Address:": "text",
+    "អាសយដ្ឋានចំណុចបញ្ចប់ (លេខផ្លូវ ភូមិ ឃុំ/សង្កាត់ ស្រុក/ខណ្ឌ ខេត្ត/រាជធានី)  -Ending Address:": "text",
+    "ចំណុចចាប់ផ្តើម រយៈទទឹងនិងបណ្តោយ (Start: Lat ,Long)": "text",
+    "ចំណុចបញ្ចប់ រយៈទទឹងនិងបណ្តោយ (End: Lat ,Long)": "text",
+    "ប្រវែងខ្សែកាប្លិ៍ដែលត្រូវជួសថ្មីគឺត្រូវតិចជាង២០០ម៉ែត្រ-Length of replacement broken cable must be less than 200m (ករណីប្រវែងខ្សែច្រើនជាង ២០០ម៉ែត្រក្រុមហ៊ុនត្រូវអនុវត្តនីតិវិធីសាងសង់ថ្មី- If length of cable is larger than 200m,company has to follow the new build procedure):": "text",
+    "មូលហេតុនៃការកាត់ផ្តាច់\nCable Incident": "textarea"
+}
+
 def get_form_headers(driver, config):
     """Retrieve headers from the Google Form."""
     try:
@@ -41,47 +65,74 @@ def get_form_headers(driver, config):
 def scroll_into_view(driver, element):
     """Scroll an element into view."""
     driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element)
-    time.sleep(0.2)
+    time.sleep(0.1)  # Reduced from 0.2s for faster execution
 
-def parse_date(value):
-    """Parse various date formats into MM/DD/YYYY."""
+def parse_date(value, target_format="DD-MM-YYYY"):
+    """Parse a date value into the specified target format."""
+    print("Raw date input:", value)
+    
     if not value:
         return None
+
     if isinstance(value, datetime):
-        return value.strftime("%m/%d/%Y")
-    if isinstance(value, str):
-        for fmt in ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%m-%d-%Y"]:
+        dt = value
+    elif isinstance(value, str):
+        # Support "YYYY-MM-DD HH:MM:SS" format (e.g., "2025-03-26 00:00:00")
+        for fmt in ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%m-%d-%Y", "%d-%m-%Y"]:
             try:
-                return datetime.strptime(value, fmt).strftime("%m/%d/%Y")
+                dt = datetime.strptime(value, fmt)
+                break
             except ValueError:
                 continue
-    logging.warning(f"Unsupported date format: {value}")
-    return None
+        else:
+            logging.warning(f"Unsupported date format: {value}")
+            return None
+    else:
+        logging.warning(f"Invalid date input type: {type(value)}")
+        return None
+
+    if target_format == "MM-DD-YYYY":
+        return dt.strftime("%m-%d-%Y")
+    elif target_format == "DD-MM-YYYY":
+        return dt.strftime("%d-%m-%Y")
+    elif target_format == "YYYY-MM-DD":
+        return dt.strftime("%Y-%m-%d")
+    else:
+        logging.warning(f"Unsupported target format: {target_format}")
+        return dt.strftime("%d-%m-%Y")  # default fallback
 
 def fill_date_field(driver, form_header, date_value):
-    """Fill a date field in the Google Form."""
+    """Fill a date field in the Google Form using JavaScript for consistency across locales."""
     try:
-        date_value = parse_date(date_value)
+        date_value = parse_date(date_value)  # Returns "26-03-2025" for "2025-03-26 00:00:00"
         if not date_value:
             return False
-
-        month, day, year = date_value.split("/")
+        print(".................date_value................",date_value)
         date_input_xpath = (
             f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']"
             f"/ancestor::div[@role='listitem']//input[@type='date']"
         )
         date_inputs = driver.find_elements(By.XPATH, date_input_xpath)
         if date_inputs:
-            scroll_into_view(driver, date_inputs[0])
-            date_inputs[0].send_keys(f"{month}{day}{year}")
-            # Verify the field value
-            if date_inputs[0].get_attribute("value") == f"{year}-{month}-{day}":
-                logging.info(f"Filled date field '{form_header}' with '{month}{day}{year}'")
+            date_input = date_inputs[0]
+            scroll_into_view(driver, date_input)
+
+            # Convert DD-MM-YYYY to YYYY-MM-DD for HTML date input
+            day, month, year = date_value.split("-")
+            html_date_format = f"{year}-{month}-{day}"  # "2025-03-26"
+
+            # Use JavaScript to set the value directly, bypassing locale issues
+            driver.execute_script("arguments[0].value = arguments[1];", date_input, html_date_format)
+
+            # Verify the field value (should always be YYYY-MM-DD in the value attribute)
+            if date_input.get_attribute("value") == html_date_format:
+                logging.info(f"Filled date field '{form_header}' with '{day}-{month}-{year}'")
                 return True
             else:
-                logging.warning(f"Date field '{form_header}' not filled correctly")
+                logging.warning(f"Date field '{form_header}' not filled correctly. Expected {html_date_format}, got {date_input.get_attribute('value')}")
                 return False
 
+        # Fallback for separate month/day/year inputs
         date_container_xpath = (
             f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']"
             f"/ancestor::div[@role='listitem']"
@@ -93,15 +144,15 @@ def fill_date_field(driver, form_header, date_value):
             "year": date_container.find_element(By.XPATH, ".//input[@aria-label='Year']")
         }
 
-        for field, value in zip(inputs, [month, day, year]):
+        day, month, year = date_value.split("-")
+        for field, value in zip(inputs, [month, day , year]):
             scroll_into_view(driver, inputs[field])
             inputs[field].clear()
             inputs[field].send_keys(value)
-            # Verify the field value
             if inputs[field].get_attribute("value") != value:
                 logging.warning(f"Date subfield '{field}' for '{form_header}' not filled correctly")
                 return False
-        logging.info(f"Filled date field '{form_header}' with '{month}/{day}/{year}'")
+        logging.info(f"Filled date field '{form_header}' with '{day}-{month}-{year}'")
         return True
 
     except NoSuchElementException:
@@ -111,18 +162,21 @@ def fill_date_field(driver, form_header, date_value):
         logging.error(f"Error filling date field '{form_header}': {e}")
         return False
 
-@retry(stop_max_attempt_number=3, wait_fixed=1000)
+@retry(stop_max_attempt_number=3, wait_fixed=500)  # Reduced from 1000ms for faster retries
 def fill_form_field(driver, form_header, value, field_type="text"):
-    """Fill a specific form field based on its type."""
+    """Fill a specific form field based on its type, optimized for speed and reliability."""
     try:
         value_str = str(value).strip()
         if not value_str:
+            logging.info(f"Skipping empty value for field '{form_header}'")
             return False
 
         if field_type == "date":
             return fill_date_field(driver, form_header, value)
 
         form_header_cleaned = re.sub(r'\s+', ' ', form_header.replace("\xa0", " ")).strip()
+        logging.debug(f"Processing field: {form_header_cleaned} with type: {field_type}")
+
         xpath_map = {
             "text": (
                 f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
@@ -149,8 +203,6 @@ def fill_form_field(driver, form_header, value, field_type="text"):
 
         if field_type == "checkbox":
             checkbox_values = [v.strip() for v in value_str.split(",") if v.strip()]
-            logging.info(f"Checkbox values for '{form_header}': {checkbox_values}")
-
             if not checkbox_values:
                 logging.warning(f"No checkbox values provided for '{form_header}'")
                 return False
@@ -161,40 +213,29 @@ def fill_form_field(driver, form_header, value, field_type="text"):
                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
                     f"/ancestor::div[@role='listitem']//div[@role='checkbox' and @data-answer-value='{val}']"
                 )
-                try:
-                    checkbox = WebDriverWait(driver, 5).until(
-                        EC.element_to_be_clickable((By.XPATH, checkbox_xpath))
-                    )
-                    scroll_into_view(driver, checkbox)
+                checkbox = WebDriverWait(driver, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, checkbox_xpath))
+                )
+                scroll_into_view(driver, checkbox)
+                if checkbox.get_attribute("aria-checked") != "true":
+                    driver.execute_script("arguments[0].click();", checkbox)
+                    time.sleep(0.2)  # Reduced from 0.5s
                     if checkbox.get_attribute("aria-checked") != "true":
-                        driver.execute_script("arguments[0].click();", checkbox)
-                        time.sleep(0.5)
-                        # Verify checkbox state
-                        if checkbox.get_attribute("aria-checked") != "true":
-                            logging.warning(f"Failed to check checkbox '{val}' for '{form_header}'")
-                            success = False
-                        else:
-                            logging.info(f"Checked checkbox '{val}' for '{form_header}'")
-                    else:
-                        logging.info(f"Checkbox '{val}' for '{form_header}' already checked")
-                except TimeoutException:
-                    logging.warning(f"Checkbox '{val}' not found or not clickable for '{form_header}'")
-                    success = False
-                except Exception as e:
-                    logging.error(f"Error checking checkbox '{val}' for '{form_header}': {e}")
-                    success = False
+                        logging.warning(f"Failed to check checkbox '{val}' for '{form_header}'")
+                        success = False
+                logging.info(f"Checked checkbox '{val}' for '{form_header}'")
             return success
 
         elements = driver.find_elements(By.XPATH, xpath)
         if not elements:
             logging.warning(f"No elements found for form header '{form_header}' and type '{field_type}'")
             return False
-    
+
         scroll_into_view(driver, elements[0])
         if field_type in ["text", "textarea"]:
             elements[0].clear()
             elements[0].send_keys(value_str)
-            # Verify the field value
+            time.sleep(0.1)  # Reduced from 0.5s
             if elements[0].get_attribute("value") == value_str:
                 logging.info(f"Filled {field_type} field '{form_header}' with '{value_str}'")
                 return True
@@ -203,16 +244,15 @@ def fill_form_field(driver, form_header, value, field_type="text"):
                 return False
         elif field_type == "dropdown":
             elements[0].click()
-            time.sleep(0.5)
-            option_xpath = f"//div[@role='option' and contains(., '{value_str[:50]}')]"
+            time.sleep(0.2)  # Reduced from 0.5s
+            option_xpath = f"//div[@role='option' and contains(normalize-space(.), '{value_str[:30]}')]"
             options = driver.find_elements(By.XPATH, option_xpath)
             if options:
                 scroll_into_view(driver, options[0])
-                options[0].click()
-                time.sleep(0.5)
-                # Verify dropdown selection
+                driver.execute_script("arguments[0].click();", options[0])  # Use JS click for reliability
+                time.sleep(0.2)  # Reduced from 0.5s
                 selected = driver.find_element(By.XPATH, xpath).text
-                if value_str in selected:
+                if value_str.lower() in selected.lower():
                     logging.info(f"Selected dropdown option '{value_str}' for '{form_header}'")
                     return True
                 else:
@@ -234,6 +274,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
         driver.get(config.get("GOOGLE_FORM_URL"))
         WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//form")))
         logging.info("Google Form loaded successfully")
+
         # Handle email checkbox once at the start
         email_checkbox_handled = False
         if not email_checkbox_handled:
@@ -241,8 +282,6 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                 checkbox_xpath = '//div[.//span[text()="Email"]]/following::div[@role="checkbox"][1]'
                 checkbox = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
                 scroll_into_view(driver, checkbox)
-                
-                # Check if the checkbox is already checked
                 is_checked = checkbox.get_attribute("aria-checked") == "true"
                 if not is_checked:
                     checkbox.click()
@@ -265,12 +304,15 @@ def fill_google_form(driver, row, headers, header_mapping, config):
             form_header = header_mapping[excel_header]
             logging.info(f"Processing field: {form_header}")
 
-            # Check if the field is an image upload field
-            is_image_field = (
-                "រូបភាពនៃស្ថានភាពការខូចខាតនៃខ្សែកាប្លិ៍ដោយមាន lat/long <10MB (Picture of Damage Cable with lat/long <10MB):"
-                in form_header or "រូបភាពនៃគំនូសនៅលើ Google Map ដែលមានចំណុចចាប់ផ្តើមនិងបញ្ចប់ (Picture of drawing in google map with start and end lat/long):" in form_header
-            )
-            if is_image_field:
+            # Get the field type from FIELD_TYPE_MAPPING
+            field_type = FIELD_TYPE_MAPPING.get(form_header)
+            if not field_type:
+                logging.warning(f"No field type defined for '{form_header}'")
+                fields_filled = False
+                continue
+
+            # Handle file upload fields
+            if field_type == "file":
                 if isinstance(value, str) and "drive.google.com" in value:
                     temp_file_path = download_google_drive_image(value)
                     if temp_file_path:
@@ -279,11 +321,10 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                         file_name = os.path.basename(temp_file_path)
                         logging.debug(f"Attempting to upload file: {file_name} for field: {form_header}")
 
-                        @retry(stop_max_attempt_number=3, wait_fixed=2000)
+                        @retry(stop_max_attempt_number=3, wait_fixed=1000)  # Reduced from 2000ms
                         def attempt_upload():
                             nonlocal uploaded
                             try:
-                                # Locate the upload button
                                 upload_btn_xpath = (
                                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']//"
                                     f"div[@role='button' and contains(@aria-label, 'Add File')]"
@@ -292,106 +333,59 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                                     EC.element_to_be_clickable((By.XPATH, upload_btn_xpath))
                                 )
                                 scroll_into_view(driver, upload_button)
-                                logging.info(f"Located 'Add File' button for '{form_header}'")
-
-                                # Click the upload button
                                 driver.execute_script("arguments[0].click();", upload_button)
-                                logging.info("Clicked 'Add File' button")
 
-                                # Wait for the picker dialog
                                 picker_dialog_xpath = "//div[contains(@class, 'fFW7wc XKSfm-Sx9Kwc picker-dialog') and not(contains(@style, 'display: none'))]"
                                 WebDriverWait(driver, 10).until(
                                     EC.presence_of_element_located((By.XPATH, picker_dialog_xpath))
                                 )
-                                logging.info("Picker dialog div is visible")
 
-                                # Switch to the iframe
                                 iframe_xpath = f"{picker_dialog_xpath}//iframe[contains(@src, 'docs.google.com/picker')]"
                                 WebDriverWait(driver, 10).until(
                                     EC.frame_to_be_available_and_switch_to_it((By.XPATH, iframe_xpath))
                                 )
-                                logging.info("Switched to new file picker iframe")
 
-                                # Send the file path
                                 file_input = WebDriverWait(driver, 15).until(
                                     EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
                                 )
                                 file_input.send_keys(temp_file_path)
-                                input_value = file_input.get_attribute("value")
-                                logging.info(f"Sent file path to input: {temp_file_path}, input value: {input_value}")
-
-                                # Switch back to default content
                                 driver.switch_to.default_content()
-                                logging.debug("Switched back to default content")
 
-                                # Verify file in the file list
                                 file_list_xpath = (
                                     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
                                     f"//div[@role='listitem']//div[contains(@class, 'ZXoVYe ybj8pf') and contains(text(), '{file_name}')]"
                                 )
-                                logging.debug(f"file_list_xpath: {file_list_xpath}")
                                 file_element = WebDriverWait(driver, 30).until(
                                     EC.presence_of_element_located((By.XPATH, file_list_xpath))
                                 )
                                 displayed_file_name = file_element.text.strip()
-                                logging.info(f"File '{file_name}' confirmed in form's file list with displayed name: '{displayed_file_name}'")
 
-                                # Relaxed file name verification
                                 if file_name not in displayed_file_name:
                                     logging.warning(f"File name mismatch: expected '{file_name}', got '{displayed_file_name}'")
-                                    raise ValueError(f"File name verification failed: expected '{file_name}', got '{displayed_file_name}'")
-
-                                # Check if picker dialog is closed
-                                try:
-                                    WebDriverWait(driver, 10).until(
-                                        EC.invisibility_of_element_located((By.XPATH, picker_dialog_xpath))
-                                    )
-                                    logging.info("Picker dialog and iframe closed")
-                                except TimeoutException:
-                                    logging.warning("Picker dialog did not close within 10s, but file is verified, proceeding")
-
-                                # Check for loading indicators
-                                try:
-                                    loading_indicator_xpath = (
-                                        f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
-                                        f"//div[contains(@class, 'loading') or contains(@class, 'spinner') or contains(@class, 'progress')]"
-                                    )
-                                    WebDriverWait(driver, 5).until(
-                                        EC.invisibility_of_element_located((By.XPATH, loading_indicator_xpath))
-                                    )
-                                    logging.info(f"No loading indicators detected for '{file_name}'")
-                                except TimeoutException:
-                                    logging.info(f"No loading indicators found for '{file_name}', assuming upload complete")
-
-                                time.sleep(1)  # Ensure UI stability
-                                uploaded = True  # Explicitly set uploaded to True
-                                logging.debug(f"Upload attempt successful for '{file_name}'")
-                                return True
+                                    uploaded = False
+                                else:
+                                    uploaded = True
+                                time.sleep(0.5)  # Reduced from 1s
+                                return uploaded
 
                             except TimeoutException as te:
                                 logging.error(f"Timeout during file upload attempt for '{form_header}': {te}")
-                                driver.save_screenshot(f"error_{form_header}_{file_name}.png")
-                                logging.info(f"Screenshot saved: error_{form_header}_{file_name}.png")
                                 driver.switch_to.default_content()
                                 raise
                             except Exception as e:
                                 logging.error(f"Error during file upload attempt for '{form_header}': {e}")
-                                driver.save_screenshot(f"error_{form_header}_{file_name}.png")
-                                logging.info(f"Screenshot saved: error_{form_header}_{file_name}.png")
                                 driver.switch_to.default_content()
                                 raise
 
                         try:
                             uploaded = attempt_upload()
-                            logging.debug(f"Post-upload attempt: uploaded={uploaded} for '{file_name}'")
+                            if uploaded:
+                                logging.info(f"Successfully uploaded file '{file_name}' for '{form_header}'")
+                            else:
+                                logging.error(f"Failed to upload file '{file_name}' for '{form_header}'")
+                                fields_filled = False
                         except Exception as e:
                             logging.error(f"Failed to upload file '{file_name}' for '{form_header}' after retries: {e}")
-                            uploaded = False
-
-                        if uploaded:
-                            logging.info(f"Successfully uploaded and verified file '{file_name}' for '{form_header}'")
-                        else:
-                            logging.error(f"Failed to upload file '{file_name}' for '{form_header}'")
                             fields_filled = False
                     else:
                         logging.warning(f"Failed to download image from Google Drive for '{form_header}': {value}")
@@ -399,9 +393,8 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                 else:
                     logging.warning(f"Invalid Google Drive URL for image field '{form_header}': {value}")
                     fields_filled = False
-                time.sleep(0.5)  # Pause after image field processing
+                time.sleep(0.3)  # Reduced from 0.5s
                 continue
-
             # Handle special case for "Number of cable * Core"
             form_header_cleaned = form_header.replace("\n", "").strip()
             if "Number of cable * Core" in form_header_cleaned:
@@ -429,18 +422,11 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                     logging.error(f"Error filling 'Number of cable * Core': {e}")
                     fields_filled = False
                 continue
-
-            # Try filling the field with all possible field types
-            filled = False
-            for field_type in ["date", "text", "textarea", "dropdown", "checkbox"]:
-                if fill_form_field(driver, form_header, value, field_type):
-                    filled = True
-                    break
-                time.sleep(0.5)  # Brief pause between field type attempts
-
-            if not filled:
+            # Fill the field using the specified field type
+            if not fill_form_field(driver, form_header, value, field_type):
                 logging.warning(f"Failed to fill field '{form_header}' with value '{value}'")
                 fields_filled = False
+            time.sleep(0.2)  # Reduced from 0.5s
 
         # Submit the form only if all fields were filled successfully
         if fields_filled:
@@ -469,4 +455,5 @@ def fill_google_form(driver, row, headers, header_mapping, config):
             except Exception as e:
                 logging.warning(f"Failed to delete temp file: {f} - {e}")
 
-    return fields_filled
+    return fields_filled  
+

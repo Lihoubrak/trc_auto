@@ -31,13 +31,34 @@ class ConfigGUI:
     """GUI for managing configuration settings stored in config.json."""
     def __init__(self, root):
         self.root = root
-        self.root.title("Google Form Automation - Configuration")
-        self.root.geometry("600x400")
+        self.root.title("Google Form Automation - FBB Dept")
         self.root.resizable(False, False)
         self.entries = {}
         self.is_running = False
+        self.workbook = None  # Store workbook for access during cleanup
         self.load_config()
+        
+        # Center the window on the screen
+        window_width = 700
+        window_height = 500
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        x_position = (screen_width - window_width) // 2
+        y_position = (screen_height - window_height) // 2
+        self.root.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
+        
         self.create_widgets()
+        self.apply_styles()
+
+    def apply_styles(self):
+        """Apply custom styles for a good and cute GUI."""
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("TLabel", font=("Helvetica", 10), padding=5)
+        style.configure("TButton", font=("Helvetica", 10, "bold"), padding=5, background="#4CAF50")
+        style.configure("TEntry", font=("Helvetica", 10), padding=5)
+        style.configure("TFrame", background="#f0f0f0")
+        self.root.configure(bg="#f0f0f0")
 
     def load_config(self):
         """Load configuration from config.json."""
@@ -61,7 +82,6 @@ class ConfigGUI:
             logging.error(f"Failed to load {CONFIG_JSON}: {e}")
             self.config_values = default_config
 
-        # Ensure all required keys are present
         for key, value in default_config.items():
             if key not in self.config_values:
                 self.config_values[key] = value
@@ -139,9 +159,30 @@ class ConfigGUI:
                 messagebox.showerror("Error", f"Failed to reset configuration: {e}")
 
     def create_widgets(self):
-        """Create GUI widgets for configuration inputs and account info."""
-        frame = ttk.Frame(self.root, padding="10")
-        frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        """Create GUI widgets for configuration inputs and account info, centered."""
+        main_frame = ttk.Frame(self.root, padding="20")
+        main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        main_frame.columnconfigure(0, weight=1)  # Center content horizontally
+
+        # Logo text (centered)
+        logo_label = tk.Label(
+            main_frame,
+            text="FBB Dept",
+            font=("Helvetica", 24, "bold"),
+            fg="#4CAF50",
+            bg="#f0f0f0"
+        )
+        logo_label.grid(row=0, column=0, pady=(0, 20), sticky=tk.EW)
+
+        # Subtitle (centered)
+        subtitle_label = tk.Label(
+            main_frame,
+            text="Google Form Automation",
+            font=("Helvetica", 12, "italic"),
+            fg="#555555",
+            bg="#f0f0f0"
+        )
+        subtitle_label.grid(row=1, column=0, pady=(0, 20), sticky=tk.EW)
 
         config_fields = [
             ("Google Form URL", "GOOGLE_FORM_URL", False),
@@ -150,28 +191,43 @@ class ConfigGUI:
             ("Profile Directory", "PROFILE_DIR", False),
         ]
 
-        for idx, (label_text, config_key, is_file) in enumerate(config_fields):
-            ttk.Label(frame, text=label_text + ":").grid(row=idx, column=0, sticky=tk.W, pady=5)
-            entry = ttk.Entry(frame, width=50)
+        for idx, (label_text, config_key, is_file) in enumerate(config_fields, start=2):
+            # Frame for each input row to center content
+            row_frame = ttk.Frame(main_frame)
+            row_frame.grid(row=idx, column=0, sticky=tk.EW, pady=8)
+            row_frame.columnconfigure(1, weight=1)  # Allow entry to expand
+
+            ttk.Label(row_frame, text=label_text + ":").grid(row=0, column=0, sticky=tk.W)
+            entry = ttk.Entry(row_frame, width=50)
             entry.insert(0, self.config_values[config_key])
-            entry.grid(row=idx, column=1, sticky=(tk.W, tk.E), pady=5)
+            entry.grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(5, 0))
             self.entries[config_key] = entry
             if is_file:
-                browse_btn = ttk.Button(frame, text="Browse", command=lambda k=config_key: self.browse_file(k))
-                browse_btn.grid(row=idx, column=2, padx=5)
+                browse_btn = ttk.Button(row_frame, text="Browse", command=lambda k=config_key: self.browse_file(k))
+                browse_btn.grid(row=0, column=2, padx=5)
 
-        self.account_name_label = ttk.Label(frame, text=f"Account Name: {self.account_name}")
-        self.account_name_label.grid(row=len(config_fields), column=0, columnspan=2, sticky=tk.W, pady=5)
+        row_offset = len(config_fields) + 2
+        # Account info (centered)
+        self.account_name_label = ttk.Label(main_frame, text=f"Account Name: {self.account_name}")
+        self.account_name_label.grid(row=row_offset, column=0, sticky=tk.EW, pady=8)
 
-        self.email_label = ttk.Label(frame, text=f"Email: {self.email}")
-        self.email_label.grid(row=len(config_fields)+1, column=0, columnspan=2, sticky=tk.W, pady=5)
+        self.email_label = ttk.Label(main_frame, text=f"Email: {self.email}")
+        self.email_label.grid(row=row_offset + 1, column=0, sticky=tk.EW, pady=8)
 
-        self.save_run_btn = ttk.Button(frame, text="Save and Run", command=self.save_and_run)
-        self.save_run_btn.grid(row=len(config_fields)+2, column=0, columnspan=3, pady=10)
-        ttk.Button(frame, text="Clear Saved Settings", command=self.clear_config).grid(row=len(config_fields)+3, column=0, columnspan=3, pady=5)
+        # Button frame (centered)
+        button_frame = ttk.Frame(main_frame)
+        button_frame.grid(row=row_offset + 2, column=0, pady=20, sticky=tk.EW)
+        button_frame.columnconfigure(0, weight=1)
+        button_frame.columnconfigure(1, weight=1)
 
-        self.status_label = ttk.Label(frame, text="Ready", foreground="black")
-        self.status_label.grid(row=len(config_fields)+4, column=0, columnspan=3, pady=10)
+        self.save_run_btn = ttk.Button(button_frame, text="Save and Run", command=self.save_and_run)
+        self.save_run_btn.grid(row=0, column=0, padx=10)
+
+        ttk.Button(button_frame, text="Clear Settings", command=self.clear_config).grid(row=0, column=1, padx=10)
+
+        # Status label (centered)
+        self.status_label = ttk.Label(main_frame, text="Ready", foreground="black")
+        self.status_label.grid(row=row_offset + 3, column=0, pady=10, sticky=tk.EW)
 
     def browse_file(self, config_key):
         """Open file/directory dialog for specific configuration fields and update account info."""
@@ -198,8 +254,25 @@ class ConfigGUI:
                 messagebox.showerror("Error", "Invalid directory selected")
 
     def prevent_close(self):
-        """Prevent closing the window during automation."""
-        messagebox.showwarning("Warning", "Please wait for the automation to complete before closing the application.")
+        """Allow closing the application but warn user to wait for Excel update."""
+        if not self.is_running:
+            self.root.destroy()
+            return
+
+        response = messagebox.askyesno(
+            "Confirm Close",
+            "Automation is still running. Please wait for the Excel file to be updated. Closing now may result in incomplete data. Do you want to close anyway?"
+        )
+        if response:
+            # Save the workbook if it exists
+            if self.workbook is not None:
+                try:
+                    self.workbook.save(self.config_values["EXCEL_FILE"])
+                    logging.info("Excel file saved before closing application")
+                except Exception as e:
+                    logging.error(f"Failed to save Excel file before closing: {e}")
+                    messagebox.showerror("Error", f"Failed to save Excel file: {e}")
+            self.root.destroy()
 
     def save_and_run(self):
         """Validate inputs, save to config.json, and run automation in a separate thread."""
@@ -208,16 +281,13 @@ class ConfigGUI:
             return
 
         try:
-            # Get and validate inputs
             google_form_url = self.entries["GOOGLE_FORM_URL"].get().strip()
             excel_file = self.entries["EXCEL_FILE"].get().strip()
             user_data_dir = self.entries["USER_DATA_DIR"].get().strip()
             profile_dir = self.entries["PROFILE_DIR"].get().strip()
 
-            # Log inputs for debugging
             logging.info(f"Inputs - Google Form URL: {google_form_url}, Excel File: {excel_file}, User Data Dir: {user_data_dir}, Profile Dir: {profile_dir}")
 
-            # Validate inputs
             if not google_form_url:
                 raise ValueError("Google Form URL cannot be empty")
             if not google_form_url.startswith("http"):
@@ -234,14 +304,12 @@ class ConfigGUI:
             if not profile_dir:
                 raise ValueError("Profile directory cannot be empty")
 
-            # Update config_values and save
             self.config_values["GOOGLE_FORM_URL"] = google_form_url
             self.config_values["EXCEL_FILE"] = str(excel_path)
             self.config_values["USER_DATA_DIR"] = user_data_dir
             self.config_values["PROFILE_DIR"] = profile_dir
             self.save_config()
 
-            # Update account info
             self.account_name, self.email = self.get_account_info()
             self.account_name_label.config(text=f"Account Name: {self.account_name}")
             self.email_label.config(text=f"Email: {self.email}")
@@ -263,7 +331,7 @@ class ConfigGUI:
     def run_automation(self):
         """Run the main automation process and display the result."""
         try:
-            result = main(self.config_values)
+            result = main(self.config_values, self)
             self.root.after(0, lambda: self.show_result(result))
         except Exception as e:
             self.root.after(0, lambda: self.show_result(f"Unexpected error: {e}"))
@@ -286,36 +354,34 @@ class ConfigGUI:
     def reset_gui(self):
         """Re-enable the GUI after automation completes."""
         self.is_running = False
+        self.workbook = None  # Clear workbook reference
         self.save_run_btn.config(state="normal")
         self.root.protocol("WM_DELETE_WINDOW", self.root.destroy)
         if self.status_label.cget("text").startswith("Running"):
             self.status_label.config(text="Ready", foreground="black")
 
-def main(config):
+def main(config, gui):
     """Main function to orchestrate the automation process."""
-    configure_logging()
     driver = None
     wb = None
     filepath = Path(config["EXCEL_FILE"])
     try:
-        # Validate file existence
         if not filepath:
             raise ValueError("Excel file path is empty")
         if not filepath.is_file():
             raise FileNotFoundError(f"Excel file not found: {filepath}")
 
-        # Load the workbook
         try:
             wb = openpyxl.load_workbook(filepath)
+            gui.workbook = wb  # Store workbook in GUI instance for access during cleanup
         except Exception as e:
             logging.error(f"Failed to load Excel file: {e}")
-            raise ValueError(f"Failed_hash to load Excel file: {e}")
+            raise ValueError(f"Failed to load Excel file: {e}")
 
         sheet = wb.active
         excel_headers, rows = read_excel_data(config["EXCEL_FILE"])
         logging.info(f"Total rows to process: {len(rows)}")
 
-        # Find or add 'Note' column
         note_column = None
         for col_idx, cell in enumerate(sheet[1], start=1):
             if cell.value and isinstance(cell.value, str) and cell.value.lower() == "note":
@@ -350,7 +416,7 @@ def main(config):
                 sheet.cell(row=idx, column=note_column).value = "Inserted"
                 logging.info(f"Row {idx} processed successfully")
             else:
-                error_message = f"Failed to insert row {idx}"
+                error_message = f"Failed to insert row {idx-1}: Form submission error, check field mappings or network connection"
                 sheet.cell(row=idx, column=note_column).value = error_message
                 logging.error(f"{error_message} - Row data: {row}")
                 wb.save(filepath)

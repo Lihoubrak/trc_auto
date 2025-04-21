@@ -49,7 +49,7 @@ def download_google_drive_image(google_drive_link, temp_dir="images"):
         os.makedirs(temp_dir, exist_ok=True)
         temp_file = tempfile.NamedTemporaryFile(
             delete=False, 
-            suffix='.jpg',
+            suffix='.png',
             dir=temp_dir
         )
         

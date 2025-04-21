@@ -19,6 +19,7 @@ def terminate_chrome_processes():
                 logging.info(f"Terminated Chrome process PID: {proc.pid}")
     except Exception as e:
         logging.error(f"Error terminating Chrome processes: {e}")
+        pass
 
 def initialize_driver(config):
     """Initialize and configure Chrome WebDriver."""
@@ -26,12 +27,13 @@ def initialize_driver(config):
     options.add_argument(f"--user-data-dir={config['USER_DATA_DIR']}")
     options.add_argument(f"--profile-directory={config['PROFILE_DIR']}")
     options.add_argument("--start-maximized")
-    options.add_argument("--lang=km-KH")
+    options.add_argument("--lang=en-US")
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.add_experimental_option("useAutomationExtension", False)
     options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -42,7 +44,7 @@ def initialize_driver(config):
         service = (
             Service(ChromeDriverManager().install())
             if USE_WEBDRIVER_MANAGER
-            else Service(CHROMEDRIVER_PATH)
+            else Service({config['CHROMEDRIVER_PATH']})
         )
         driver = webdriver.Chrome(service=service, options=options)
         driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
