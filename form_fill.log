@@ -1506,3 +1506,243 @@ Stacktrace:
 2025-04-22 11:19:18,765 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002B2D783F680>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/32dfd1c69492db550abf4868b601b335/elements
 2025-04-22 11:19:22,885 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002B2D783F8A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/32dfd1c69492db550abf4868b601b335/elements
 2025-04-22 11:19:31,237 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002B2D783FDF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/32dfd1c69492db550abf4868b601b335/element
+2025-04-22 11:27:19,847 - INFO - Loaded config from C:\Users\LIHOUB\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\LIHOUB\\Downloads\\Telegram Desktop\\template (2).xlsx', 'USER_DATA_DIR': 'C:\\Users\\LIHOUB\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 3', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 11:27:19,857 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 11:27:39,175 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\LIHOUB\Downloads\Telegram Desktop\template (2).xlsx, User Data Dir: C:\Users\LIHOUB\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 3
+2025-04-22 11:27:39,176 - INFO - Configuration saved to C:\Users\LIHOUB\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 11:27:39,177 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 11:27:39,203 - INFO - Total rows to process: 7
+2025-04-22 11:27:39,268 - INFO - Terminated Chrome process PID: 2220
+2025-04-22 11:27:39,294 - INFO - Terminated Chrome process PID: 3172
+2025-04-22 11:27:39,423 - INFO - ====== WebDriver manager ======
+2025-04-22 11:27:40,094 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 11:27:40,973 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 11:27:43,302 - INFO - Driver [C:\Users\LIHOUB\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 11:27:44,452 - INFO - WebDriver initialized successfully
+2025-04-22 11:28:08,735 - INFO - Retrieved 18 form headers
+2025-04-22 11:28:08,736 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 11:28:08,736 - WARNING - No match for Excel header: 'Company'
+2025-04-22 11:28:08,736 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 11:28:08,736 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 11:28:08,737 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 11:28:08,763 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 11:28:08,763 - WARNING - No match for Excel header: 'Note'
+2025-04-22 11:28:08,763 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 11:28:10,116 - INFO - Google Form loaded successfully
+2025-04-22 11:28:10,299 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:28:10,300 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:28:10,300 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:28:10,300 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:28:10,300 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:28:10,300 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:28:14,401 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 11:28:29,175 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmp2baxkly5.png
+2025-04-22 11:28:29,177 - INFO - Download took 9.33 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 11:28:54,362 - INFO - File name matched: expected 'tmp2baxkly5.png', got 'tmp2baxkly5.png'
+2025-04-22 11:29:24,062 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpj1cnz981.png
+2025-04-22 11:29:24,063 - INFO - Download took 28.89 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 11:29:56,885 - INFO - File name matched: expected 'tmpj1cnz981.png', got 'tmpj1cnz981.png'
+2025-04-22 11:29:57,696 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:29:57,697 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:30:03,508 - INFO - Form submitted successfully
+2025-04-22 11:30:03,509 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmp2baxkly5.png
+2025-04-22 11:30:03,510 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpj1cnz981.png
+2025-04-22 11:30:03,510 - INFO - Row 2 processed successfully
+2025-04-22 11:30:03,528 - INFO - Excel file saved after processing row 2
+2025-04-22 11:30:04,521 - INFO - Google Form loaded successfully
+2025-04-22 11:30:04,700 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:30:04,701 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:30:04,701 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:30:04,701 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:30:04,701 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:30:04,701 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:30:08,793 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 11:30:31,035 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpcnvpjurb.png
+2025-04-22 11:30:31,038 - INFO - Download took 16.64 seconds for URL: https://drive.google.com/open?id=1g-QogrO_s_nTGaKJPVKlGQykae04__Gb
+2025-04-22 11:30:42,178 - INFO - File name matched: expected 'tmpcnvpjurb.png', got 'tmpcnvpjurb.png'
+2025-04-22 11:30:47,809 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpb8rh780f.png
+2025-04-22 11:30:47,811 - INFO - Download took 4.82 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 11:30:59,837 - INFO - File name matched: expected 'tmpb8rh780f.png', got 'tmpb8rh780f.png'
+2025-04-22 11:31:00,644 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:31:00,645 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:31:06,091 - INFO - Form submitted successfully
+2025-04-22 11:31:06,092 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpcnvpjurb.png
+2025-04-22 11:31:06,093 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpb8rh780f.png
+2025-04-22 11:31:06,093 - INFO - Row 3 processed successfully
+2025-04-22 11:31:06,111 - INFO - Excel file saved after processing row 3
+2025-04-22 11:31:07,040 - INFO - Google Form loaded successfully
+2025-04-22 11:31:07,211 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:31:07,211 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:31:07,211 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:31:07,211 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:31:07,211 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:31:07,211 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:31:11,299 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 11:31:33,425 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmp13krw0xc.png
+2025-04-22 11:31:33,427 - INFO - Download took 16.53 seconds for URL: https://drive.google.com/open?id=1NwTYN4oLYXapJsGOAxefzPTvQqnd6OjW
+2025-04-22 11:31:43,507 - INFO - File name matched: expected 'tmp13krw0xc.png', got 'tmp13krw0xc.png'
+2025-04-22 11:31:57,626 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpf4np1zv8.png
+2025-04-22 11:31:57,628 - INFO - Download took 13.30 seconds for URL: https://drive.google.com/open?id=1P0--G8BV_M0ggKDPpGXPaG61N3VhlqpS
+2025-04-22 11:32:10,357 - INFO - File name matched: expected 'tmpf4np1zv8.png', got 'tmpf4np1zv8.png'
+2025-04-22 11:32:11,168 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:32:11,169 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:32:17,080 - INFO - Form submitted successfully
+2025-04-22 11:32:17,081 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmp13krw0xc.png
+2025-04-22 11:32:17,082 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpf4np1zv8.png
+2025-04-22 11:32:17,082 - INFO - Row 4 processed successfully
+2025-04-22 11:32:17,099 - INFO - Excel file saved after processing row 4
+2025-04-22 11:32:17,861 - INFO - Google Form loaded successfully
+2025-04-22 11:32:18,035 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:32:18,036 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:32:18,036 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:32:18,036 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:32:18,036 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:32:18,036 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:32:22,292 - INFO - Filled 'Number of cable * Core' with value: 8fo
+2025-04-22 11:32:33,387 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmphbvxpkgv.png
+2025-04-22 11:32:33,389 - INFO - Download took 5.10 seconds for URL: https://drive.google.com/open?id=11im8fT7b232386TzfOeiFX48_R-hF97Z
+2025-04-22 11:32:43,686 - INFO - File name matched: expected 'tmphbvxpkgv.png', got 'tmphbvxpkgv.png'
+2025-04-22 11:32:50,771 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpimnv70te.png
+2025-04-22 11:32:50,772 - INFO - Download took 6.27 seconds for URL: https://drive.google.com/open?id=16jpxUStaOuj4-qSrMoTC4vxQM5X4JA3O
+2025-04-22 11:32:57,710 - INFO - File name matched: expected 'tmpimnv70te.png', got 'tmpimnv70te.png'
+2025-04-22 11:32:58,522 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:32:58,523 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:33:06,747 - INFO - Form submitted successfully
+2025-04-22 11:33:06,748 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmphbvxpkgv.png
+2025-04-22 11:33:06,748 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpimnv70te.png
+2025-04-22 11:33:06,748 - INFO - Row 5 processed successfully
+2025-04-22 11:33:06,766 - INFO - Excel file saved after processing row 5
+2025-04-22 11:33:07,495 - INFO - Google Form loaded successfully
+2025-04-22 11:33:07,667 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:33:07,667 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:33:07,667 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:33:07,668 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:33:07,668 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:33:07,668 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:33:11,725 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 11:33:26,528 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpapbdnys_.png
+2025-04-22 11:33:26,531 - INFO - Download took 9.24 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 11:33:37,711 - INFO - File name matched: expected 'tmpapbdnys_.png', got 'tmpapbdnys_.png'
+2025-04-22 11:33:47,565 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpe_ddn_dv.png
+2025-04-22 11:33:47,567 - INFO - Download took 9.03 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 11:34:03,234 - INFO - File name matched: expected 'tmpe_ddn_dv.png', got 'tmpe_ddn_dv.png'
+2025-04-22 11:34:04,045 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:34:04,046 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:34:12,681 - INFO - Form submitted successfully
+2025-04-22 11:34:12,682 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpapbdnys_.png
+2025-04-22 11:34:12,683 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpe_ddn_dv.png
+2025-04-22 11:34:12,683 - INFO - Row 6 processed successfully
+2025-04-22 11:34:12,702 - INFO - Excel file saved after processing row 6
+2025-04-22 11:34:13,482 - INFO - Google Form loaded successfully
+2025-04-22 11:34:13,653 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:34:13,653 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:34:13,653 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:34:13,653 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:34:13,654 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:34:13,654 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:34:17,842 - INFO - Filled 'Number of cable * Core' with value: 8 core
+2025-04-22 11:34:28,840 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpgkgbe4gm.png
+2025-04-22 11:34:28,842 - INFO - Download took 5.24 seconds for URL: https://drive.google.com/open?id=18PZajfaBonHcOyXJNVmOCUWoPVEcI7_A
+2025-04-22 11:34:35,080 - INFO - File name matched: expected 'tmpgkgbe4gm.png', got 'tmpgkgbe4gm.png'
+2025-04-22 11:34:49,890 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpydwjfhy_.png
+2025-04-22 11:34:49,892 - INFO - Download took 13.99 seconds for URL: https://drive.google.com/open?id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP7
+2025-04-22 11:35:09,350 - INFO - File name matched: expected 'tmpydwjfhy_.png', got 'tmpydwjfhy_.png'
+2025-04-22 11:35:10,157 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:35:10,158 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:35:16,305 - INFO - Form submitted successfully
+2025-04-22 11:35:16,306 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpgkgbe4gm.png
+2025-04-22 11:35:16,306 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpydwjfhy_.png
+2025-04-22 11:35:16,306 - INFO - Row 7 processed successfully
+2025-04-22 11:35:16,321 - INFO - Excel file saved after processing row 7
+2025-04-22 11:35:17,160 - INFO - Google Form loaded successfully
+2025-04-22 11:35:17,338 - INFO - Checked 'Email' collection checkbox
+2025-04-22 11:35:17,338 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 11:35:17,339 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 11:35:17,339 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 11:35:17,339 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 11:35:17,339 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 11:35:21,449 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 11:35:48,252 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpmo9_ged0.png
+2025-04-22 11:35:48,254 - INFO - Download took 21.42 seconds for URL: https://drive.google.com/open?id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP7
+2025-04-22 11:35:59,401 - INFO - File name matched: expected 'tmpmo9_ged0.png', got 'tmpmo9_ged0.png'
+2025-04-22 11:36:07,301 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmp28o67lt5.png
+2025-04-22 11:36:07,302 - INFO - Download took 7.08 seconds for URL: https://drive.google.com/open?id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP7
+2025-04-22 11:36:20,426 - INFO - File name matched: expected 'tmp28o67lt5.png', got 'tmp28o67lt5.png'
+2025-04-22 11:36:21,233 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 11:36:21,234 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 11:36:26,580 - INFO - Form submitted successfully
+2025-04-22 11:36:26,581 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpmo9_ged0.png
+2025-04-22 11:36:26,581 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmp28o67lt5.png
+2025-04-22 11:36:26,581 - INFO - Row 8 processed successfully
+2025-04-22 11:36:26,599 - INFO - Excel file saved after processing row 8
+2025-04-22 11:36:26,616 - INFO - Final Excel file save completed
+2025-04-22 11:36:28,766 - INFO - WebDriver closed
+2025-04-22 13:02:35,206 - INFO - Loaded config from C:\Users\LIHOUB\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\LIHOUB\\Downloads\\Telegram Desktop\\template (2).xlsx', 'USER_DATA_DIR': 'C:\\Users\\LIHOUB\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 3', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 13:02:35,214 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 13:02:36,661 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\LIHOUB\Downloads\Telegram Desktop\template (2).xlsx, User Data Dir: C:\Users\LIHOUB\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 3
+2025-04-22 13:02:36,662 - INFO - Configuration saved to C:\Users\LIHOUB\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 13:02:36,663 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 13:02:36,687 - INFO - Total rows to process: 7
+2025-04-22 13:02:36,920 - INFO - ====== WebDriver manager ======
+2025-04-22 13:02:37,654 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 13:02:42,227 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 13:02:42,525 - INFO - Driver [C:\Users\LIHOUB\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 13:02:43,742 - INFO - WebDriver initialized successfully
+2025-04-22 13:03:07,986 - INFO - Retrieved 18 form headers
+2025-04-22 13:03:07,987 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 13:03:07,987 - WARNING - No match for Excel header: 'Company'
+2025-04-22 13:03:07,987 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 13:03:07,987 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 13:03:07,988 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 13:03:08,011 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 13:03:08,012 - WARNING - No match for Excel header: 'Note'
+2025-04-22 13:03:08,012 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 13:03:08,679 - INFO - Google Form loaded successfully
+2025-04-22 13:03:08,873 - INFO - Checked 'Email' collection checkbox
+2025-04-22 13:03:08,873 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 13:03:08,873 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 13:03:08,873 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 13:03:08,873 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 13:03:08,874 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 13:03:13,036 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 13:03:26,262 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpigggy2pl.png
+2025-04-22 13:03:26,263 - INFO - Download took 8.03 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 13:03:39,901 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmpq_rycws8.png
+2025-04-22 13:03:39,902 - INFO - Download took 4.50 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 13:03:42,256 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 13:03:42,256 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 13:03:42,257 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpigggy2pl.png
+2025-04-22 13:03:42,257 - INFO - Deleted temp file: C:\Users\LIHOUB\Desktop\trc_auto\images\tmpq_rycws8.png
+2025-04-22 13:03:42,278 - INFO - Excel file saved with error note for row 2
+2025-04-22 13:03:44,293 - INFO - WebDriver closed
+2025-04-22 13:04:36,348 - INFO - Loaded config from C:\Users\LIHOUB\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\LIHOUB\\Downloads\\Telegram Desktop\\template (2).xlsx', 'USER_DATA_DIR': 'C:\\Users\\LIHOUB\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 3', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 13:04:36,356 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 13:04:39,084 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\LIHOUB\Downloads\Telegram Desktop\template (2).xlsx, User Data Dir: C:\Users\LIHOUB\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 3
+2025-04-22 13:04:39,085 - INFO - Configuration saved to C:\Users\LIHOUB\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 13:04:39,087 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 13:04:39,118 - INFO - Total rows to process: 7
+2025-04-22 13:04:39,317 - INFO - ====== WebDriver manager ======
+2025-04-22 13:04:39,985 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 13:04:40,215 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 13:04:40,407 - INFO - Driver [C:\Users\LIHOUB\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 13:04:41,528 - INFO - WebDriver initialized successfully
+2025-04-22 13:05:05,907 - INFO - Retrieved 18 form headers
+2025-04-22 13:05:05,908 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 13:05:05,908 - WARNING - No match for Excel header: 'Company'
+2025-04-22 13:05:05,908 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 13:05:05,908 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 13:05:05,909 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 13:05:05,933 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 13:05:05,934 - WARNING - No match for Excel header: 'Note'
+2025-04-22 13:05:05,934 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 13:05:06,632 - INFO - Google Form loaded successfully
+2025-04-22 13:05:06,771 - INFO - Email checkbox already checked, skipping
+2025-04-22 13:05:06,772 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 13:05:06,772 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 13:05:06,772 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 13:05:06,772 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 13:05:06,772 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 13:05:10,782 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 13:05:19,622 - INFO - Downloaded image to C:\Users\LIHOUB\Desktop\trc_auto\images\tmp4f32bdo_.png
+2025-04-22 13:05:19,624 - INFO - Download took 3.66 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 13:05:31,907 - INFO - Excel file saved before closing application

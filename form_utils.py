@@ -84,12 +84,11 @@ def parse_date(value):
 def fill_date_field(driver, form_header, date_value):
     """Fill a date field in the Google Form."""
     try:
-        print("...date_value",date_value)
         date_value = parse_date(date_value)
         if not date_value:
             return False
-
-        month, day, year = date_value.split("/")
+        print(date_value)
+        day, month, year = date_value.split("/")
         date_input_xpath = (
             f"//span[@class='M7eMe' and normalize-space(.)='{form_header}']"
             f"/ancestor::div[@role='listitem']//input[@type='date']"
