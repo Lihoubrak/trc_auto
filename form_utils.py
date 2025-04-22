@@ -293,11 +293,9 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                         def attempt_upload():
                             nonlocal uploaded
                             try:
-                                import unicodedata
-                                form_header_normalized = unicodedata.normalize('NFKC', form_header).strip()
+                               
                                 upload_btn_xpath = (
-                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_normalized}')]/ancestor::div[@role='listitem']//"
-                                    f"div[@role='button' and contains(@aria-label, 'Add File')]"
+                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']//div[@role='button' and contains(@class, 'uArJ5e') and contains(@aria-label, 'Add file')]"
                                 )
                                 upload_button = WebDriverWait(driver, 30).until(
                                     EC.element_to_be_clickable((By.XPATH, upload_btn_xpath))
@@ -324,7 +322,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
 
                                 # Simplified XPath for uploaded file verification
                                 file_list_xpath = (
-                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_normalized}')]/ancestor::div[@role='listitem']"
+                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
                                     f"//div[@role='listitem']//div[contains(text(), '{file_name}')]"
                                 )
                                 file_element = WebDriverWait(driver, 45).until(
@@ -343,10 +341,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
 
                             except TimeoutException as te:
                                 logging.error(f"Timeout during file upload attempt for '{form_header}': {te}")
-                                with open("page_source.html", "w", encoding="utf-8") as f:
-                                    f.write(driver.page_source)
-                                driver.save_screenshot("timeout_screenshot.png")
-                                logging.info("Saved page source and screenshot for debugging")
+                                
                                 driver.switch_to.default_content()
                                 raise
                             except Exception as e:
