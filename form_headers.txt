@@ -1,0 +1,18 @@
+Email
+ក្រុមហ៊ុនស្នើសុំ-Requested Company:
+ជួសជុលជូនក្រុមហ៊ុនឬអតិថិជន-Repair for company/customers:
+ប្រភេទហេដ្ឋារចនាសម្ព័ន្ធ-Type of Infrastructure:
+ប្រភេទនៃការជួសជុល-Overhead or Underground:
+ចំនួនខ្សែកាប្លិ៍xចំនួន បណ្តូលខ្សែកាប្លិ៍ -Number of cable * Core:
+អាសយដ្ឋានចំនុចចាប់ផ្តើម(លេខផ្លូវ ភូមិ ឃុំ/សង្កាត់ ស្រុក/ខណ្ឌ ខេត្ត/រាជធានី)-Starting Address:
+អាសយដ្ឋានចំណុចបញ្ចប់ (លេខផ្លូវ ភូមិ ឃុំ/សង្កាត់ ស្រុក/ខណ្ឌ ខេត្ត/រាជធានី) -Ending Address:
+ខេត្ត/ក្រុង
+ចំណុចចាប់ផ្តើម រយៈទទឹងនិងបណ្តោយ (Start: Lat ,Long)
+ចំណុចបញ្ចប់ រយៈទទឹងនិងបណ្តោយ (End: Lat ,Long)
+ស្នើចុះថែទាំខ្សែក្នុងវង្វង់ចំណុចចាប់ផ្តើមនិងបញ្ចប់ Lat/Long ខាងលើ ដើម្បី៖
+ប្រវែងខ្សែកាប្លិ៍ដែលត្រូវជួសថ្មីគឺត្រូវតិចជាង២០០ម៉ែត្រ-Length of replacement broken cable must be less than 200m (ករណីប្រវែងខ្សែច្រើនជាង ២០០ម៉ែត្រក្រុមហ៊ុនត្រូវអនុវត្តនីតិវិធីសាងសង់ថ្មី- If length of cable is larger than 200m,company has to follow the new build procedure):
+កាលបរិច្ឆេទនៃការកាត់ផ្តាច់-Date of Damage:
+កាលបរិច្ឆេទគ្រោងបញ្ចប់ការថែទាំ-Finished Date of Repairing:
+មូលហេតុនៃការកាត់ផ្តាច់ Cable Incident
+រូបភាពនៃស្ថានភាពការខូចខាតនៃខ្សែកាប្លិ៍ដោយមាន lat/long <10MB (Picture of Damage Cable with lat/long <10MB):
+រូបភាពនៃគំនូសនៅលើ Google Map ដែលមានចំណុចចាប់ផ្តើមនិងបញ្ចប់ (Picture of drawing in google map with start and end lat/long):

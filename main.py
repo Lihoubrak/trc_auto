@@ -401,6 +401,11 @@ def main(config, gui):
         terminate_chrome_processes()
         driver = initialize_driver(config)
         form_headers = get_form_headers(driver, config)
+        # Save headers to a text file
+        with open("form_headers.txt", "w", encoding="utf-8") as f:
+            for header in form_headers:
+                f.write(header + "\n")
+
         header_mapping, unmatched_headers = match_headers(excel_headers, form_headers)
 
         for idx, row in enumerate(rows, start=2):
