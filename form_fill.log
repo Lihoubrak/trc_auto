@@ -1,0 +1,1234 @@
+2025-04-22 08:04:37,973 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:04:37,985 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:04:57,509 - INFO - Selected EXCEL_FILE: C:/Users/user/Desktop/template.xlsx
+2025-04-22 08:04:58,202 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 1
+2025-04-22 08:04:58,204 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:04:58,206 - INFO - Retrieved account info - Name: Your Chrome, Email: 
+2025-04-22 08:04:58,372 - INFO - Total rows to process: 17
+2025-04-22 08:04:59,047 - INFO - ====== WebDriver manager ======
+2025-04-22 08:05:00,921 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:05:02,581 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:05:03,471 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:05:05,600 - INFO - WebDriver version 135.0.7049.95 selected
+2025-04-22 08:05:05,606 - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/135.0.7049.95/win32/chromedriver-win32.zip
+2025-04-22 08:05:05,607 - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/135.0.7049.95/win32/chromedriver-win32.zip
+2025-04-22 08:05:06,170 - INFO - Driver downloading response is 200
+2025-04-22 08:05:24,758 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:05:25,781 - INFO - Driver has been saved in cache [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95]
+2025-04-22 08:05:28,850 - INFO - WebDriver initialized successfully
+2025-04-22 08:05:35,774 - ERROR - Error fetching form headers: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=135.0.7049.96)
+Stacktrace:
+	GetHandleVerifier [0x00528073+60707]
+	GetHandleVerifier [0x005280B4+60772]
+	(No symbol) [0x00350683]
+	(No symbol) [0x0033FED0]
+	(No symbol) [0x0035DD3F]
+	(No symbol) [0x003C3D7F]
+	(No symbol) [0x003DE129]
+	(No symbol) [0x003BCE46]
+	(No symbol) [0x0038C5D3]
+	(No symbol) [0x0038D424]
+	GetHandleVerifier [0x0076BB53+2435075]
+	GetHandleVerifier [0x007670F3+2416035]
+	GetHandleVerifier [0x0078349C+2531660]
+	GetHandleVerifier [0x0053F145+155125]
+	GetHandleVerifier [0x00545AED+182173]
+	GetHandleVerifier [0x0052F948+91640]
+	GetHandleVerifier [0x0052FAF0+92064]
+	GetHandleVerifier [0x0051A5B0+4704]
+	BaseThreadInitThunk [0x74D8FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x76F782AE+286]
+	RtlGetAppContainerNamedObjectPath [0x76F7827E+238]
+
+2025-04-22 08:05:35,776 - ERROR - Main process error: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=135.0.7049.96)
+Stacktrace:
+	GetHandleVerifier [0x00528073+60707]
+	GetHandleVerifier [0x005280B4+60772]
+	(No symbol) [0x00350683]
+	(No symbol) [0x0033FED0]
+	(No symbol) [0x0035DD3F]
+	(No symbol) [0x003C3D7F]
+	(No symbol) [0x003DE129]
+	(No symbol) [0x003BCE46]
+	(No symbol) [0x0038C5D3]
+	(No symbol) [0x0038D424]
+	GetHandleVerifier [0x0076BB53+2435075]
+	GetHandleVerifier [0x007670F3+2416035]
+	GetHandleVerifier [0x0078349C+2531660]
+	GetHandleVerifier [0x0053F145+155125]
+	GetHandleVerifier [0x00545AED+182173]
+	GetHandleVerifier [0x0052F948+91640]
+	GetHandleVerifier [0x0052FAF0+92064]
+	GetHandleVerifier [0x0051A5B0+4704]
+	BaseThreadInitThunk [0x74D8FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x76F782AE+286]
+	RtlGetAppContainerNamedObjectPath [0x76F7827E+238]
+
+2025-04-22 08:05:35,841 - INFO - Excel file saved with error note due to critical error
+2025-04-22 08:05:37,915 - INFO - WebDriver closed
+2025-04-22 08:05:42,682 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:05:42,684 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:05:42,694 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:05:42,728 - INFO - Total rows to process: 17
+2025-04-22 08:05:42,751 - INFO - ====== WebDriver manager ======
+2025-04-22 08:05:43,524 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:05:43,835 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:05:44,060 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:05:45,314 - INFO - WebDriver initialized successfully
+2025-04-22 08:05:48,731 - INFO - Retrieved 18 form headers
+2025-04-22 08:05:48,735 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:05:48,735 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:05:48,736 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:05:48,736 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:05:48,736 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:05:48,793 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:05:48,793 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:05:48,794 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:05:49,818 - INFO - Google Form loaded successfully
+2025-04-22 08:05:49,966 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:05:49,966 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:05:49,966 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:05:49,966 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:05:49,967 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:05:49,967 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:05:54,131 - INFO - Filled 'Number of cable * Core' with value: 8fo
+2025-04-22 08:06:03,304 - INFO - Downloaded image to E:\trc_auto\images\tmpeg137ax8.png
+2025-04-22 08:06:19,475 - WARNING - File name mismatch: expected 'tmpeg137ax8.png', got 'tmpeg137ax8.png'
+2025-04-22 08:06:24,646 - INFO - Downloaded image to E:\trc_auto\images\tmpszvq9ije.png
+2025-04-22 08:06:28,993 - WARNING - File name mismatch: expected 'tmpszvq9ije.png', got 'tmpszvq9ije.png'
+2025-04-22 08:06:29,800 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:06:29,800 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:06:29,801 - INFO - Deleted temp file: E:\trc_auto\images\tmpeg137ax8.png
+2025-04-22 08:06:29,801 - INFO - Deleted temp file: E:\trc_auto\images\tmpszvq9ije.png
+2025-04-22 08:06:29,835 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:06:32,499 - INFO - WebDriver closed
+2025-04-22 08:08:06,699 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:08:06,708 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:08:08,794 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:08:08,795 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:08:08,797 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:08:08,835 - INFO - Total rows to process: 17
+2025-04-22 08:08:09,163 - INFO - ====== WebDriver manager ======
+2025-04-22 08:08:09,991 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:08:10,324 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:08:10,954 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:08:12,237 - INFO - WebDriver initialized successfully
+2025-04-22 08:08:14,381 - INFO - Retrieved 18 form headers
+2025-04-22 08:08:14,382 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:08:14,382 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:08:14,382 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:08:14,383 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:08:14,383 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:08:14,436 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:08:14,436 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:08:14,436 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:08:15,481 - INFO - Google Form loaded successfully
+2025-04-22 08:08:15,628 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:08:15,628 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:08:15,628 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:08:15,628 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:08:15,629 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:08:15,629 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:08:19,705 - INFO - Filled 'Number of cable * Core' with value: 8fo
+2025-04-22 08:08:28,365 - INFO - Downloaded image to E:\trc_auto\images\tmpgdjwqq98.png
+2025-04-22 08:08:36,307 - WARNING - File name mismatch: expected 'tmpgdjwqq98.png', got 'tmpgdjwqq98.png'
+2025-04-22 08:08:40,701 - INFO - Downloaded image to E:\trc_auto\images\tmpzjeryb6v.png
+2025-04-22 08:08:50,856 - WARNING - File name mismatch: expected 'tmpzjeryb6v.png', got 'tmpzjeryb6v.png'
+2025-04-22 08:08:51,663 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:08:51,664 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:08:51,664 - INFO - Deleted temp file: E:\trc_auto\images\tmpgdjwqq98.png
+2025-04-22 08:08:51,665 - INFO - Deleted temp file: E:\trc_auto\images\tmpzjeryb6v.png
+2025-04-22 08:08:51,691 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:08:54,425 - INFO - WebDriver closed
+2025-04-22 08:09:51,857 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:09:51,871 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:09:55,698 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:09:55,700 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:09:55,701 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:09:55,728 - INFO - Total rows to process: 7
+2025-04-22 08:09:56,044 - INFO - ====== WebDriver manager ======
+2025-04-22 08:09:56,770 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:09:57,128 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:09:57,896 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:09:59,069 - INFO - WebDriver initialized successfully
+2025-04-22 08:10:02,959 - INFO - Retrieved 18 form headers
+2025-04-22 08:10:02,959 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:10:02,959 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:10:02,960 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:10:02,960 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:10:02,960 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:10:03,008 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:10:03,008 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:10:03,008 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:10:04,449 - INFO - Google Form loaded successfully
+2025-04-22 08:10:04,593 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:10:04,593 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:10:04,593 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:10:04,594 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:10:04,594 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:10:04,594 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:10:08,625 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:10:29,406 - INFO - Downloaded image to E:\trc_auto\images\tmpj0xsikjp.png
+2025-04-22 08:11:01,126 - WARNING - File name mismatch: expected 'tmpj0xsikjp.png', got 'tmpj0xsikjp.png'
+2025-04-22 08:11:10,914 - INFO - Downloaded image to E:\trc_auto\images\tmpnzc0rti4.png
+2025-04-22 08:11:32,796 - WARNING - File name mismatch: expected 'tmpnzc0rti4.png', got 'tmpnzc0rti4.png'
+2025-04-22 08:11:33,602 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:11:33,603 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:11:33,604 - INFO - Deleted temp file: E:\trc_auto\images\tmpj0xsikjp.png
+2025-04-22 08:11:33,604 - INFO - Deleted temp file: E:\trc_auto\images\tmpnzc0rti4.png
+2025-04-22 08:11:33,629 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:11:36,282 - INFO - WebDriver closed
+2025-04-22 08:12:49,582 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:12:49,592 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:12:51,291 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:12:51,292 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:12:51,293 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:12:51,320 - INFO - Total rows to process: 7
+2025-04-22 08:12:51,664 - INFO - ====== WebDriver manager ======
+2025-04-22 08:12:52,398 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:12:55,073 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:12:55,722 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:12:56,886 - INFO - WebDriver initialized successfully
+2025-04-22 08:12:58,614 - INFO - Retrieved 18 form headers
+2025-04-22 08:12:58,614 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:12:58,615 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:12:58,615 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:12:58,616 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:12:58,616 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:12:58,664 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:12:58,665 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:12:58,665 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:12:59,805 - INFO - Google Form loaded successfully
+2025-04-22 08:12:59,951 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:12:59,951 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:12:59,951 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:12:59,951 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:12:59,952 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:12:59,952 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:13:04,075 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:13:16,508 - INFO - Downloaded image to E:\trc_auto\images\tmpr99365fw.png
+2025-04-22 08:14:59,273 - INFO - Downloaded image to E:\trc_auto\images\tmp3mm67irr.png
+2025-04-22 08:15:01,627 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:15:01,629 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:15:01,630 - INFO - Deleted temp file: E:\trc_auto\images\tmpr99365fw.png
+2025-04-22 08:15:01,630 - INFO - Deleted temp file: E:\trc_auto\images\tmp3mm67irr.png
+2025-04-22 08:15:01,663 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:15:03,711 - INFO - WebDriver closed
+2025-04-22 08:17:48,129 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:17:48,138 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:17:51,491 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:17:51,492 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:17:51,493 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:17:51,520 - INFO - Total rows to process: 7
+2025-04-22 08:17:51,841 - INFO - ====== WebDriver manager ======
+2025-04-22 08:17:52,591 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:17:53,689 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:17:53,994 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:17:55,588 - INFO - WebDriver initialized successfully
+2025-04-22 08:17:57,423 - INFO - Retrieved 18 form headers
+2025-04-22 08:17:57,424 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:17:57,424 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:17:57,424 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:17:57,425 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:17:57,425 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:17:57,469 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:17:57,470 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:17:57,470 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:17:58,320 - INFO - Google Form loaded successfully
+2025-04-22 08:17:58,468 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:17:58,469 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:17:58,469 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:17:58,469 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:17:58,469 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:17:58,470 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:18:02,596 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:18:24,445 - INFO - Downloaded image to E:\trc_auto\images\tmp33r3n_bb.png
+2025-04-22 08:19:12,223 - INFO - Excel file saved before closing application
+2025-04-22 08:24:28,188 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:24:28,198 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:24:30,748 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:24:30,749 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:24:30,751 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:24:30,775 - INFO - Total rows to process: 7
+2025-04-22 08:24:30,798 - INFO - Terminated Chrome process PID: 684
+2025-04-22 08:24:31,035 - INFO - Terminated Chrome process PID: 10420
+2025-04-22 08:24:31,081 - INFO - Terminated Chrome process PID: 13020
+2025-04-22 08:24:31,130 - INFO - ====== WebDriver manager ======
+2025-04-22 08:24:31,884 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:24:32,513 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:24:33,073 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:24:34,262 - INFO - WebDriver initialized successfully
+2025-04-22 08:24:36,419 - INFO - Retrieved 18 form headers
+2025-04-22 08:24:36,420 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:24:36,421 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:24:36,421 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:24:36,422 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:24:36,422 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:24:36,489 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:24:36,489 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:24:36,489 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:24:37,318 - INFO - Google Form loaded successfully
+2025-04-22 08:24:37,466 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:24:37,467 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:24:37,467 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:24:37,467 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:24:37,468 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:24:37,468 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:24:41,486 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:24:59,231 - INFO - Downloaded image to E:\trc_auto\images\tmplsb5e_vn.png
+2025-04-22 08:25:28,201 - WARNING - File name mismatch: expected 'tmplsb5e_vn.png', got 'tmplsb5e_vn.png'
+2025-04-22 08:25:36,276 - INFO - Downloaded image to E:\trc_auto\images\tmp3i06nyj8.png
+2025-04-22 08:25:58,648 - WARNING - File name mismatch: expected 'tmp3i06nyj8.png', got 'tmp3i06nyj8.png'
+2025-04-22 08:25:59,455 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:25:59,455 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:25:59,456 - INFO - Deleted temp file: E:\trc_auto\images\tmplsb5e_vn.png
+2025-04-22 08:25:59,457 - INFO - Deleted temp file: E:\trc_auto\images\tmp3i06nyj8.png
+2025-04-22 08:25:59,479 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:26:01,667 - INFO - WebDriver closed
+2025-04-22 08:27:39,241 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:27:39,251 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:27:41,684 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:27:41,685 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:27:41,687 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:27:41,715 - INFO - Total rows to process: 7
+2025-04-22 08:27:42,021 - INFO - ====== WebDriver manager ======
+2025-04-22 08:27:42,745 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:27:44,085 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:27:44,635 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:27:45,802 - INFO - WebDriver initialized successfully
+2025-04-22 08:27:47,815 - INFO - Retrieved 18 form headers
+2025-04-22 08:27:47,815 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:27:47,815 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:27:47,816 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:27:47,816 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:27:47,817 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:27:47,902 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:27:47,903 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:27:47,903 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:27:48,895 - INFO - Google Form loaded successfully
+2025-04-22 08:27:49,042 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:27:49,042 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:27:49,042 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:27:49,043 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:27:49,043 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:27:49,043 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:27:53,071 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:28:05,792 - INFO - Downloaded image to E:\trc_auto\images\tmpkvcmn1v_.png
+2025-04-22 08:28:28,033 - WARNING - File name mismatch: expected 'tmpkvcmn1v_.png', got 'tmpkvcmn1v_.png'
+2025-04-22 08:28:37,968 - INFO - Downloaded image to E:\trc_auto\images\tmp7ab7y_dt.png
+2025-04-22 08:29:15,003 - WARNING - File name mismatch: expected 'tmp7ab7y_dt.png', got 'tmp7ab7y_dt.png'
+2025-04-22 08:29:15,808 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:29:15,809 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:29:15,810 - INFO - Deleted temp file: E:\trc_auto\images\tmpkvcmn1v_.png
+2025-04-22 08:29:15,810 - INFO - Deleted temp file: E:\trc_auto\images\tmp7ab7y_dt.png
+2025-04-22 08:29:15,836 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:29:18,022 - INFO - WebDriver closed
+2025-04-22 08:34:11,939 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:34:11,948 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:34:14,941 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:34:14,942 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:34:14,943 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:34:14,967 - INFO - Total rows to process: 7
+2025-04-22 08:34:15,266 - INFO - ====== WebDriver manager ======
+2025-04-22 08:34:16,022 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:34:16,285 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:34:16,498 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:34:17,654 - INFO - WebDriver initialized successfully
+2025-04-22 08:34:19,671 - INFO - Retrieved 18 form headers
+2025-04-22 08:34:19,672 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:34:19,672 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:34:19,672 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:34:19,673 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:34:19,673 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:34:19,745 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:34:19,747 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:34:19,748 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:34:20,917 - INFO - Google Form loaded successfully
+2025-04-22 08:34:21,060 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:34:21,060 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:34:21,061 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:34:21,061 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:34:21,061 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:34:21,062 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:34:25,105 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:34:33,915 - INFO - Downloaded image to E:\trc_auto\images\tmpbjl5qzwi.png
+2025-04-22 08:35:13,031 - INFO - Downloaded image to E:\trc_auto\images\tmp7k5xpki_.png
+2025-04-22 08:35:46,789 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:35:46,789 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:35:46,789 - INFO - Deleted temp file: E:\trc_auto\images\tmpbjl5qzwi.png
+2025-04-22 08:35:46,790 - INFO - Deleted temp file: E:\trc_auto\images\tmp7k5xpki_.png
+2025-04-22 08:35:46,815 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:35:48,996 - INFO - WebDriver closed
+2025-04-22 08:37:18,207 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:37:18,216 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:37:19,588 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:37:19,590 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:37:19,591 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:37:19,617 - INFO - Total rows to process: 7
+2025-04-22 08:37:19,918 - INFO - ====== WebDriver manager ======
+2025-04-22 08:37:20,673 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:37:20,932 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:37:21,184 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:37:22,333 - INFO - WebDriver initialized successfully
+2025-04-22 08:37:23,808 - INFO - Retrieved 18 form headers
+2025-04-22 08:37:23,809 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:37:23,809 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:37:23,809 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:37:23,809 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:37:23,810 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:37:23,855 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:37:23,855 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:37:23,855 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:37:24,769 - INFO - Google Form loaded successfully
+2025-04-22 08:37:24,919 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:37:24,919 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:37:24,920 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:37:24,920 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:37:24,920 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:37:24,920 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:37:28,993 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:37:38,339 - INFO - Downloaded image to E:\trc_auto\images\tmpa14j7x18.png
+2025-04-22 08:38:16,975 - INFO - Downloaded image to E:\trc_auto\images\tmpawengpdf.png
+2025-04-22 08:38:19,328 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:38:19,329 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:38:19,329 - INFO - Deleted temp file: E:\trc_auto\images\tmpa14j7x18.png
+2025-04-22 08:38:19,330 - INFO - Deleted temp file: E:\trc_auto\images\tmpawengpdf.png
+2025-04-22 08:38:19,356 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:38:21,407 - INFO - WebDriver closed
+2025-04-22 08:41:53,206 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:41:53,239 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:41:55,494 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:41:55,495 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:41:55,496 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:41:55,540 - INFO - Total rows to process: 7
+2025-04-22 08:41:55,851 - INFO - ====== WebDriver manager ======
+2025-04-22 08:41:56,661 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:41:57,073 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:41:57,345 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:41:59,309 - INFO - WebDriver initialized successfully
+2025-04-22 08:42:01,264 - INFO - Retrieved 18 form headers
+2025-04-22 08:42:01,268 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:42:01,268 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:42:01,268 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:42:01,269 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:42:01,269 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:42:01,313 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:42:01,313 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:42:01,314 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:42:02,239 - INFO - Google Form loaded successfully
+2025-04-22 08:42:02,389 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:42:02,389 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:42:02,389 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:42:02,389 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:42:02,390 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:42:02,390 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:42:06,554 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:42:21,598 - INFO - Downloaded image to E:\trc_auto\images\tmpi_z7hsmb.png
+2025-04-22 08:43:13,365 - INFO - Downloaded image to E:\trc_auto\images\tmp8es21ayt.png
+2025-04-22 08:43:30,684 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:43:30,684 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:43:30,685 - INFO - Deleted temp file: E:\trc_auto\images\tmpi_z7hsmb.png
+2025-04-22 08:43:30,686 - INFO - Deleted temp file: E:\trc_auto\images\tmp8es21ayt.png
+2025-04-22 08:43:30,759 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:43:33,013 - INFO - WebDriver closed
+2025-04-22 08:45:39,216 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:45:39,225 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:45:41,254 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:45:41,255 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:45:41,256 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:45:41,284 - INFO - Total rows to process: 7
+2025-04-22 08:45:41,602 - INFO - ====== WebDriver manager ======
+2025-04-22 08:45:42,343 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:45:42,809 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:45:43,054 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:45:44,231 - INFO - WebDriver initialized successfully
+2025-04-22 08:45:46,633 - INFO - Retrieved 18 form headers
+2025-04-22 08:45:46,633 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:45:46,634 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:45:46,634 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:45:46,634 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:45:46,635 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:45:46,679 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:45:46,680 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:45:46,680 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:45:47,762 - INFO - Google Form loaded successfully
+2025-04-22 08:45:47,904 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:45:47,904 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:45:47,904 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:45:47,905 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:45:47,905 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:45:47,905 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:45:52,099 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:46:03,536 - INFO - Downloaded image to E:\trc_auto\images\tmpoq6gihr8.png
+2025-04-22 08:47:24,427 - INFO - Downloaded image to E:\trc_auto\images\tmpbcaqdqy7.png
+2025-04-22 08:48:33,732 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:48:33,733 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:48:33,733 - INFO - Deleted temp file: E:\trc_auto\images\tmpoq6gihr8.png
+2025-04-22 08:48:33,734 - INFO - Deleted temp file: E:\trc_auto\images\tmpbcaqdqy7.png
+2025-04-22 08:48:33,757 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:48:35,955 - INFO - WebDriver closed
+2025-04-22 08:50:34,297 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 08:50:34,306 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:50:44,101 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 08:50:44,103 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 08:50:44,104 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 08:50:44,127 - INFO - Total rows to process: 7
+2025-04-22 08:50:44,454 - INFO - ====== WebDriver manager ======
+2025-04-22 08:50:45,212 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:50:47,105 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 08:50:47,632 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 08:50:49,215 - INFO - WebDriver initialized successfully
+2025-04-22 08:50:50,901 - INFO - Retrieved 18 form headers
+2025-04-22 08:50:50,902 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 08:50:50,902 - WARNING - No match for Excel header: 'Company'
+2025-04-22 08:50:50,902 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 08:50:50,903 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 08:50:50,903 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 08:50:50,948 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 08:50:50,948 - WARNING - No match for Excel header: 'Note'
+2025-04-22 08:50:50,948 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 08:50:51,730 - INFO - Google Form loaded successfully
+2025-04-22 08:50:51,876 - INFO - Email checkbox already checked, skipping
+2025-04-22 08:50:51,877 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 08:50:51,877 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 08:50:51,878 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 08:50:51,878 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 08:50:51,879 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 08:50:55,942 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 08:51:06,638 - INFO - Downloaded image to E:\trc_auto\images\tmpa9j8ygt_.png
+2025-04-22 08:51:28,095 - INFO - Downloaded image to E:\trc_auto\images\tmpbcy01b86.png
+2025-04-22 08:52:01,364 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 08:52:01,364 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 08:52:01,365 - INFO - Deleted temp file: E:\trc_auto\images\tmpa9j8ygt_.png
+2025-04-22 08:52:01,366 - INFO - Deleted temp file: E:\trc_auto\images\tmpbcy01b86.png
+2025-04-22 08:52:01,389 - INFO - Excel file saved with error note for row 2
+2025-04-22 08:52:03,443 - INFO - WebDriver closed
+2025-04-22 09:18:01,870 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:18:01,885 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:18:05,800 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:18:05,801 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:18:05,802 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:18:05,923 - INFO - Total rows to process: 7
+2025-04-22 09:18:06,287 - INFO - ====== WebDriver manager ======
+2025-04-22 09:18:08,198 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:18:08,582 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:18:08,801 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:18:10,906 - INFO - WebDriver initialized successfully
+2025-04-22 09:18:15,815 - INFO - Retrieved 18 form headers
+2025-04-22 09:18:15,818 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:18:15,819 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:18:15,819 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:18:15,819 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:18:15,820 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:18:15,872 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:18:15,873 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:18:15,873 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:18:16,943 - INFO - Google Form loaded successfully
+2025-04-22 09:18:17,164 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:18:17,164 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:18:17,164 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:18:17,164 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:18:17,165 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:18:17,165 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:18:21,328 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:18:33,820 - INFO - Downloaded image to E:\trc_auto\images\tmpkohawmcx.png
+2025-04-22 09:19:17,551 - INFO - Downloaded image to E:\trc_auto\images\tmpb0kh744z.png
+2025-04-22 09:19:41,084 - INFO - Excel file saved before closing application
+2025-04-22 09:19:50,218 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:19:50,230 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:19:51,569 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:19:51,570 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:19:51,571 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:19:51,599 - INFO - Total rows to process: 7
+2025-04-22 09:19:51,890 - INFO - Terminated Chrome process PID: 5148
+2025-04-22 09:19:51,924 - INFO - Terminated Chrome process PID: 7172
+2025-04-22 09:19:52,052 - INFO - Terminated Chrome process PID: 14520
+2025-04-22 09:19:52,053 - INFO - Terminated Chrome process PID: 14700
+2025-04-22 09:19:52,054 - INFO - Terminated Chrome process PID: 15852
+2025-04-22 09:19:52,064 - INFO - Terminated Chrome process PID: 15872
+2025-04-22 09:19:52,122 - INFO - Terminated Chrome process PID: 25300
+2025-04-22 09:19:52,163 - INFO - ====== WebDriver manager ======
+2025-04-22 09:19:53,260 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:19:53,556 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:19:53,867 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:19:55,308 - INFO - WebDriver initialized successfully
+2025-04-22 09:19:57,249 - INFO - Retrieved 18 form headers
+2025-04-22 09:19:57,249 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:19:57,250 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:19:57,250 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:19:57,250 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:19:57,251 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:19:57,303 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:19:57,304 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:19:57,304 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:19:58,097 - INFO - Google Form loaded successfully
+2025-04-22 09:19:58,246 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:19:58,246 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:19:58,246 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:19:58,246 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:19:58,247 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:19:58,247 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:20:02,303 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:20:11,975 - INFO - Downloaded image to E:\trc_auto\images\tmp2k3m0rcu.png
+2025-04-22 09:20:20,991 - WARNING - File name mismatch: expected 'tmp2k3m0rcu.png', got 'tmp2k3m0rcu.png'
+2025-04-22 09:20:28,351 - INFO - Downloaded image to E:\trc_auto\images\tmpzno2s48m.png
+2025-04-22 09:20:36,397 - WARNING - File name mismatch: expected 'tmpzno2s48m.png', got 'tmpzno2s48m.png'
+2025-04-22 09:20:37,202 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:20:37,203 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:20:37,203 - INFO - Deleted temp file: E:\trc_auto\images\tmp2k3m0rcu.png
+2025-04-22 09:20:37,204 - INFO - Deleted temp file: E:\trc_auto\images\tmpzno2s48m.png
+2025-04-22 09:20:37,231 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:20:39,489 - INFO - WebDriver closed
+2025-04-22 09:24:28,655 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:24:28,668 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:24:29,792 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:24:29,793 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:24:29,794 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:24:29,830 - INFO - Total rows to process: 7
+2025-04-22 09:24:30,208 - INFO - ====== WebDriver manager ======
+2025-04-22 09:24:31,196 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:24:31,490 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:24:31,847 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:24:33,931 - INFO - WebDriver initialized successfully
+2025-04-22 09:24:35,821 - INFO - Retrieved 18 form headers
+2025-04-22 09:24:35,822 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:24:35,822 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:24:35,823 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:24:35,823 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:24:35,823 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:24:35,886 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:24:35,887 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:24:35,887 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:24:35,891 - ERROR - Main process error: fill_google_form() missing 1 required positional argument: 'field_type_mapping'
+2025-04-22 09:24:35,935 - INFO - Excel file saved with error note due to critical error
+2025-04-22 09:24:38,209 - INFO - WebDriver closed
+2025-04-22 09:26:22,644 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:26:22,654 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:26:23,625 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:26:23,626 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:26:23,627 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:26:23,652 - INFO - Total rows to process: 7
+2025-04-22 09:26:23,983 - INFO - ====== WebDriver manager ======
+2025-04-22 09:26:24,747 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:26:25,197 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:26:25,429 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:26:26,661 - INFO - WebDriver initialized successfully
+2025-04-22 09:26:28,986 - INFO - Retrieved 18 form headers
+2025-04-22 09:26:28,986 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:26:28,987 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:26:28,987 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:26:28,987 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:26:28,988 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:26:29,031 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:26:29,031 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:26:29,032 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:26:29,887 - INFO - Google Form loaded successfully
+2025-04-22 09:26:30,041 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:26:30,041 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:26:30,041 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:26:30,042 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:26:30,042 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:26:30,042 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:26:34,070 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:26:44,543 - INFO - Downloaded image to E:\trc_auto\images\tmp2l1_73vt.png
+2025-04-22 09:26:57,675 - WARNING - File name mismatch: expected 'tmp2l1_73vt.png', got 'tmp2l1_73vt.png'
+2025-04-22 09:27:04,508 - INFO - Downloaded image to E:\trc_auto\images\tmpmrtkn7s5.png
+2025-04-22 09:27:29,865 - WARNING - File name mismatch: expected 'tmpmrtkn7s5.png', got 'tmpmrtkn7s5.png'
+2025-04-22 09:27:30,670 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:27:30,670 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:27:30,671 - INFO - Deleted temp file: E:\trc_auto\images\tmp2l1_73vt.png
+2025-04-22 09:27:30,671 - INFO - Deleted temp file: E:\trc_auto\images\tmpmrtkn7s5.png
+2025-04-22 09:27:30,696 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:27:32,900 - INFO - WebDriver closed
+2025-04-22 09:39:24,906 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:39:24,918 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:39:26,290 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:39:26,291 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:39:26,292 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:39:26,320 - INFO - Total rows to process: 7
+2025-04-22 09:39:26,659 - INFO - ====== WebDriver manager ======
+2025-04-22 09:39:27,442 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:39:27,735 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:39:27,927 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:39:29,581 - INFO - WebDriver initialized successfully
+2025-04-22 09:39:31,307 - INFO - Retrieved 18 form headers
+2025-04-22 09:39:31,308 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:39:31,309 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:39:31,309 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:39:31,309 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:39:31,310 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:39:31,363 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:39:31,364 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:39:31,364 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:39:32,326 - INFO - Google Form loaded successfully
+2025-04-22 09:39:32,479 - INFO - Email checkbox already checked
+2025-04-22 09:39:37,354 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:39:46,543 - INFO - Downloaded image to E:\trc_auto\images\tmpk9nu9vi3.png
+2025-04-22 09:40:12,094 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001706780BC50>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/dc3ba90544d2c87f581bd13bcdaa47ae/frame
+2025-04-22 09:40:16,204 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001706780BB10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/dc3ba90544d2c87f581bd13bcdaa47ae/frame
+2025-04-22 09:40:18,873 - INFO - Excel file saved before closing application
+2025-04-22 09:41:32,796 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:41:32,807 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:41:34,690 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:41:34,692 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:41:34,693 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:41:34,719 - INFO - Total rows to process: 7
+2025-04-22 09:41:35,075 - INFO - ====== WebDriver manager ======
+2025-04-22 09:41:35,886 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:41:36,099 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:41:36,338 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:41:37,579 - INFO - WebDriver initialized successfully
+2025-04-22 09:41:38,948 - INFO - Retrieved 18 form headers
+2025-04-22 09:41:38,948 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:41:38,948 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:41:38,949 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:41:38,950 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:41:38,950 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:41:38,999 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:41:39,000 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:41:39,000 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:41:39,913 - INFO - Google Form loaded successfully
+2025-04-22 09:41:40,059 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:41:40,060 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:41:40,060 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:41:40,060 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:41:40,060 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:41:40,061 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:41:44,123 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:41:52,918 - INFO - Downloaded image to E:\trc_auto\images\tmpyqym4yda.png
+2025-04-22 09:41:59,893 - WARNING - File name mismatch: expected 'tmpyqym4yda.png', got 'tmpyqym4yda.png'
+2025-04-22 09:42:03,794 - INFO - Downloaded image to E:\trc_auto\images\tmp1xq5dp46.png
+2025-04-22 09:42:37,574 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:42:37,574 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:42:37,575 - INFO - Deleted temp file: E:\trc_auto\images\tmpyqym4yda.png
+2025-04-22 09:42:37,575 - INFO - Deleted temp file: E:\trc_auto\images\tmp1xq5dp46.png
+2025-04-22 09:42:37,603 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:42:39,946 - INFO - WebDriver closed
+2025-04-22 09:42:44,388 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:42:44,402 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:42:45,633 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:42:45,635 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:42:45,636 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:42:45,662 - INFO - Total rows to process: 7
+2025-04-22 09:42:46,049 - INFO - ====== WebDriver manager ======
+2025-04-22 09:42:46,892 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:42:47,237 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:42:47,453 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:42:51,293 - INFO - WebDriver initialized successfully
+2025-04-22 09:42:52,969 - INFO - Retrieved 18 form headers
+2025-04-22 09:42:52,970 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:42:52,970 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:42:52,970 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:42:52,971 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:42:52,971 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:42:53,049 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:42:53,050 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:42:53,050 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:42:54,082 - INFO - Google Form loaded successfully
+2025-04-22 09:42:54,234 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:42:54,235 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:42:54,235 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:42:54,235 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:42:54,235 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:42:54,236 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:42:58,352 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:43:06,958 - INFO - Downloaded image to E:\trc_auto\images\tmpcpcu1ehl.png
+2025-04-22 09:43:15,502 - WARNING - File name mismatch: expected 'tmpcpcu1ehl.png', got 'tmpcpcu1ehl.png'
+2025-04-22 09:43:21,538 - INFO - Downloaded image to E:\trc_auto\images\tmppfs2ug6l.png
+2025-04-22 09:43:47,154 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:43:47,155 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:43:47,155 - INFO - Deleted temp file: E:\trc_auto\images\tmpcpcu1ehl.png
+2025-04-22 09:43:47,156 - INFO - Deleted temp file: E:\trc_auto\images\tmppfs2ug6l.png
+2025-04-22 09:43:47,190 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:43:49,259 - INFO - WebDriver closed
+2025-04-22 09:44:44,222 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:44:44,231 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:44:45,242 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:44:45,244 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:44:45,245 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:44:45,271 - INFO - Total rows to process: 7
+2025-04-22 09:44:45,596 - INFO - ====== WebDriver manager ======
+2025-04-22 09:44:46,363 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:44:46,564 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:44:46,846 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:44:48,141 - INFO - WebDriver initialized successfully
+2025-04-22 09:44:50,089 - INFO - Retrieved 18 form headers
+2025-04-22 09:44:50,090 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:44:50,091 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:44:50,091 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:44:50,091 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:44:50,092 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:44:50,165 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:44:50,166 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:44:50,167 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:44:55,161 - INFO - Google Form loaded successfully
+2025-04-22 09:44:55,307 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:44:55,308 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:44:55,309 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:44:55,309 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:44:55,309 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:44:55,309 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:44:59,302 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:45:08,697 - INFO - Downloaded image to E:\trc_auto\images\tmpz2nikv7d.png
+2025-04-22 09:45:42,030 - INFO - Downloaded image to E:\trc_auto\images\tmp7yuxujej.png
+2025-04-22 09:45:44,393 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:45:44,393 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:45:44,395 - INFO - Deleted temp file: E:\trc_auto\images\tmpz2nikv7d.png
+2025-04-22 09:45:44,397 - INFO - Deleted temp file: E:\trc_auto\images\tmp7yuxujej.png
+2025-04-22 09:45:44,438 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:45:46,503 - INFO - WebDriver closed
+2025-04-22 09:46:20,018 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:46:20,040 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:46:21,003 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:46:21,004 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:46:21,005 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:46:21,045 - INFO - Total rows to process: 7
+2025-04-22 09:46:21,338 - INFO - Terminated Chrome process PID: 12568
+2025-04-22 09:46:21,360 - INFO - Terminated Chrome process PID: 14664
+2025-04-22 09:46:21,398 - INFO - Terminated Chrome process PID: 23232
+2025-04-22 09:46:21,405 - INFO - Terminated Chrome process PID: 24948
+2025-04-22 09:46:21,406 - INFO - Terminated Chrome process PID: 25052
+2025-04-22 09:46:21,407 - INFO - Terminated Chrome process PID: 25804
+2025-04-22 09:46:21,432 - INFO - Terminated Chrome process PID: 29172
+2025-04-22 09:46:21,444 - INFO - ====== WebDriver manager ======
+2025-04-22 09:46:22,328 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:46:22,588 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:46:22,811 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:46:24,636 - INFO - WebDriver initialized successfully
+2025-04-22 09:46:26,218 - INFO - Retrieved 18 form headers
+2025-04-22 09:46:26,222 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:46:26,222 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:46:26,222 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:46:26,223 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:46:26,223 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:46:26,334 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:46:26,334 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:46:26,334 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:46:27,529 - INFO - Google Form loaded successfully
+2025-04-22 09:46:27,679 - INFO - Email checkbox already checked, skipping
+2025-04-22 09:46:27,680 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:46:27,680 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:46:27,680 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:46:27,681 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:46:27,681 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:46:32,311 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:46:41,897 - INFO - Downloaded image to E:\trc_auto\images\tmpl19n6e_q.png
+2025-04-22 09:46:59,150 - WARNING - File name mismatch: expected 'tmpl19n6e_q.png', got 'tmpl19n6e_q.png'
+2025-04-22 09:47:04,084 - INFO - Downloaded image to E:\trc_auto\images\tmpft_8w6bf.png
+2025-04-22 09:47:12,444 - WARNING - File name mismatch: expected 'tmpft_8w6bf.png', got 'tmpft_8w6bf.png'
+2025-04-22 09:47:13,250 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:47:13,251 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:47:13,252 - INFO - Deleted temp file: E:\trc_auto\images\tmpl19n6e_q.png
+2025-04-22 09:47:13,252 - INFO - Deleted temp file: E:\trc_auto\images\tmpft_8w6bf.png
+2025-04-22 09:47:13,356 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:47:15,580 - INFO - WebDriver closed
+2025-04-22 09:50:10,078 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 09:50:10,089 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:50:11,331 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 09:50:11,333 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 09:50:11,334 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 09:50:11,362 - INFO - Total rows to process: 7
+2025-04-22 09:50:11,699 - INFO - ====== WebDriver manager ======
+2025-04-22 09:50:12,476 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:50:14,035 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 09:50:14,461 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 09:50:15,681 - INFO - WebDriver initialized successfully
+2025-04-22 09:50:17,878 - INFO - Retrieved 18 form headers
+2025-04-22 09:50:17,879 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 09:50:17,879 - WARNING - No match for Excel header: 'Company'
+2025-04-22 09:50:17,880 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 09:50:17,880 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 09:50:17,881 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 09:50:17,955 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 09:50:17,955 - WARNING - No match for Excel header: 'Note'
+2025-04-22 09:50:17,955 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 09:50:19,184 - INFO - Google Form loaded successfully
+2025-04-22 09:50:19,384 - INFO - Checked 'Email' collection checkbox
+2025-04-22 09:50:19,384 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 09:50:19,385 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 09:50:19,385 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 09:50:19,385 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 09:50:19,386 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 09:50:23,985 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 09:50:35,200 - INFO - Downloaded image to E:\trc_auto\images\tmp0gfuhg83.png
+2025-04-22 09:50:47,876 - WARNING - File name mismatch: expected 'tmp0gfuhg83.png', got 'tmp0gfuhg83.png'
+2025-04-22 09:50:52,615 - INFO - Downloaded image to E:\trc_auto\images\tmpepka6rur.png
+2025-04-22 09:51:11,914 - WARNING - File name mismatch: expected 'tmpepka6rur.png', got 'tmpepka6rur.png'
+2025-04-22 09:51:12,719 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 09:51:12,720 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 09:51:12,721 - INFO - Deleted temp file: E:\trc_auto\images\tmp0gfuhg83.png
+2025-04-22 09:51:12,721 - INFO - Deleted temp file: E:\trc_auto\images\tmpepka6rur.png
+2025-04-22 09:51:12,746 - INFO - Excel file saved with error note for row 2
+2025-04-22 09:51:14,959 - INFO - WebDriver closed
+2025-04-22 10:07:01,582 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:07:01,592 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:07:15,604 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 10:07:15,606 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 10:07:15,608 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:07:15,631 - INFO - Total rows to process: 7
+2025-04-22 10:07:15,953 - INFO - ====== WebDriver manager ======
+2025-04-22 10:07:16,699 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:07:17,452 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:07:17,712 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 10:07:18,877 - INFO - WebDriver initialized successfully
+2025-04-22 10:07:20,638 - INFO - Retrieved 18 form headers
+2025-04-22 10:07:20,639 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 10:07:20,639 - WARNING - No match for Excel header: 'Company'
+2025-04-22 10:07:20,639 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 10:07:20,640 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 10:07:20,640 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 10:07:20,685 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 10:07:20,685 - WARNING - No match for Excel header: 'Note'
+2025-04-22 10:07:20,686 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 10:07:21,652 - INFO - Google Form loaded successfully
+2025-04-22 10:07:21,871 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:07:21,871 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:07:21,872 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:07:21,872 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:07:21,872 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:07:21,872 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:07:26,320 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:07:42,943 - INFO - Downloaded image to E:\trc_auto\images\tmpj679jf75.png
+2025-04-22 10:09:28,844 - INFO - Downloaded image to E:\trc_auto\images\tmpxj4zizlh.png
+2025-04-22 10:09:37,657 - INFO - Excel file saved before closing application
+2025-04-22 10:13:35,734 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:13:35,747 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:13:38,557 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 10:13:38,558 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 10:13:38,559 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:13:38,588 - INFO - Total rows to process: 7
+2025-04-22 10:13:38,891 - INFO - Terminated Chrome process PID: 13096
+2025-04-22 10:13:38,896 - INFO - Terminated Chrome process PID: 13760
+2025-04-22 10:13:38,934 - INFO - Terminated Chrome process PID: 19736
+2025-04-22 10:13:38,964 - INFO - Terminated Chrome process PID: 21240
+2025-04-22 10:13:38,997 - INFO - Terminated Chrome process PID: 27072
+2025-04-22 10:13:38,998 - INFO - Terminated Chrome process PID: 27128
+2025-04-22 10:13:39,003 - INFO - Terminated Chrome process PID: 29224
+2025-04-22 10:13:39,016 - INFO - ====== WebDriver manager ======
+2025-04-22 10:13:39,795 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:13:40,081 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:13:40,316 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 10:13:41,875 - INFO - WebDriver initialized successfully
+2025-04-22 10:13:44,037 - INFO - Retrieved 18 form headers
+2025-04-22 10:13:44,038 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 10:13:44,038 - WARNING - No match for Excel header: 'Company'
+2025-04-22 10:13:44,038 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 10:13:44,039 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 10:13:44,039 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 10:13:44,089 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 10:13:44,089 - WARNING - No match for Excel header: 'Note'
+2025-04-22 10:13:44,089 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 10:13:44,937 - INFO - Google Form loaded successfully
+2025-04-22 10:13:45,148 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:13:45,149 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:13:45,149 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:13:45,149 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:13:45,150 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:13:45,151 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:13:49,171 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:13:58,425 - INFO - Downloaded image to E:\trc_auto\images\tmpha2ybzzr.png
+2025-04-22 10:14:07,880 - INFO - Excel file saved before closing application
+2025-04-22 10:15:38,369 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:15:38,379 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:15:40,333 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 10:15:40,334 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 10:15:40,335 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:15:40,362 - INFO - Total rows to process: 7
+2025-04-22 10:15:40,692 - INFO - ====== WebDriver manager ======
+2025-04-22 10:15:41,438 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:15:41,689 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:15:41,914 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 10:15:43,112 - INFO - WebDriver initialized successfully
+2025-04-22 10:15:44,672 - INFO - Retrieved 18 form headers
+2025-04-22 10:15:44,673 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 10:15:44,673 - WARNING - No match for Excel header: 'Company'
+2025-04-22 10:15:44,673 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 10:15:44,673 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 10:15:44,674 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 10:15:44,720 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 10:15:44,721 - WARNING - No match for Excel header: 'Note'
+2025-04-22 10:15:44,721 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 10:15:45,568 - INFO - Google Form loaded successfully
+2025-04-22 10:15:45,712 - INFO - Email checkbox already checked, skipping
+2025-04-22 10:15:45,712 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:15:45,712 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:15:45,712 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:15:45,713 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:15:45,713 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:15:49,770 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:15:58,700 - INFO - Downloaded image to E:\trc_auto\images\tmpawq6_gbi.png
+2025-04-22 10:16:08,354 - WARNING - File name mismatch: expected 'tmpawq6_gbi.png', got 'tmpawq6_gbi.png'
+2025-04-22 10:16:12,889 - INFO - Downloaded image to E:\trc_auto\images\tmp8h49xhbu.png
+2025-04-22 10:16:30,527 - WARNING - File name mismatch: expected 'tmp8h49xhbu.png', got 'tmp8h49xhbu.png'
+2025-04-22 10:16:31,333 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:16:31,334 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:16:31,335 - INFO - Deleted temp file: E:\trc_auto\images\tmpawq6_gbi.png
+2025-04-22 10:16:31,335 - INFO - Deleted temp file: E:\trc_auto\images\tmp8h49xhbu.png
+2025-04-22 10:16:31,359 - INFO - Excel file saved with error note for row 2
+2025-04-22 10:16:33,540 - INFO - WebDriver closed
+2025-04-22 10:19:34,574 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:19:34,584 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:19:35,981 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 10:19:35,982 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 10:19:35,983 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:19:36,011 - INFO - Total rows to process: 7
+2025-04-22 10:19:36,394 - INFO - ====== WebDriver manager ======
+2025-04-22 10:19:37,167 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:19:37,453 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:19:37,715 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 10:19:38,935 - INFO - WebDriver initialized successfully
+2025-04-22 10:19:40,592 - INFO - Retrieved 18 form headers
+2025-04-22 10:19:40,592 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 10:19:40,593 - WARNING - No match for Excel header: 'Company'
+2025-04-22 10:19:40,593 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 10:19:40,593 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 10:19:40,594 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 10:19:40,641 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 10:19:40,642 - WARNING - No match for Excel header: 'Note'
+2025-04-22 10:19:40,642 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 10:19:42,608 - INFO - Google Form loaded successfully
+2025-04-22 10:19:42,754 - INFO - Email checkbox already checked, skipping
+2025-04-22 10:19:42,755 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:19:42,755 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:19:42,755 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:19:42,756 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:19:42,756 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:19:46,408 - INFO - Downloaded image to E:\trc_auto\images\tmpa9yy4k87.png
+2025-04-22 10:19:46,409 - INFO - Download took 3.60 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 10:19:56,259 - INFO - File name matched: expected 'tmpa9yy4k87.png', got 'tmpa9yy4k87.png'
+2025-04-22 10:20:01,494 - INFO - Downloaded image to E:\trc_auto\images\tmpzwc9zml5.png
+2025-04-22 10:20:01,495 - INFO - Download took 4.43 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 10:20:14,575 - INFO - File name matched: expected 'tmpzwc9zml5.png', got 'tmpzwc9zml5.png'
+2025-04-22 10:20:15,381 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:20:15,382 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:20:29,295 - INFO - Form submitted successfully
+2025-04-22 10:20:29,296 - INFO - Deleted temp file: E:\trc_auto\images\tmpa9yy4k87.png
+2025-04-22 10:20:29,296 - INFO - Deleted temp file: E:\trc_auto\images\tmpzwc9zml5.png
+2025-04-22 10:20:29,297 - INFO - Row 2 processed successfully
+2025-04-22 10:20:29,318 - INFO - Excel file saved after processing row 2
+2025-04-22 10:20:30,285 - INFO - Google Form loaded successfully
+2025-04-22 10:20:30,484 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:20:30,484 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:20:30,484 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:20:30,484 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:20:30,484 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:20:30,485 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:20:36,622 - INFO - Downloaded image to E:\trc_auto\images\tmp85hj9gzv.png
+2025-04-22 10:20:36,623 - INFO - Download took 6.10 seconds for URL: https://drive.google.com/open?id=1g-QogrO_s_nTGaKJPVKlGQykae04__Gb
+2025-04-22 10:20:48,497 - INFO - File name matched: expected 'tmp85hj9gzv.png', got 'tmp85hj9gzv.png'
+2025-04-22 10:20:52,803 - INFO - Downloaded image to E:\trc_auto\images\tmpollfl891.png
+2025-04-22 10:20:52,804 - INFO - Download took 3.50 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 10:20:59,223 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000024D7AC52BA0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/c6d0f46648149595d77c93fd8a4d8c23/element
+2025-04-22 10:21:03,325 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000024D7AC4F890>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/c6d0f46648149595d77c93fd8a4d8c23/element
+2025-04-22 10:21:17,380 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:21:17,395 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:21:26,626 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:21:26,628 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:21:33,229 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 10:21:33,230 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 10:21:33,231 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:21:33,257 - INFO - Total rows to process: 7
+2025-04-22 10:21:33,626 - INFO - ====== WebDriver manager ======
+2025-04-22 10:21:34,527 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:21:35,086 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:21:35,458 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 10:21:36,663 - INFO - WebDriver initialized successfully
+2025-04-22 10:21:38,185 - INFO - Retrieved 18 form headers
+2025-04-22 10:21:38,185 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 10:21:38,186 - WARNING - No match for Excel header: 'Company'
+2025-04-22 10:21:38,186 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 10:21:38,186 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 10:21:38,187 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 10:21:38,249 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 10:21:38,250 - WARNING - No match for Excel header: 'Note'
+2025-04-22 10:21:38,250 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 10:21:39,165 - INFO - Google Form loaded successfully
+2025-04-22 10:21:39,312 - INFO - Email checkbox already checked, skipping
+2025-04-22 10:21:39,313 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:21:39,313 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:21:39,313 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:21:39,313 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:21:39,313 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:21:50,218 - INFO - Downloaded image to E:\trc_auto\images\tmpbwbsv5y5.png
+2025-04-22 10:21:50,218 - INFO - Download took 10.85 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 10:22:06,315 - INFO - Downloaded image to E:\trc_auto\images\tmp2y0i03it.png
+2025-04-22 10:22:06,315 - INFO - Download took 3.45 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 10:22:08,665 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:22:08,665 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:22:08,666 - INFO - Deleted temp file: E:\trc_auto\images\tmpbwbsv5y5.png
+2025-04-22 10:22:08,667 - INFO - Deleted temp file: E:\trc_auto\images\tmp2y0i03it.png
+2025-04-22 10:22:08,694 - INFO - Excel file saved with error note for row 2
+2025-04-22 10:22:10,752 - INFO - WebDriver closed
+2025-04-22 10:22:56,685 - INFO - Loaded config from C:\Users\user\AppData\Roaming\TRC_AUTO\config.json: {'GOOGLE_FORM_URL': 'https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header', 'EXCEL_FILE': 'C:\\Users\\user\\Desktop\\template.xlsx', 'USER_DATA_DIR': 'C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data', 'PROFILE_DIR': 'Profile 5', 'SIMILARITY_THRESHOLD': 80}
+2025-04-22 10:22:56,734 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:22:57,837 - INFO - Inputs - Google Form URL: https://docs.google.com/forms/d/e/1FAIpQLSeqWvnn4KIru5BYd6aNVTCvaej6KvPWdbK0tN3piOgU8u8ftg/viewform?usp=header, Excel File: C:\Users\user\Desktop\template.xlsx, User Data Dir: C:\Users\user\AppData\Local\Google\Chrome\User Data, Profile Dir: Profile 5
+2025-04-22 10:22:57,838 - INFO - Configuration saved to C:\Users\user\AppData\Roaming\TRC_AUTO\config.json
+2025-04-22 10:22:57,839 - INFO - Retrieved account info - Name: Your Chrome, Email: dcan38802@gmail.com
+2025-04-22 10:22:57,869 - INFO - Total rows to process: 7
+2025-04-22 10:22:58,245 - INFO - ====== WebDriver manager ======
+2025-04-22 10:22:59,151 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:22:59,403 - INFO - Get LATEST chromedriver version for google-chrome
+2025-04-22 10:22:59,654 - INFO - Driver [C:\Users\user\.wdm\drivers\chromedriver\win64\135.0.7049.95\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-22 10:23:01,747 - INFO - WebDriver initialized successfully
+2025-04-22 10:23:03,502 - INFO - Retrieved 18 form headers
+2025-04-22 10:23:03,502 - WARNING - No match for Excel header: 'Timestamp'
+2025-04-22 10:23:03,503 - WARNING - No match for Excel header: 'Company'
+2025-04-22 10:23:03,503 - WARNING - No match for Excel header: 'Staff name'
+2025-04-22 10:23:03,504 - WARNING - No match for Excel header: 'Staff ID'
+2025-04-22 10:23:03,504 - WARNING - No match for Excel header: 'Staff phone number'
+2025-04-22 10:23:03,570 - WARNING - No match for Excel header: 'Account number'
+2025-04-22 10:23:03,570 - WARNING - No match for Excel header: 'Note'
+2025-04-22 10:23:03,570 - WARNING - Unmatched headers: ['Timestamp', 'Company', 'Staff name', 'Staff ID', 'Staff phone number', 'Account number', 'Note']
+2025-04-22 10:23:04,500 - INFO - Google Form loaded successfully
+2025-04-22 10:23:04,651 - INFO - Email checkbox already checked, skipping
+2025-04-22 10:23:04,651 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:23:04,652 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:23:04,652 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:23:04,652 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:23:04,652 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:23:08,898 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:23:18,745 - INFO - Downloaded image to E:\trc_auto\images\tmpvijrrzuy.png
+2025-04-22 10:23:18,745 - INFO - Download took 4.41 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 10:23:30,856 - INFO - File name matched: expected 'tmpvijrrzuy.png', got 'tmpvijrrzuy.png'
+2025-04-22 10:23:35,111 - INFO - Downloaded image to E:\trc_auto\images\tmpem9l6o1v.png
+2025-04-22 10:23:35,112 - INFO - Download took 3.44 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 10:23:44,468 - INFO - File name matched: expected 'tmpem9l6o1v.png', got 'tmpem9l6o1v.png'
+2025-04-22 10:23:45,274 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:23:45,274 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:24:02,243 - INFO - Form submitted successfully
+2025-04-22 10:24:02,244 - INFO - Deleted temp file: E:\trc_auto\images\tmpvijrrzuy.png
+2025-04-22 10:24:02,244 - INFO - Deleted temp file: E:\trc_auto\images\tmpem9l6o1v.png
+2025-04-22 10:24:02,245 - INFO - Row 2 processed successfully
+2025-04-22 10:24:02,300 - INFO - Excel file saved after processing row 2
+2025-04-22 10:24:03,059 - INFO - Google Form loaded successfully
+2025-04-22 10:24:03,271 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:24:03,277 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:24:03,277 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:24:03,277 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:24:03,278 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:24:03,278 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:24:07,299 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:24:17,147 - INFO - Downloaded image to E:\trc_auto\images\tmpa8f8sarb.png
+2025-04-22 10:24:17,148 - INFO - Download took 4.43 seconds for URL: https://drive.google.com/open?id=1g-QogrO_s_nTGaKJPVKlGQykae04__Gb
+2025-04-22 10:24:34,880 - INFO - File name matched: expected 'tmpa8f8sarb.png', got 'tmpa8f8sarb.png'
+2025-04-22 10:24:58,455 - INFO - Downloaded image to E:\trc_auto\images\tmp0c_hp5_a.png
+2025-04-22 10:24:58,455 - INFO - Download took 22.77 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 10:25:31,472 - INFO - File name matched: expected 'tmp0c_hp5_a.png', got 'tmp0c_hp5_a.png'
+2025-04-22 10:25:32,277 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:25:32,277 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:25:57,076 - INFO - Form submitted successfully
+2025-04-22 10:25:57,077 - INFO - Deleted temp file: E:\trc_auto\images\tmpa8f8sarb.png
+2025-04-22 10:25:57,077 - INFO - Deleted temp file: E:\trc_auto\images\tmp0c_hp5_a.png
+2025-04-22 10:25:57,077 - INFO - Row 3 processed successfully
+2025-04-22 10:25:57,095 - INFO - Excel file saved after processing row 3
+2025-04-22 10:25:57,989 - INFO - Google Form loaded successfully
+2025-04-22 10:25:58,199 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:25:58,215 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:25:58,221 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:25:58,222 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:25:58,223 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:25:58,224 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:26:02,199 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:26:11,746 - INFO - Downloaded image to E:\trc_auto\images\tmpnxhcm3yr.png
+2025-04-22 10:26:11,747 - INFO - Download took 4.30 seconds for URL: https://drive.google.com/open?id=1NwTYN4oLYXapJsGOAxefzPTvQqnd6OjW
+2025-04-22 10:26:20,741 - INFO - File name matched: expected 'tmpnxhcm3yr.png', got 'tmpnxhcm3yr.png'
+2025-04-22 10:26:26,101 - INFO - Downloaded image to E:\trc_auto\images\tmp3qa7o00s.png
+2025-04-22 10:26:26,102 - INFO - Download took 4.55 seconds for URL: https://drive.google.com/open?id=1P0--G8BV_M0ggKDPpGXPaG61N3VhlqpS
+2025-04-22 10:26:34,394 - INFO - File name matched: expected 'tmp3qa7o00s.png', got 'tmp3qa7o00s.png'
+2025-04-22 10:26:35,200 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:26:35,201 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:26:40,505 - INFO - Form submitted successfully
+2025-04-22 10:26:40,506 - INFO - Deleted temp file: E:\trc_auto\images\tmpnxhcm3yr.png
+2025-04-22 10:26:40,506 - INFO - Deleted temp file: E:\trc_auto\images\tmp3qa7o00s.png
+2025-04-22 10:26:40,507 - INFO - Row 4 processed successfully
+2025-04-22 10:26:40,525 - INFO - Excel file saved after processing row 4
+2025-04-22 10:26:41,289 - INFO - Google Form loaded successfully
+2025-04-22 10:26:41,481 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:26:41,487 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:26:41,487 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:26:41,487 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:26:41,487 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:26:41,487 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:26:45,448 - INFO - Filled 'Number of cable * Core' with value: 8fo
+2025-04-22 10:26:55,105 - INFO - Downloaded image to E:\trc_auto\images\tmpf_c16exz.png
+2025-04-22 10:26:55,106 - INFO - Download took 3.89 seconds for URL: https://drive.google.com/open?id=11im8fT7b232386TzfOeiFX48_R-hF97Z
+2025-04-22 10:26:59,466 - INFO - File name matched: expected 'tmpf_c16exz.png', got 'tmpf_c16exz.png'
+2025-04-22 10:27:04,156 - INFO - Downloaded image to E:\trc_auto\images\tmp423d0xiq.png
+2025-04-22 10:27:04,157 - INFO - Download took 3.88 seconds for URL: https://drive.google.com/open?id=16jpxUStaOuj4-qSrMoTC4vxQM5X4JA3O
+2025-04-22 10:27:10,728 - INFO - File name matched: expected 'tmp423d0xiq.png', got 'tmp423d0xiq.png'
+2025-04-22 10:27:11,533 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:27:11,534 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:27:17,159 - INFO - Form submitted successfully
+2025-04-22 10:27:17,160 - INFO - Deleted temp file: E:\trc_auto\images\tmpf_c16exz.png
+2025-04-22 10:27:17,160 - INFO - Deleted temp file: E:\trc_auto\images\tmp423d0xiq.png
+2025-04-22 10:27:17,160 - INFO - Row 5 processed successfully
+2025-04-22 10:27:17,180 - INFO - Excel file saved after processing row 5
+2025-04-22 10:27:17,925 - INFO - Google Form loaded successfully
+2025-04-22 10:27:18,111 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:27:18,111 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:27:18,112 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:27:18,112 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:27:18,112 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:27:18,112 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:27:22,139 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:27:33,615 - INFO - Downloaded image to E:\trc_auto\images\tmp2pvtxzon.png
+2025-04-22 10:27:33,616 - INFO - Download took 6.04 seconds for URL: https://drive.google.com/open?id=1vbUdYVSSfn8i4dD_4vUOyAL0L8NNcki5
+2025-04-22 10:27:42,044 - INFO - File name matched: expected 'tmp2pvtxzon.png', got 'tmp2pvtxzon.png'
+2025-04-22 10:27:47,127 - INFO - Downloaded image to E:\trc_auto\images\tmpkg_jc8z0.png
+2025-04-22 10:27:47,128 - INFO - Download took 4.27 seconds for URL: https://drive.google.com/open?id=1-2sTEbXmRHHylT_4JkGajNtB0f3yJn8s
+2025-04-22 10:27:55,021 - INFO - File name matched: expected 'tmpkg_jc8z0.png', got 'tmpkg_jc8z0.png'
+2025-04-22 10:27:55,829 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:27:55,829 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:28:00,918 - INFO - Form submitted successfully
+2025-04-22 10:28:00,919 - INFO - Deleted temp file: E:\trc_auto\images\tmp2pvtxzon.png
+2025-04-22 10:28:00,919 - INFO - Deleted temp file: E:\trc_auto\images\tmpkg_jc8z0.png
+2025-04-22 10:28:00,919 - INFO - Row 6 processed successfully
+2025-04-22 10:28:00,937 - INFO - Excel file saved after processing row 6
+2025-04-22 10:28:01,674 - INFO - Google Form loaded successfully
+2025-04-22 10:28:01,861 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:28:01,861 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:28:01,861 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:28:01,861 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:28:01,861 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:28:01,862 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:28:05,849 - INFO - Filled 'Number of cable * Core' with value: 8 core
+2025-04-22 10:28:14,771 - INFO - Downloaded image to E:\trc_auto\images\tmph_dksp82.png
+2025-04-22 10:28:14,771 - INFO - Download took 3.44 seconds for URL: https://drive.google.com/open?id=18PZajfaBonHcOyXJNVmOCUWoPVEcI7_A
+2025-04-22 10:28:19,310 - INFO - File name matched: expected 'tmph_dksp82.png', got 'tmph_dksp82.png'
+2025-04-22 10:28:26,773 - INFO - Downloaded image to E:\trc_auto\images\tmpxir377rv.png
+2025-04-22 10:28:26,774 - INFO - Download took 6.65 seconds for URL: https://drive.google.com/open?id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP7
+2025-04-22 10:28:45,289 - INFO - File name matched: expected 'tmpxir377rv.png', got 'tmpxir377rv.png'
+2025-04-22 10:28:46,094 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:28:46,095 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:28:57,341 - INFO - Form submitted successfully
+2025-04-22 10:28:57,342 - INFO - Deleted temp file: E:\trc_auto\images\tmph_dksp82.png
+2025-04-22 10:28:57,343 - INFO - Deleted temp file: E:\trc_auto\images\tmpxir377rv.png
+2025-04-22 10:28:57,343 - INFO - Row 7 processed successfully
+2025-04-22 10:28:57,362 - INFO - Excel file saved after processing row 7
+2025-04-22 10:28:58,098 - INFO - Google Form loaded successfully
+2025-04-22 10:28:58,295 - INFO - Checked 'Email' collection checkbox
+2025-04-22 10:28:58,295 - INFO - Skipping empty or unmapped field: Timestamp
+2025-04-22 10:28:58,295 - INFO - Skipping empty or unmapped field: Company
+2025-04-22 10:28:58,296 - INFO - Skipping empty or unmapped field: Staff name
+2025-04-22 10:28:58,296 - INFO - Skipping empty or unmapped field: Staff ID
+2025-04-22 10:28:58,296 - INFO - Skipping empty or unmapped field: Staff phone number
+2025-04-22 10:29:02,294 - INFO - Filled 'Number of cable * Core' with value: 1
+2025-04-22 10:29:11,440 - INFO - Downloaded image to E:\trc_auto\images\tmpunnihe9k.png
+2025-04-22 10:29:11,441 - INFO - Download took 3.70 seconds for URL: https://drive.google.com/open?id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP7
+2025-04-22 10:29:18,971 - INFO - File name matched: expected 'tmpunnihe9k.png', got 'tmpunnihe9k.png'
+2025-04-22 10:29:23,387 - INFO - Downloaded image to E:\trc_auto\images\tmp2mf__0zo.png
+2025-04-22 10:29:23,388 - INFO - Download took 3.61 seconds for URL: https://drive.google.com/open?id=1RmADJ_Zhg4Lh197O3pVPQIuI1IueAAP7
+2025-04-22 10:29:35,985 - INFO - File name matched: expected 'tmp2mf__0zo.png', got 'tmp2mf__0zo.png'
+2025-04-22 10:29:36,791 - INFO - Skipping empty or unmapped field: Account number
+2025-04-22 10:29:36,792 - INFO - Skipping empty or unmapped field: Note
+2025-04-22 10:29:43,484 - INFO - Form submitted successfully
+2025-04-22 10:29:43,485 - INFO - Deleted temp file: E:\trc_auto\images\tmpunnihe9k.png
+2025-04-22 10:29:43,486 - INFO - Deleted temp file: E:\trc_auto\images\tmp2mf__0zo.png
+2025-04-22 10:29:43,486 - INFO - Row 8 processed successfully
+2025-04-22 10:29:43,503 - INFO - Excel file saved after processing row 8
+2025-04-22 10:29:43,521 - INFO - Final Excel file save completed
+2025-04-22 10:29:45,764 - INFO - WebDriver closed

@@ -274,24 +274,29 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                 logging.warning(f"No field type defined for '{form_header}'")
                 fields_filled = False
                 continue
-
             # Handle file upload fields
             if field_type == "file":
                 if isinstance(value, str) and "drive.google.com" in value:
+                    # Log download start time
+                    start_time = time.time()
                     temp_file_path = download_google_drive_image(value)
-                    
+                    download_duration = time.time() - start_time
+                    logging.info(f"Download took {download_duration:.2f} seconds for URL: {value}")
+
                     if temp_file_path:
                         temp_files.append(temp_file_path)
                         uploaded = False
                         file_name = os.path.basename(temp_file_path)
                         logging.debug(f"Attempting to upload file: {file_name} for field: {form_header}")
 
-                        @retry(stop_max_attempt_number=3, wait_fixed=1000)  # Reduced from 2000ms
+                        @retry(stop_max_attempt_number=3, wait_fixed=1000)
                         def attempt_upload():
                             nonlocal uploaded
                             try:
+                                import unicodedata
+                                form_header_normalized = unicodedata.normalize('NFKC', form_header).strip()
                                 upload_btn_xpath = (
-                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']//"
+                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_normalized}')]/ancestor::div[@role='listitem']//"
                                     f"div[@role='button' and contains(@aria-label, 'Add File')]"
                                 )
                                 upload_button = WebDriverWait(driver, 30).until(
@@ -315,26 +320,33 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                                 )
                                 file_input.send_keys(temp_file_path)
                                 driver.switch_to.default_content()
+                                time.sleep(1)  # Wait for form to update
 
+                                # Simplified XPath for uploaded file verification
                                 file_list_xpath = (
-                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header}')]/ancestor::div[@role='listitem']"
-                                    f"//div[@role='listitem']//div[contains(@class, 'ZXoVYe ybj8pf') and contains(text(), '{file_name}')]"
+                                    f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_normalized}')]/ancestor::div[@role='listitem']"
+                                    f"//div[@role='listitem']//div[contains(text(), '{file_name}')]"
                                 )
-                                file_element = WebDriverWait(driver, 30).until(
+                                file_element = WebDriverWait(driver, 45).until(
                                     EC.presence_of_element_located((By.XPATH, file_list_xpath))
                                 )
                                 displayed_file_name = file_element.text.strip()
 
-                                if file_name.lower() in displayed_file_name.lower():
+                                if file_name.lower() == displayed_file_name.lower():
+                                    logging.info(f"File name matched: expected '{file_name}', got '{displayed_file_name}'")
+                                    uploaded = True
+                                else:
                                     logging.warning(f"File name mismatch: expected '{file_name}', got '{displayed_file_name}'")
                                     uploaded = False
-                                else:
-                                    uploaded = True
-                                time.sleep(0.5)  # Reduced from 1s
+                                time.sleep(0.5)
                                 return uploaded
 
                             except TimeoutException as te:
                                 logging.error(f"Timeout during file upload attempt for '{form_header}': {te}")
+                                with open("page_source.html", "w", encoding="utf-8") as f:
+                                    f.write(driver.page_source)
+                                driver.save_screenshot("timeout_screenshot.png")
+                                logging.info("Saved page source and screenshot for debugging")
                                 driver.switch_to.default_content()
                                 raise
                             except Exception as e:
@@ -358,7 +370,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                 else:
                     logging.warning(f"Invalid Google Drive URL for image field '{form_header}': {value}")
                     fields_filled = False
-                time.sleep(0.3)  # Reduced from 0.5s
+                time.sleep(0.3)
                 continue
             # Handle special case for "Number of cable * Core"
             form_header_cleaned = form_header.replace("\n", "").strip()
@@ -421,4 +433,3 @@ def fill_google_form(driver, row, headers, header_mapping, config):
                 logging.warning(f"Failed to delete temp file: {f} - {e}")
 
     return fields_filled  
-
