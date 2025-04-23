@@ -7,7 +7,6 @@ import os
 import openpyxl
 import sys
 import threading
-from logging_config import configure_logging
 from driver_utils import terminate_chrome_processes, initialize_driver
 from excel_utils import read_excel_data
 from form_utils import get_form_headers, fill_google_form
