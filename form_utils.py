@@ -218,6 +218,7 @@ def handle_text_field(driver, form_header, value, form_header_cleaned):
         scroll_into_view(driver, element)
         element.clear()
         element.send_keys(str(value))
+        print(f"Type of value: {type(value)}")
         if element.get_attribute("value") != str(value):
             driver.execute_script("arguments[0].value = arguments[1];", element, str(value))
             if element.get_attribute("value") != str(value):
@@ -244,11 +245,25 @@ def upload_file(driver, form_header, form_header_cleaned, temp_file_path):
     file_name = os.path.basename(temp_file_path)
     try:
         driver.switch_to.default_content()
+        # upload_btn_xpath = (
+        #     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
+        #     f"/ancestor::div[@role='listitem']//div[@role='button' and contains(@aria-label, 'Add File')]"
+        # )
+#         upload_btn_xpath = (
+#     f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
+#     f"/ancestor::div[@role='listitem']//div[@role='button' and "
+#     f"(@aria-label='Add File' or contains(@class, 'uArJ5e') or contains(@class, 'cd29Sd') or @jsname='mWZCyf')]"
+# )
         upload_btn_xpath = (
             f"//span[@class='M7eMe' and contains(normalize-space(.), '{form_header_cleaned[:50]}')]"
-            f"/ancestor::div[@role='listitem']//div[@role='button' and contains(@aria-label, 'Add File')]"
+            f"/ancestor::div[@role='listitem']//div[@role='button' and ("
+            f"@aria-label='Add File' or "
+            f"contains(@class, 'uArJ5e') or "
+            f"contains(@class, 'cd29Sd') or "
+            f".//span[contains(@class, 'NPEfkd') and contains(@class, 'RveJvd') and contains(@class, 'snByac') and contains(., 'Add File')]"
+            f")]"
         )
-        upload_button = WebDriverWait(driver, 10).until(
+        upload_button = WebDriverWait(driver, 5).until(
             EC.element_to_be_clickable((By.XPATH, upload_btn_xpath))
         )
         scroll_into_view(driver, upload_button)
@@ -256,12 +271,12 @@ def upload_file(driver, form_header, form_header_cleaned, temp_file_path):
         logger.info(f"Clicked 'Add File' button for '{form_header}'")
 
         picker_dialog_xpath = "//div[contains(@class, 'picker-dialog') and not(contains(@style, 'display: none'))]"
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.XPATH, picker_dialog_xpath))
         )
 
         iframe_xpath = f"{picker_dialog_xpath}//iframe[contains(@src, 'docs.google.com/picker')]"
-        iframes = WebDriverWait(driver, 15).until(
+        iframes = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, iframe_xpath))
         )
         if not iframes:
@@ -336,7 +351,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
 
         # Process each header
         for excel_header, value in zip(headers, row):
-            if excel_header not in header_mapping or not value:
+            if excel_header not in header_mapping:
                 logger.info(f"Skipping empty or unmapped field: {excel_header}")
                 continue
             form_header = header_mapping[excel_header]
