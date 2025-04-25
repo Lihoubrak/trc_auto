@@ -415,7 +415,6 @@ def main(config, gui):
 
             logging.info(f"Processing row {idx}: {row}")
             success = fill_google_form(driver, row, excel_headers, header_mapping, config)
-
             if success:
                 sheet.cell(row=idx, column=note_column).value = "Inserted"
                 logging.info(f"Row {idx} processed successfully")

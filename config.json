@@ -4,5 +4,6 @@
   "USER_DATA_DIR": "",
   "PROFILE_DIR": "",
   "CHROMEDRIVER_PATH": "chromedriver.exe",
-  "SIMILARITY_THRESHOLD": 80
+  "SIMILARITY_THRESHOLD": 80,
+  "DOWNLOAD_DIR" : "images"
 }

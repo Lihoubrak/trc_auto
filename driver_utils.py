@@ -19,7 +19,6 @@ def terminate_chrome_processes():
                 logging.info(f"Terminated Chrome process PID: {proc.pid}")
     except Exception as e:
         logging.error(f"Error terminating Chrome processes: {e}")
-        pass
 
 def initialize_driver(config):
     """Initialize and configure Chrome WebDriver."""
@@ -31,6 +30,8 @@ def initialize_driver(config):
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-infobars")  
+    options.add_argument("--disable-extensions")  
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
@@ -38,12 +39,11 @@ def initialize_driver(config):
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
     )
-
     try:
         service = (
             Service(ChromeDriverManager().install())
             if USE_WEBDRIVER_MANAGER
-            else Service({config['CHROMEDRIVER_PATH']})
+            else Service(config['CHROMEDRIVER_PATH'])
         )
         driver = webdriver.Chrome(service=service, options=options)
         driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {

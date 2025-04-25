@@ -362,7 +362,7 @@ def fill_google_form(driver, row, headers, header_mapping, config):
             if "Picture of Damage Cable" in form_header or "Picture of drawing in google map" in form_header:
                 if isinstance(value, str) and "drive.google.com" in value:
                     start_time = time.time()
-                    temp_file_path = download_google_drive_image(value, temp_dir=str(temp_dir))
+                    temp_file_path = download_google_drive_image(value,driver, temp_dir=str(temp_dir))
                     download_duration = time.time() - start_time
                     logger.info(f"Download took {download_duration:.2f} seconds for URL: {value}")
 
@@ -420,18 +420,28 @@ def fill_google_form(driver, row, headers, header_mapping, config):
 
         # Submit the form if all fields were filled successfully
         if fields_filled:
-            try:
-                submit_btn = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//span[text()='Submit']/ancestor::div[@role='button']"))
-                )
-                scroll_into_view(driver, submit_btn)
-                driver.execute_script("arguments[0].click();", submit_btn)
-                WebDriverWait(driver, 15).until(EC.url_contains("formResponse"))
-                logger.info("Form submitted successfully")
-                return True
-            except Exception as e:
-                logger.error(f"Form submission failed: {e}")
-                fields_filled = False
+             time.sleep(2)
+        try:
+            submit_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//span[text()='Submit']/ancestor::div[@role='button']"))
+            )
+            scroll_into_view(driver, submit_btn)
+            if submit_btn.get_attribute("aria-disabled") == "true":
+                logger.error("Submit button is disabled, likely due to unfilled required fields")
+                # Ghi log các trường bắt buộc còn trống
+                required_fields = driver.find_elements(By.XPATH, "//*[contains(@aria-required, 'true')]")
+                for field in required_fields:
+                    value = field.get_attribute("value") or field.text
+                    if not value:
+                        logger.warning(f"Required field empty: {field.get_attribute('aria-label')}")
+                return False
+            driver.execute_script("arguments[0].click();", submit_btn)
+            WebDriverWait(driver, 60).until(EC.url_contains("formResponse"))
+            logger.info("Form submitted successfully")
+            return True
+        except Exception as e:
+            logger.error(f"Form submission failed: {e}", exc_info=True)
+            return False
 
     except Exception as e:
         logger.error(f"Error while filling the form: {e}")
